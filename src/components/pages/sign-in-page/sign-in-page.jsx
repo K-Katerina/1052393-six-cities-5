@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../header/header";
+import Header from "../../header/header";
 
-const SignIn = () => {
+const SignInPage = () => {
 
   return (
     <React.Fragment>
@@ -38,4 +38,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;

@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../header/header";
+import Header from "../../header/header";
 
-const Room = () => {
+const RoomPage = () => {
   return (
     <React.Fragment>
       <div className="page">
@@ -318,4 +318,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default RoomPage;

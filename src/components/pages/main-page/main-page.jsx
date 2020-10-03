@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../header/header";
+import Header from "../../header/header";
 
-const Main = (props) => {
+const MainPage = (props) => {
   const {rentalOfferCount} = props;
 
   return (
@@ -251,8 +251,8 @@ const Main = (props) => {
   );
 };
 
-Main.propTypes = {
+MainPage.propTypes = {
   rentalOfferCount: PropTypes.number.isRequired,
 };
 
-export default Main;
+export default MainPage;

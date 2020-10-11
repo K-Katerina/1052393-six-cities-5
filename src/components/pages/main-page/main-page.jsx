@@ -11,6 +11,13 @@ export class MainPage extends React.PureComponent {
       activeOffer: null
     };
   }
+
+  setActiveOffer(offer) {
+    this.setState({
+      activeOffer: offer,
+    });
+  }
+
   render() {
     const {offers} = this.props;
 
@@ -58,12 +65,9 @@ export class MainPage extends React.PureComponent {
             </div>
             <div className="cities">
               <div className="cities__places-container container">
-                <OffersList offers={offers}
-                  onSelectActiveCard={(offer) => {
-                    this.setState({
-                      activeOffer: offer,
-                    });
-                  }}/>
+                <OffersList
+                  offers={offers}
+                  onSelectActiveCard={(offer) => this.setActiveOffer(offer)}/>
                 <div className="cities__right-section">
                   <section className="cities__map map"></section>
                 </div>

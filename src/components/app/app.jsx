@@ -14,8 +14,8 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" render={() => <MainPage offers={offers}/>}/>
         <Route exact path="/login" component={SignInPage}/>
-        <Route exact path="/favorites" component={FavoritesPage}/>
-        <Route exact path="/offer/:id" component={RoomPage}/>
+        <Route exact path="/favorites" render={() => <FavoritesPage offers={offers.filter((offer) => offer.isFavorite)}/>}/>
+        <Route exact path="/offer/:id" render={() => <RoomPage offer={offers[0]} offers={offers}/>}/>
         <Redirect to="/"/>
       </Switch>
     </BrowserRouter>

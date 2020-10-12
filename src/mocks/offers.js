@@ -21,7 +21,7 @@ export const OFFERS = [
       id: 373,
       avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
       name: `Onik_373`,
-      isSuper: true
+      isSuper: false
     },
     reviews: [{
       id: 32,

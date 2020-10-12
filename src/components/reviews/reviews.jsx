@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {ReviewPropType} from "../../types";
 import ReviewsForm from "../reviews-form/reviews-form";
-import ListReviews from "../list-reviews/list-reviews";
+import ReviewsList from "../reviews-list/reviews-list";
 
 const Reviews = (props) => {
   const {reviews} = props;
@@ -11,9 +11,7 @@ const Reviews = (props) => {
       <section className="property__reviews reviews">
         <h2 className="reviews__title">Reviews &middot; <span
           className="reviews__amount">{reviews.length}</span></h2>
-        <ul className="reviews__list">
-          <ListReviews reviews={reviews}/>
-        </ul>
+        <ReviewsList reviews={reviews}/>
         <ReviewsForm/>
       </section>
     </React.Fragment>

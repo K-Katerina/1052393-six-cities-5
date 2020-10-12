@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
-import Card from "../card/card";
+import OfferCard from "../offer-card/offer-card";
 import {TypeCards} from "../../const";
 
 class NearPlaces extends React.PureComponent {
@@ -28,7 +28,7 @@ class NearPlaces extends React.PureComponent {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {offers.map((offer) =>
-              <Card
+              <OfferCard
                 key={offer.id}
                 offer={offer}
                 onHover={() => this.setActiveOffer(offer)}

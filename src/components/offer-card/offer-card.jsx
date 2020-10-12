@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {getRating} from "../../utils";
 import {TypeCards} from "../../const";
 
-const Card = (props) => {
+const OfferCard = (props) => {
   const {onHover, offer, typeCard = TypeCards.CITIES} = props;
   const isFavoritesCard = TypeCards.FAVORITES === typeCard;
   return (
@@ -55,10 +55,10 @@ const Card = (props) => {
   );
 };
 
-Card.propTypes = {
+OfferCard.propTypes = {
   onHover: PropTypes.func.isRequired,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards))
 };
 
-export default Card;
+export default OfferCard;

@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {TypeCards} from "../../const";
-import Card from "../card/card";
+import OfferCard from "../offer-card/offer-card";
 
 const PlaceCard = (props) => {
   const {onHover, offer} = props;
   return (
     <React.Fragment>
-      <Card onHover={onHover} offer={offer}/>
+      <OfferCard onHover={onHover} offer={offer}/>
     </React.Fragment>
   );
 };

@@ -1,20 +1,21 @@
 import React from "react";
-import PropTypes from "prop-types";
-import MainPage from "../pages/main-page/main-page";
 import {Redirect, Switch, Route, BrowserRouter} from "react-router-dom";
+import PropTypes from "prop-types";
+import {OfferPropType} from "../../types";
+import {MainPage} from "../pages/main-page/main-page";
 import SignInPage from "../pages/sign-in-page/sign-in-page";
 import FavoritesPage from "../pages/favorites-page/favorites-page";
 import RoomPage from "../pages/room-page/room-page";
 
 const App = (props) => {
-  const {rentalOfferCount} = props;
+  const {offers} = props;
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" render={() => <MainPage rentalOfferCount={rentalOfferCount}/>}/>
+        <Route exact path="/" render={() => <MainPage offers={offers}/>}/>
         <Route exact path="/login" component={SignInPage}/>
-        <Route exact path="/favorites" component={FavoritesPage}/>
-        <Route exact path="/offer/:id" component={RoomPage}/>
+        <Route exact path="/favorites" render={() => <FavoritesPage offers={offers.filter((offer) => offer.isFavorite)}/>}/>
+        <Route exact path="/offer/:id" render={() => <RoomPage offer={offers[0]} offers={offers}/>}/>
         <Redirect to="/"/>
       </Switch>
     </BrowserRouter>
@@ -22,7 +23,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  rentalOfferCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(OfferPropType).isRequired
 };
 
 export default App;

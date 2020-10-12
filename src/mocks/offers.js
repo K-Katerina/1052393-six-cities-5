@@ -4,6 +4,10 @@ export const OFFERS = [
   {
     id: 13,
     location: `Amsterdam`,
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198
+    },
     title: `Beautiful & luxurious studio at great location`,
     preview: `http://picsum.photos/248/152?r=${Math.random()}`,
     photos: [`http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`],
@@ -49,6 +53,10 @@ export const OFFERS = [
   {
     id: 17,
     location: `Amsterdam`,
+    coordinates: {
+      lat: 52.369553943508,
+      lng: 4.85309666406198
+    },
     title: `Studio at great location`,
     preview: `http://picsum.photos/248/152?r=${Math.random()}`,
     photos: [],
@@ -82,7 +90,11 @@ export const OFFERS = [
   },
   {
     id: 18,
-    location: `Hamburg`,
+    location: `Amsterdam`,
+    coordinates: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198
+    },
     title: `Norm`,
     preview: `http://picsum.photos/248/152?r=${Math.random()}`,
     photos: [`http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`],
@@ -100,6 +112,34 @@ export const OFFERS = [
         id: 833,
         avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
         name: `Eva_833`,
+        isSuper: false
+      },
+    reviews: []
+  },
+  {
+    id: 19,
+    location: `Amsterdam`,
+    coordinates: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198
+    },
+    title: `Milestiae vel beatae!`,
+    preview: `http://picsum.photos/248/152?r=${Math.random()}`,
+    photos: [`http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`],
+    desc: `Milestiae vel beatae! Milestiae vel beatae! Milestiae vel beatae! Milestiae vel beatae!`,
+    isPremium: false,
+    rating: 5,
+    type: HousingType.HOUSE,
+    bedroomsCount: 1,
+    maxGuests: 1,
+    costPerNight: 12,
+    features: [`Wi-fi`],
+    isFavorite: false,
+    owner:
+      {
+        id: 943,
+        avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
+        name: `Ivan_943`,
         isSuper: false
       },
     reviews: []

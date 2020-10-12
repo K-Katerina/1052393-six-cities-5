@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
 import Header from "../../header/header";
+import Map from "../../map/map";
 import {OffersList} from "../../offers-list/offers-list";
 
 export class MainPage extends React.PureComponent {
@@ -20,7 +21,7 @@ export class MainPage extends React.PureComponent {
 
   render() {
     const {offers} = this.props;
-
+    const {activeOffer} = this.state;
     return (
       <React.Fragment>
         <div className="page page--gray page--main">
@@ -69,7 +70,9 @@ export class MainPage extends React.PureComponent {
                   offers={offers}
                   onSelectActiveCard={(offer) => this.setActiveOffer(offer)}/>
                 <div className="cities__right-section">
-                  <section className="cities__map map"></section>
+                  <section className="cities__map map">
+                    <Map offers={offers} activeOffer={activeOffer}/>
+                  </section>
                 </div>
               </div>
             </div>

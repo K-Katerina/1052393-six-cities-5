@@ -1,7 +1,8 @@
 import React from "react";
-import PlaceCard from "../place-card/place-card";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
+import OfferCard from "../offer-card/offer-card";
+import {TypeCards} from "../../const";
 
 class NearPlaces extends React.PureComponent {
   constructor(props) {
@@ -21,18 +22,17 @@ class NearPlaces extends React.PureComponent {
 
   render() {
     const {offers} = this.props;
-    const isMainCard = false;
     return (
       <React.Fragment>
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {offers.map((offer) =>
-              <PlaceCard
+              <OfferCard
                 key={offer.id}
                 offer={offer}
                 onHover={() => this.setActiveOffer(offer)}
-                isMainCard={isMainCard}
+                typeCard={TypeCards.NEAR_PLACES}
               />)}
           </div>
         </section>

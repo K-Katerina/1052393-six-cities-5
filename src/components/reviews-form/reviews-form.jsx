@@ -24,7 +24,6 @@ class ReviewsForm extends React.Component {
   }
 
   render() {
-    const {rating, review} = this.state;
     return (
       <React.Fragment>
         <form onSubmit={this.handleFormSubmit} className="reviews__form form" action="#" method="post">

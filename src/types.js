@@ -22,9 +22,15 @@ export const ReviewPropType = PropTypes.shape({
   comment: PropTypes.string.isRequired
 });
 
+export const CoordinatesPropType = PropTypes.shape({
+  lat: PropTypes.number.isRequired,
+  lng: PropTypes.number.isRequired
+});
+
 export const OfferPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  coordinates: CoordinatesPropType.isRequired,
   preview: PropTypes.string.isRequired,
   photos: PropTypes.arrayOf(PropTypes.string),
   desc: PropTypes.string,

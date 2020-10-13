@@ -4,3 +4,9 @@ export const HousingType = {
   HOUSE: `House`,
   HOTEL: `Hotel`
 };
+
+export const TypeCards = {
+  FAVORITES: `favorites`,
+  NEAR_PLACES: `near-places`,
+  CITIES: `cities`
+};

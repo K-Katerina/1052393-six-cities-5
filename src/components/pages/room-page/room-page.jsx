@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import {getRating} from "../../../utils";
 import NearPlaces from "../../near-places/near-places";
 import Reviews from "../../reviews/reviews";
+import Owner from "../../owner/owner";
 
 const MAX_NEAR_PLACES = 3;
 
@@ -93,15 +94,7 @@ class RoomPage extends React.PureComponent {
                   </div>
                   <div className="property__host">
                     <h2 className="property__host-title">Meet the host</h2>
-                    <div className="property__host-user user">
-                      <div className="jsx-avatar__owner property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                        <img className="property__avatar user__avatar" src={offer.owner.avatar} width="74" height="74"
-                          alt="Host avatar"/>
-                      </div>
-                      <span className="property__user-name">
-                        {offer.owner.name}
-                      </span>
-                    </div>
+                    <Owner owner = {offer.owner}/>
                     <div className="property__description">
                       <p className="property__text">
                         {offer.desc}

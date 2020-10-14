@@ -1,9 +1,9 @@
 import {TypeCards} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 
-class PlaceCard extends OfferCard {
+class NearPlaceCard extends OfferCard {
   getTypeCard() {
-    return TypeCards.CITIES;
+    return TypeCards.NEAR_PLACES;
   }
 
   getPlaceCardWidth() {
@@ -13,10 +13,6 @@ class PlaceCard extends OfferCard {
   getPlaceCardHeight() {
     return 200;
   }
-
-  isPremium() {
-    return true;
-  }
 }
 
-export default PlaceCard;
+export default NearPlaceCard;

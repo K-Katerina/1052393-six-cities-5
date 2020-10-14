@@ -3,36 +3,47 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link} from "react-router-dom";
 import {getRating} from "../../utils";
-import {TypeCards} from "../../const";
 
-const OfferCard = (props) => {
-  const {onHover, offer, typeCard = TypeCards.CITIES} = props;
-  const isFavoritesCard = TypeCards.FAVORITES === typeCard;
-  return (
-    <React.Fragment>
-      <article className={`${typeCard}__card place-card`}
+class OfferCard extends React.Component {
+  getTypeCard() {}
+  getPlaceCardWidth() {}
+  getPlaceCardHeight() {}
+  isPremium() {
+    return false;
+  }
+
+  render() {
+    const {onHover, offer} = this.props;
+
+    return (
+      <article className={`${this.getTypeCard()}__card place-card`}
         onMouseOver={(evt) => {
           evt.preventDefault();
-          onHover(offer);
+          if (onHover) {
+            onHover(offer);
+          }
         }}
       >
-        {offer.isPremium && !isFavoritesCard ?
+        {offer.isPremium && this.isPremium() ?
           <div className="place-card__mark">
             <span>Premium</span>
           </div> : ``}
-        <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
+        <div className={`${this.getTypeCard()}__image-wrapper place-card__image-wrapper`}>
           <Link to={`/offer/${offer.id}`}>
-            <img className="place-card__image" src={offer.preview} width={`${isFavoritesCard ? `150` : `260`}`} height={`${isFavoritesCard ? `110` : `200`}`}
+            <img className="place-card__image" src={offer.preview} width={`${this.getPlaceCardWidth()}px`}
+              height={`${this.getPlaceCardHeight()}px`}
               alt="Place image"/>
           </Link>
         </div>
-        <div className={`${typeCard}__card-info place-card__info`}>
+        <div className={`${this.getTypeCard()}__card-info place-card__info`}>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{offer.costPerNight}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+            <button
+              className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`}
+              type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
@@ -51,14 +62,13 @@ const OfferCard = (props) => {
           <p className="place-card__type">{offer.type}</p>
         </div>
       </article>
-    </React.Fragment>
-  );
-};
+    );
+  }
+}
 
 OfferCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
+  onHover: PropTypes.func,
   offer: OfferPropType.isRequired,
-  typeCard: PropTypes.oneOf(Object.values(TypeCards))
 };
 
 export default OfferCard;

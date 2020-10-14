@@ -1,21 +1,23 @@
-import React from "react";
-import {OfferPropType} from "../../types";
-import OfferCard from "../offer-card/offer-card";
-import PropTypes from "prop-types";
 import {TypeCards} from "../../const";
+import OfferCard from "../offer-card/offer-card";
 
-const FavoriteCard = (props) => {
-  const {offer, onHover} = props;
-  return (
-    <React.Fragment>
-      <OfferCard onHover={onHover} offer={offer} typeCard={TypeCards.FAVORITES}/>
-    </React.Fragment>
-  );
-};
+class FavoriteCard extends OfferCard {
 
-FavoriteCard.propTypes = {
-  offer: OfferPropType,
-  onHover: PropTypes.func.isRequired,
-};
+  constructor(props) {
+    super(props);
+  }
+
+  getTypeCard() {
+    return TypeCards.FAVORITES;
+  }
+
+  getPlaceCardWidth() {
+    return 150;
+  }
+
+  getPlaceCardHeight() {
+    return 110;
+  }
+}
 
 export default FavoriteCard;

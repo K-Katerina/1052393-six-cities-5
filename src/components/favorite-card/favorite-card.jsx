@@ -1,23 +1,19 @@
+import React from "react";
+import PropTypes from "prop-types";
+import {OfferPropType} from "../../types";
 import {TypeCards} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 
-class FavoriteCard extends OfferCard {
+const FavoriteCard = (props) => {
+  const {offer} = props;
+  return (
+    <OfferCard offer={offer} typeCard={TypeCards.FAVORITES}/>
+  );
+};
 
-  constructor(props) {
-    super(props);
-  }
-
-  getTypeCard() {
-    return TypeCards.FAVORITES;
-  }
-
-  getPlaceCardWidth() {
-    return 150;
-  }
-
-  getPlaceCardHeight() {
-    return 110;
-  }
-}
+FavoriteCard.propTypes = {
+  offer: OfferPropType.isRequired,
+  typeCard: PropTypes.oneOf(Object.values(TypeCards))
+};
 
 export default FavoriteCard;

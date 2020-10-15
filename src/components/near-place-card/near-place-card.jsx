@@ -1,18 +1,20 @@
+import React from "react";
+import PropTypes from "prop-types";
+import {OfferPropType} from "../../types";
 import {TypeCards} from "../../const";
 import OfferCard from "../offer-card/offer-card";
 
-class NearPlaceCard extends OfferCard {
-  getTypeCard() {
-    return TypeCards.NEAR_PLACES;
-  }
+const NearPlacesCard = (props) => {
+  const {onHover, offer} = props;
+  return (
+    <OfferCard onHover={onHover} offer={offer} typeCard={TypeCards.NEAR_PLACES}/>
+  );
+};
 
-  getPlaceCardWidth() {
-    return 260;
-  }
+NearPlacesCard.propTypes = {
+  onHover: PropTypes.func.isRequired,
+  offer: OfferPropType.isRequired,
+  typeCard: PropTypes.oneOf(Object.values(TypeCards))
+};
 
-  getPlaceCardHeight() {
-    return 200;
-  }
-}
-
-export default NearPlaceCard;
+export default NearPlacesCard;

@@ -31,8 +31,8 @@ export class OffersList extends React.PureComponent {
           {offers.map((offer) =>
             <PlaceCard
               key={offer.id}
-              offer={offer}
               onHover={() => this.setActiveOffer(offer)}
+              offer={offer}
             />)}
         </div>
       </section>

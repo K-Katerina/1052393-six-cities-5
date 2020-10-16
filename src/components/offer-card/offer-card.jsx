@@ -5,24 +5,50 @@ import {Link} from "react-router-dom";
 import {getRating} from "../../utils";
 import {TypeCards} from "../../const";
 
+function getWidth(typeCard) {
+  switch (typeCard) {
+    case TypeCards.CITIES:
+      return 260;
+    case TypeCards.NEAR_PLACES:
+      return 260;
+    case TypeCards.FAVORITES:
+      return 150;
+  }
+  return 0;
+}
+
+function getHeight(typeCard) {
+  switch (typeCard) {
+    case TypeCards.CITIES:
+      return 200;
+    case TypeCards.NEAR_PLACES:
+      return 200;
+    case TypeCards.FAVORITES:
+      return 110;
+  }
+  return 0;
+}
+
 const OfferCard = (props) => {
   const {onHover, offer, typeCard = TypeCards.CITIES} = props;
-  const isFavoritesCard = TypeCards.FAVORITES === typeCard;
+  const needPremiumMark = TypeCards.CITIES === typeCard;
   return (
     <React.Fragment>
       <article className={`${typeCard}__card place-card`}
         onMouseOver={(evt) => {
           evt.preventDefault();
-          onHover(offer);
+          if (onHover) {
+            onHover(offer);
+          }
         }}
       >
-        {offer.isPremium && !isFavoritesCard ?
+        {offer.isPremium && needPremiumMark ?
           <div className="place-card__mark">
             <span>Premium</span>
           </div> : ``}
         <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
           <Link to={`/offer/${offer.id}`}>
-            <img className="place-card__image" src={offer.preview} width={`${isFavoritesCard ? `150` : `260`}`} height={`${isFavoritesCard ? `110` : `200`}`}
+            <img className="place-card__image" src={offer.preview} width={`${getWidth(typeCard)}`} height={`${getHeight(typeCard)}`}
               alt="Place image"/>
           </Link>
         </div>
@@ -56,7 +82,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  onHover: PropTypes.func.isRequired,
+  onHover: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards))
 };

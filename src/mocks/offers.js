@@ -48,6 +48,17 @@ export const OFFERS = [
       rating: 5,
       date: new Date(),
       comment: `Dicta sit pariatur porro quaerat autem ipsam odit quam beatae tempora...`
+    },
+    {
+      id: 3243,
+      author: {
+        id: 475,
+        avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
+        name: `Tupeg-475`
+      },
+      rating: 1,
+      date: new Date(),
+      comment: `Quod quidem in voluptatem corporis dolorum dicta sit pariatur porro quaerat autem ipsam odit quam beatae tempora quibusdam illum!`
     }]
   },
   {

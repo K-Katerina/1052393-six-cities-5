@@ -37,16 +37,12 @@ class Map extends React.Component {
   }
 
   addMarkers(map, icon) {
-    for (let offer of this.props.offers) {
-      leaflet.marker(offer.coordinates, {icon}).addTo(map);
-    }
+    this.props.offers.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
   }
 
   render() {
     return (
-      <React.Fragment>
-        <div id="map" style={{height: `100%`}}></div>
-      </React.Fragment>
+      <div id="map" style={{height: `100%`}}></div>
     );
   }
 }

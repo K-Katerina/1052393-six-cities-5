@@ -1,11 +1,9 @@
 import React from "react";
-import Header from "../../header/header";
-import Footer from "../../footer/footer";
-import {groupOffersByLocation} from "../../../utils";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
-import {Link} from "react-router-dom";
-import FavoriteCard from "../../favorite-card/favorite-card";
+import Header from "../../header/header";
+import Footer from "../../footer/footer";
+import FavoriteList from "../../favorite-list/favorite-list";
 
 class FavoritesPage extends React.PureComponent {
   constructor(props) {
@@ -15,15 +13,8 @@ class FavoritesPage extends React.PureComponent {
     };
   }
 
-  setActiveFavoriteOffer(offer) {
-    this.setState({
-      activeFavoriteOffer: offer,
-    });
-  }
-
   render() {
     const {offers} = this.props;
-    const groupedOffers = groupOffersByLocation(offers);
     return (
       <React.Fragment>
         <div className="page">
@@ -32,25 +23,7 @@ class FavoritesPage extends React.PureComponent {
             <div className="page__favorites-container container">
               <section className="favorites">
                 <h1 className="favorites__title">Saved listing</h1>
-                <ul className="favorites__list">
-                  {Array.from(groupedOffers.keys()).map((location) =>
-                    <li key={location} className="favorites__locations-items">
-                      <div className="favorites__locations locations locations--current">
-                        <div className="locations__item">
-                          <Link to="/" className="locations__item-link">
-                            <span>{location}</span>
-                          </Link>
-                        </div>
-                      </div>
-                      <div className="favorites__places">
-                        {groupedOffers.get(location).map((offer) =>
-                          <FavoriteCard key={offer.id} offer={offer}
-                            onHover={() => this.setActiveFavoriteOffer(offer)}/>
-                        )}
-                      </div>
-                    </li>
-                  )}
-                </ul>
+                <FavoriteList offers = {offers}/>
               </section>
             </div>
           </main>

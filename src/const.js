@@ -6,7 +6,32 @@ export const HousingType = {
 };
 
 export const TypeCards = {
-  FAVORITES: `favorites`,
-  NEAR_PLACES: `near-places`,
-  CITIES: `cities`
+  FAVORITES: `FAVORITES`,
+  NEAR_PLACES: `NEAR_PLACES`,
+  CITIES: `CITIES`
+};
+
+export const getStyleForCard = (cardType) => {
+  switch (cardType) {
+    case TypeCards.CITIES:
+      return {
+        className: `cities`,
+        width: 260,
+        height: 200
+      };
+    case TypeCards.NEAR_PLACES:
+      return {
+        className: `near-places`,
+        width: 260,
+        height: 200
+      };
+    case TypeCards.FAVORITES:
+      return {
+        className: `favorites`,
+        width: 150,
+        height: 110
+      };
+    default:
+      return new Error(`Type "${cardType}" not found`);
+  }
 };

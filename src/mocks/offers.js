@@ -159,8 +159,8 @@ export const OFFERS = [
     id: 193,
     location: Cities.PARIS.name,
     coordinates: {
-      lat: 52.3809553943508,
-      lng: 4.93930966640619
+      lat: 48.853,
+      lng: 2.3
     },
     title: `Milestiae vel beatae!`,
     preview: `http://picsum.photos/248/152?r=${Math.random()}`,

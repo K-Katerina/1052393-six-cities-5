@@ -4,6 +4,7 @@ import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
+import {getOffersForCity} from "../../utils";
 
 class Map extends React.Component {
   constructor(props) {
@@ -16,28 +17,34 @@ class Map extends React.Component {
       iconSize: [30, 30]
     });
     const zoom = 12;
-    const map = leaflet.map(`map`, {
+    this.map = leaflet.map(`map`, {
       center: this.props.selectedCity.coordinates,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(this.props.selectedCity.coordinates, zoom);
+    this.map.setView(this.props.selectedCity.coordinates, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
-    this.addMarkers(map, icon);
+      .addTo(this.map);
+    this.addMarkers(this.map, icon);
   }
 
   componentDidMount() {
     this.initMap();
   }
 
+  componentDidUpdate() {
+    this.map.remove();
+    this.initMap();
+  }
+
   addMarkers(map, icon) {
-    this.props.offers.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
+    const offersForCity = getOffersForCity(this.props.selectedCity, this.props.offers);
+    offersForCity.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
   }
 
   render() {

@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropType} from "../../types";
+import {CityPropType, OfferPropType} from "../../types";
 import NearPlacesCard from "../near-place-card/near-place-card";
-import {getNearOffers} from "../../utils";
+import {getNearOffers, getOffersForCity} from "../../utils";
 import {connect} from "react-redux";
 
 const NearPlaces = (props) => {
-  const nearOffers = getNearOffers(props.offers);
+  const {selectedCity, offers} = props;
+  const nearOffers = getOffersForCity(selectedCity, getNearOffers(offers));
 
   return (
     <section className="near-places places">
@@ -24,10 +25,12 @@ const NearPlaces = (props) => {
 
 NearPlaces.propTypes = {
   offers: PropTypes.arrayOf(OfferPropType),
+  selectedCity: CityPropType
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
+  selectedCity: state.selectedCity
 });
 
 export {NearPlaces};

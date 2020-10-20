@@ -9,6 +9,10 @@ export const getNearOffers = (offers) => {
   return offers.slice(0, MAX_NEAR_PLACES);
 };
 
+export const getOffersForCity = (city, offers) => {
+  return offers.filter((offer) => offer.location === city.name);
+};
+
 export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 
 export const getDate = (date) => moment(date).format(`MMMM YYYY`);

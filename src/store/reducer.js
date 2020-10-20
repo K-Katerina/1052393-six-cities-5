@@ -6,7 +6,8 @@ import {OFFERS} from "../mocks/offers";
 const initialState = {
   selectedCity: Cities.PARIS,
   activeOffer: Cities.PARIS,
-  offers: OFFERS
+  offers: OFFERS,
+  isLoggedIn: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,10 +19,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload
-      });
-    case ActionType.CHANGE_OFFERS:
-      return extend(state, {
-        offers: action.payload
       });
     default: return state;
   }

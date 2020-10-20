@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropType} from "../../types";
-import * as leaflet from "leaflet";
+import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
+import * as leaflet from "leaflet";
+import {connect} from "react-redux";
 
 class Map extends React.Component {
   constructor(props) {
@@ -10,19 +11,18 @@ class Map extends React.Component {
   }
 
   initMap() {
-    const city = [52.38333, 4.9];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
     const zoom = 12;
     const map = leaflet.map(`map`, {
-      center: city,
+      center: this.props.selectedCity.coordinates,
       zoom,
       zoomControl: false,
       marker: true
     });
-    map.setView(city, zoom);
+    map.setView(this.props.selectedCity.coordinates, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -48,7 +48,14 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType)
+  offers: PropTypes.arrayOf(OfferPropType),
+  selectedCity: CityPropType
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  selectedCity: state.selectedCity
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

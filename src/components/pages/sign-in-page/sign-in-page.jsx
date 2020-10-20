@@ -3,7 +3,6 @@ import Header from "../../header/header";
 import {Link} from "react-router-dom";
 
 const SignInPage = () => {
-
   return (
     <React.Fragment>
       <div className="page page--gray page--login">

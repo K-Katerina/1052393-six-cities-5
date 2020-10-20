@@ -27,6 +27,11 @@ export const CoordinatesPropType = PropTypes.shape({
   lng: PropTypes.number.isRequired
 });
 
+export const CityPropType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  coordinates: CoordinatesPropType.isRequired
+});
+
 export const OfferPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,

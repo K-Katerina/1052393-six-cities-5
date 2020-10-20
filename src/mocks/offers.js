@@ -1,9 +1,9 @@
-import {HousingType} from "../const";
+import {Cities, HousingType} from "../const";
 
 export const OFFERS = [
   {
     id: 13,
-    location: `Amsterdam`,
+    location: Cities.AMSTERDAM.name,
     coordinates: {
       lat: 52.3909553943508,
       lng: 4.85309666406198
@@ -63,7 +63,7 @@ export const OFFERS = [
   },
   {
     id: 17,
-    location: `Amsterdam`,
+    location: Cities.AMSTERDAM.name,
     coordinates: {
       lat: 52.369553943508,
       lng: 4.85309666406198
@@ -101,7 +101,7 @@ export const OFFERS = [
   },
   {
     id: 18,
-    location: `Amsterdam`,
+    location: Cities.AMSTERDAM.name,
     coordinates: {
       lat: 52.3909553943508,
       lng: 4.929309666406198
@@ -129,7 +129,7 @@ export const OFFERS = [
   },
   {
     id: 19,
-    location: `Amsterdam`,
+    location: Cities.AMSTERDAM.name,
     coordinates: {
       lat: 52.3809553943508,
       lng: 4.939309666406198
@@ -151,6 +151,34 @@ export const OFFERS = [
         id: 943,
         avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
         name: `Ivan_943`,
+        isSuper: false
+      },
+    reviews: []
+  },
+  {
+    id: 193,
+    location: Cities.PARIS.name,
+    coordinates: {
+      lat: 52.3809553943508,
+      lng: 4.93930966640619
+    },
+    title: `Milestiae vel beatae!`,
+    preview: `http://picsum.photos/248/152?r=${Math.random()}`,
+    photos: [`http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`, `http://picsum.photos/248/152?r=${Math.random()}`],
+    desc: `Milestiae vel beatae! Milestiae vel beatae! Milestiae vel beatae! Milestiae vel beatae!`,
+    isPremium: false,
+    rating: 5,
+    type: HousingType.HOUSE,
+    bedroomsCount: 1,
+    maxGuests: 1,
+    costPerNight: 12,
+    features: [`Wi-fi`],
+    isFavorite: true,
+    owner:
+      {
+        id: 9433,
+        avatar: `http://picsum.photos/74/74?r=${Math.random()}`,
+        name: `Ivan_9433`,
         isSuper: false
       },
     reviews: []

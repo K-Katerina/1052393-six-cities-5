@@ -14,7 +14,13 @@ const OfferCard = (props) => {
   return (
     <React.Fragment>
       <article className={`${className}__card place-card`}
-        onMouseOver={(evt) => {
+        onMouseLeave={(evt) => {
+          evt.preventDefault();
+          if (changeActiveOffer) {
+            changeActiveOffer(null);
+          }
+        }}
+        onMouseEnter={(evt) => {
           evt.preventDefault();
           if (changeActiveOffer) {
             changeActiveOffer(offer);
@@ -67,9 +73,7 @@ OfferCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer(activeOffer) {
-    dispatch(ActionCreator.changeActiveOffer(activeOffer));
-  },
+  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
 });
 
 export {OfferCard};

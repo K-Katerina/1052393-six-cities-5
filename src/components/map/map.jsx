@@ -12,10 +12,6 @@ class Map extends React.Component {
   }
 
   initMap() {
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
     const zoom = 12;
     this.map = leaflet.map(`map`, {
       center: this.props.selectedCity.coordinates,
@@ -30,7 +26,7 @@ class Map extends React.Component {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
-    this.addMarkers(this.map, icon);
+    this.addMarkers(this.map);
   }
 
   componentDidMount() {
@@ -42,8 +38,22 @@ class Map extends React.Component {
     this.initMap();
   }
 
-  addMarkers(map, icon) {
-    this.props.offers.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
+  addMarkers(map) {
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    const activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 30]
+    });
+    this.props.offers.forEach((offer) => {
+      if (offer === this.props.activeOffer) {
+        leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(map);
+      } else {
+        leaflet.marker(offer.coordinates, {icon}).addTo(map);
+      }
+    });
   }
 
   render() {
@@ -55,12 +65,14 @@ class Map extends React.Component {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropType),
-  selectedCity: CityPropType
+  selectedCity: CityPropType,
+  activeOffer: OfferPropType
 };
 
 const mapStateToProps = (state) => ({
   offers: getOffersForCity(state.selectedCity, state.offers),
-  selectedCity: state.selectedCity
+  selectedCity: state.selectedCity,
+  activeOffer: state.activeOffer
 });
 
 export {Map};

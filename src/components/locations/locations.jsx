@@ -34,7 +34,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity: (selectedCity) => dispatch(ActionCreator.changeSelectedCity(selectedCity))
+  changeSelectedCity(selectedCity) {
+    dispatch(ActionCreator.changeSelectedCity(selectedCity));
+    dispatch(ActionCreator.changeActiveOffer(null));
+  }
 });
 
 export {Locations};

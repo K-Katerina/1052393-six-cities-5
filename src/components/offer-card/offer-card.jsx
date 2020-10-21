@@ -2,43 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link} from "react-router-dom";
-import {getRating} from "../../utils";
 import {TypeCards} from "../../const";
-
-function getWidth(typeCard) {
-  switch (typeCard) {
-    case TypeCards.CITIES:
-      return 260;
-    case TypeCards.NEAR_PLACES:
-      return 260;
-    case TypeCards.FAVORITES:
-      return 150;
-  }
-  return 0;
-}
-
-function getHeight(typeCard) {
-  switch (typeCard) {
-    case TypeCards.CITIES:
-      return 200;
-    case TypeCards.NEAR_PLACES:
-      return 200;
-    case TypeCards.FAVORITES:
-      return 110;
-  }
-  return 0;
-}
+import {getRating, getStyleForCard} from "../../utils";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/actions";
 
 const OfferCard = (props) => {
-  const {onHover, offer, typeCard = TypeCards.CITIES} = props;
+  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES} = props;
   const needPremiumMark = TypeCards.CITIES === typeCard;
+  const {className, width, height} = getStyleForCard(typeCard);
   return (
     <React.Fragment>
-      <article className={`${typeCard}__card place-card`}
+      <article className={`${className}__card place-card`}
         onMouseOver={(evt) => {
           evt.preventDefault();
-          if (onHover) {
-            onHover(offer);
+          if (changeActiveOffer) {
+            changeActiveOffer(offer);
           }
         }}
       >
@@ -46,13 +25,13 @@ const OfferCard = (props) => {
           <div className="place-card__mark">
             <span>Premium</span>
           </div> : ``}
-        <div className={`${typeCard}__image-wrapper place-card__image-wrapper`}>
+        <div className={`${className}__image-wrapper place-card__image-wrapper`}>
           <Link to={`/offer/${offer.id}`}>
-            <img className="place-card__image" src={offer.preview} width={`${getWidth(typeCard)}`} height={`${getHeight(typeCard)}`}
+            <img className="place-card__image" src={offer.preview} width={`${width}`} height={`${height}`}
               alt="Place image"/>
           </Link>
         </div>
-        <div className={`${typeCard}__card-info place-card__info`}>
+        <div className={`${className}__card-info place-card__info`}>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{offer.costPerNight}</b>
@@ -82,9 +61,17 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  onHover: PropTypes.func,
+  changeActiveOffer: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards))
 };
 
-export default OfferCard;
+const mapDispatchToProps = (dispatch) => ({
+  changeActiveOffer(activeOffer) {
+    dispatch(ActionCreator.changeActiveOffer(activeOffer));
+  },
+});
+
+export {OfferCard};
+export default connect(null, mapDispatchToProps)(OfferCard);
+

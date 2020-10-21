@@ -1,8 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
 
-const Header = () => {
-  const isLoggedIn = false;
+const Header = (props) => {
+  const {isLoggedIn} = props;
 
   return (
     <header className="header">
@@ -19,7 +21,10 @@ const Header = () => {
                 <Link to={isLoggedIn ? `/favorites` : `/login`} className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  {isLoggedIn ?
+                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span> :
+                    <span className="header__login">Sign in</span>
+                  }
                 </Link>
               </li>
             </ul>
@@ -30,4 +35,13 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool
+};
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.isLoggedIn,
+});
+
+export {Header};
+export default connect(mapStateToProps)(Header);

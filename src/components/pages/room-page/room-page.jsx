@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
 import InfoProperty from "../../info-property/info-property";
 import Header from "../../header/header";
@@ -8,9 +7,7 @@ import Map from "../../map/map";
 import {connect} from "react-redux";
 
 const RoomPage = (props) => {
-  const {offers} = props;
-  const offerId = +props.match.params.id;
-  const offer = offers.find((it) => it.id === offerId);
+  const {offer} = props;
   return (
     <React.Fragment>
       <div className="page">
@@ -41,16 +38,11 @@ const RoomPage = (props) => {
 };
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired
-    })
-  }),
+  offer: OfferPropType
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers
+const mapStateToProps = (state, ownProps) => ({
+  offer: state.offers.find((it) => it.id === +ownProps.match.params.id)
 });
 
 export {RoomPage};

@@ -1,20 +1,18 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {OfferPropType} from "../../types";
 import {groupOffersByLocation} from "../../utils";
-import FavoriteCard from "../favorite-card/favorite-card";
 import {connect} from "react-redux";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
+import FavoritePlaces from "../favorite-places/favorite-places";
 
 const FavoriteList = (props) => {
   const {offers} = props;
-  const groupedFavoritesOffers = groupOffersByLocation(offers);
-  return (groupedFavoritesOffers.size ?
+  return (offers.size ?
     <React.Fragment>
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        {Array.from(groupedFavoritesOffers.keys()).map((location) =>
+        {Array.from(offers.keys()).map((location) =>
           <li key={location} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
@@ -24,9 +22,7 @@ const FavoriteList = (props) => {
               </div>
             </div>
             <div className="favorites__places">
-              {groupedFavoritesOffers.get(location).map((offer) =>
-                <FavoriteCard key={offer.id} offer={offer}/>
-              )}
+              <FavoritePlaces offersForLocation={offers.get(location)}/>
             </div>
           </li>
         )}
@@ -37,11 +33,11 @@ const FavoriteList = (props) => {
 };
 
 FavoriteList.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType)
+  offers: PropTypes.instanceOf(Map)
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: groupOffersByLocation(state.offers)
 });
 
 export {FavoriteList};

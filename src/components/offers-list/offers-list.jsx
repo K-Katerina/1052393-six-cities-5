@@ -8,14 +8,13 @@ import {connect} from "react-redux";
 
 const OffersList = (props) => {
   const {offers, selectedCity} = props;
-  const offersForCity = getOffersForCity(selectedCity, offers);
   return (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{offersForCity.length} place{offersForCity.length > 1 ? `s` : ``} to stay in {capitalizeWord(selectedCity.name)}</b>
+      <b className="places__found">{offers.length} place{offers.length > 1 ? `s` : ``} to stay in {capitalizeWord(selectedCity.name)}</b>
       <Sort/>
       <div className="cities__places-list places__list tabs__content">
-        {offersForCity.map((offer) =>
+        {offers.map((offer) =>
           <PlaceCard
             key={offer.id}
             offer={offer}
@@ -31,7 +30,7 @@ OffersList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffersForCity(state.selectedCity, state.offers),
   selectedCity: state.selectedCity
 });
 

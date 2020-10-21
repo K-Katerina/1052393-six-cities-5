@@ -24,17 +24,17 @@ const Locations = (props) => {
 
 Locations.propTypes = {
   selectedCity: CityPropType,
-  changeSelectedCity: PropTypes.func
+  changeSelectedCity: PropTypes.func,
+  cities: PropTypes.arrayOf(String)
 };
 
 const mapStateToProps = (state) => ({
   selectedCity: state.selectedCity,
+  cities: [...new Set(state.offers.map((offer) => offer.location))]
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity(selectedCity) {
-    dispatch(ActionCreator.changeSelectedCity(selectedCity));
-  },
+  changeSelectedCity: (selectedCity) => dispatch(ActionCreator.changeSelectedCity(selectedCity))
 });
 
 export {Locations};

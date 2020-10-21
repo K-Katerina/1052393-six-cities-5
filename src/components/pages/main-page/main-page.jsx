@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {CityPropType, OfferPropType} from "../../../types";
 import {getOffersForCity} from "../../../utils";
 import MainEmpty from "../../main-empty/main-empty";
 import Header from "../../header/header";
@@ -10,8 +9,7 @@ import OffersList from "../../offers-list/offers-list";
 import {connect} from "react-redux";
 
 const MainPage = (props) => {
-  const {offers, selectedCity} = props;
-  const isEmptyOffers = !getOffersForCity(selectedCity, offers).length;
+  const {isEmptyOffers} = props;
   return (
     <React.Fragment>
       <div className="page page--gray page--main">
@@ -39,13 +37,11 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  selectedCity: CityPropType
+  isEmptyOffers: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  selectedCity: state.selectedCity
+  isEmptyOffers: !getOffersForCity(state.selectedCity, state.offers).length
 });
 
 export {MainPage};

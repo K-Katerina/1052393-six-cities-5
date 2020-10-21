@@ -43,8 +43,7 @@ class Map extends React.Component {
   }
 
   addMarkers(map, icon) {
-    const offersForCity = getOffersForCity(this.props.selectedCity, this.props.offers);
-    offersForCity.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
+    this.props.offers.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
   }
 
   render() {
@@ -60,7 +59,7 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffersForCity(state.selectedCity, state.offers),
   selectedCity: state.selectedCity
 });
 

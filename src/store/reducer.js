@@ -1,12 +1,12 @@
 import {extend} from "../utils";
 import {ActionType} from "./actions";
-import {Cities} from "../const";
 import {OFFERS} from "../mocks/offers";
+import {Cities} from "../const";
 
 const initialState = {
   selectedCity: Cities.PARIS,
-  activeOffer: Cities.PARIS,
   offers: OFFERS,
+  activeOffer: null,
   isLoggedIn: true
 };
 

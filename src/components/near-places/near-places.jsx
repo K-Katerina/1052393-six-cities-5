@@ -6,14 +6,13 @@ import {getNearOffers, getOffersForCity} from "../../utils";
 import {connect} from "react-redux";
 
 const NearPlaces = (props) => {
-  const {selectedCity, offers} = props;
-  const nearOffers = getOffersForCity(selectedCity, getNearOffers(offers));
+  const {offers} = props;
 
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {nearOffers.map((offer) =>
+        {offers.map((offer) =>
           <NearPlacesCard
             offer={offer}
             key={offer.id}
@@ -24,13 +23,11 @@ const NearPlaces = (props) => {
 };
 
 NearPlaces.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  selectedCity: CityPropType
+  offers: PropTypes.arrayOf(OfferPropType)
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  selectedCity: state.selectedCity
+  offers: getOffersForCity(state.selectedCity, getNearOffers(state.offers))
 });
 
 export {NearPlaces};

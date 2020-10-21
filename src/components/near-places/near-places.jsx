@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {CityPropType, OfferPropType} from "../../types";
+import {OfferPropType} from "../../types";
 import NearPlacesCard from "../near-place-card/near-place-card";
 import {getNearOffers, getOffersForCity} from "../../utils";
 import {connect} from "react-redux";

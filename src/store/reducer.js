@@ -7,7 +7,8 @@ const initialState = {
   selectedCity: Cities.PARIS,
   offers: OFFERS,
   activeOffer: null,
-  isLoggedIn: true
+  isLoggedIn: true,
+  sortType: `POPULAR`
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload
+      });
+    case ActionType.CHANGE_SORT_TYPE:
+      return extend(state, {
+        sortType: action.payload
       });
     default: return state;
   }

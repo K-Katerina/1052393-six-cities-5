@@ -1,20 +1,20 @@
 import React from "react";
-import {Cities} from "../../const";
 import {ActionCreator} from "../../store/actions";
 import PropTypes from "prop-types";
 import {CityPropType} from "../../types";
+import {Cities, DEFAULT_SORT_TYPE} from "../../const";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
 
 const Locations = (props) => {
-  const {selectedCity, changeSelectedCity} = props;
+  const {selectedCity, changeSelectedCity, cities} = props;
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {Object.keys(Cities).map((city) =>
+        {cities.map((city) =>
           <li key={city} className="locations__item">
-            <a onClick={() => changeSelectedCity(Cities[city])}
-              className={`locations__item-link tabs__item ${selectedCity === Cities[city] ? `tabs__item--active` : ``}`}
+            <a onClick={() => changeSelectedCity(city)}
+              className={`locations__item-link tabs__item ${selectedCity.name === city ? `tabs__item--active` : ``}`}
               href="#" data-city={`${city}`}>
               <span>{capitalizeWord(city)}</span>
             </a>
@@ -37,8 +37,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeSelectedCity(selectedCity) {
-    dispatch(ActionCreator.changeSelectedCity(selectedCity));
+    dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity]));
     dispatch(ActionCreator.changeActiveOffer(null));
+    dispatch(ActionCreator.changeSortType(DEFAULT_SORT_TYPE));
+    dispatch(ActionCreator.openSortMenu(false));
   }
 });
 

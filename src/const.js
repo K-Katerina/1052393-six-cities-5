@@ -12,6 +12,7 @@ export const TypeCards = {
 };
 
 export const MAX_NEAR_PLACES = 3;
+export const DEFAULT_SORT_TYPE = `POPULAR`;
 
 export const Cities = {
   PARIS: {

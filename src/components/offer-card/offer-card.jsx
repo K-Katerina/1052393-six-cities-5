@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link} from "react-router-dom";
 import {TypeCards} from "../../const";
+import {ActionCreator} from "../../store/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/actions";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES} = props;
@@ -69,11 +69,11 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   changeActiveOffer: PropTypes.func,
   offer: OfferPropType.isRequired,
-  typeCard: PropTypes.oneOf(Object.values(TypeCards))
+  typeCard: PropTypes.oneOf(Object.values(TypeCards)),
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
+  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer)),
 });
 
 export {OfferCard};

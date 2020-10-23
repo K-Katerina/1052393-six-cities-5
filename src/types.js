@@ -27,13 +27,12 @@ export const CoordinatesPropType = PropTypes.shape({
   lng: PropTypes.number.isRequired
 });
 
-export const CityPropType = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  coordinates: CoordinatesPropType.isRequired
-});
+export const CityPropType = PropTypes.string;
 
 export const OfferPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
+  city: CityPropType,
+  coordinatesCity: CoordinatesPropType,
   title: PropTypes.string.isRequired,
   coordinates: CoordinatesPropType.isRequired,
   preview: PropTypes.string.isRequired,

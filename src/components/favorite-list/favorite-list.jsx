@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
-import {groupOffersByLocation} from "../../utils";
+import {groupOffersByCity} from "../../utils";
 import {connect} from "react-redux";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritePlaces from "../favorite-places/favorite-places";
@@ -37,7 +37,7 @@ FavoriteList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: groupOffersByLocation(state.offers)
+  offers: groupOffersByCity(state.offers)
 });
 
 export {FavoriteList};

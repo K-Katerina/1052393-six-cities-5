@@ -5,7 +5,7 @@ import MainEmpty from "../../main-empty/main-empty";
 import Header from "../../header/header";
 import Locations from "../../locations/locations";
 import Map from "../../map/map";
-import OffersList from "../../offers-list/offers-list";
+import OffersContainer from "../../offers-container/offers-container";
 import {connect} from "react-redux";
 
 const MainPage = (props) => {
@@ -22,7 +22,7 @@ const MainPage = (props) => {
           <div className="cities">
             { isEmptyOffers ? <MainEmpty/> :
               <div className="cities__places-container container">
-                <OffersList/>
+                <OffersContainer/>
                 <div className="cities__right-section">
                   <section className="cities__map map">
                     <Map/>

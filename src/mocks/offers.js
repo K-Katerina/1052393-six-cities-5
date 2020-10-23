@@ -3,7 +3,11 @@ import {Cities, HousingType} from "../const";
 export const OFFERS = [
   {
     id: 13,
-    location: Cities.AMSTERDAM.name,
+    city: Cities.AMSTERDAM,
+    coordinatesCity: {
+      lat: 52.38333,
+      lng: 4.9
+    },
     coordinates: {
       lat: 52.3909553943508,
       lng: 4.85309666406198
@@ -63,7 +67,11 @@ export const OFFERS = [
   },
   {
     id: 17,
-    location: Cities.AMSTERDAM.name,
+    city: Cities.AMSTERDAM,
+    coordinatesCity: {
+      lat: 52.38333,
+      lng: 4.9
+    },
     coordinates: {
       lat: 52.369553943508,
       lng: 4.85309666406198
@@ -101,7 +109,11 @@ export const OFFERS = [
   },
   {
     id: 18,
-    location: Cities.AMSTERDAM.name,
+    city: Cities.AMSTERDAM,
+    coordinatesCity: {
+      lat: 52.38333,
+      lng: 4.9
+    },
     coordinates: {
       lat: 52.3909553943508,
       lng: 4.929309666406198
@@ -129,7 +141,11 @@ export const OFFERS = [
   },
   {
     id: 19,
-    location: Cities.AMSTERDAM.name,
+    city: Cities.AMSTERDAM,
+    coordinatesCity: {
+      lat: 52.38333,
+      lng: 4.9
+    },
     coordinates: {
       lat: 52.3809553943508,
       lng: 4.939309666406198
@@ -157,7 +173,11 @@ export const OFFERS = [
   },
   {
     id: 193,
-    location: Cities.PARIS.name,
+    city: Cities.PARIS,
+    coordinatesCity: {
+      lat: 48.8534100,
+      lng: 2.3488000
+    },
     coordinates: {
       lat: 48.853,
       lng: 2.3

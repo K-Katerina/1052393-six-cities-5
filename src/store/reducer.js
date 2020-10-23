@@ -6,7 +6,7 @@ import {Cities, DEFAULT_SORT_TYPE} from "../const";
 const initialState = {
   selectedCity: Cities.PARIS,
   offers: OFFERS,
-  activeOffer: null,
+  activeOffer: -1,
   isLoggedIn: true,
   sortType: DEFAULT_SORT_TYPE,
   isOpenSortMenu: false

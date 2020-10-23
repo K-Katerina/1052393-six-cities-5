@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {CityPropType, OfferPropType} from "../../types";
+import {OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
@@ -13,13 +13,14 @@ class Map extends React.Component {
 
   initMap() {
     const zoom = 12;
+    const coordinates = this.props.offers[0].coordinatesCity;
     this.map = leaflet.map(`map`, {
-      center: this.props.selectedCity.coordinates,
+      center: coordinates,
       zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(this.props.selectedCity.coordinates, zoom);
+    this.map.setView(coordinates, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -48,7 +49,7 @@ class Map extends React.Component {
       iconSize: [30, 30]
     });
     this.props.offers.forEach((offer) => {
-      if (offer === this.props.activeOffer) {
+      if (offer.id === this.props.activeOffer) {
         leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(map);
       } else {
         leaflet.marker(offer.coordinates, {icon}).addTo(map);
@@ -65,8 +66,7 @@ class Map extends React.Component {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropType),
-  selectedCity: CityPropType,
-  activeOffer: OfferPropType
+  activeOffer: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({

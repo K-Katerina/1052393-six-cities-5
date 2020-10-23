@@ -9,21 +9,22 @@ import {connect} from "react-redux";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES} = props;
+  const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
   return (
     <React.Fragment>
       <article className={`${className}__card place-card`}
         onMouseLeave={(evt) => {
-          evt.preventDefault();
-          if (changeActiveOffer) {
-            changeActiveOffer(null);
+          if (needChangeActiveOffer) {
+            evt.preventDefault();
+            changeActiveOffer(-1);
           }
         }}
         onMouseEnter={(evt) => {
-          evt.preventDefault();
-          if (changeActiveOffer) {
-            changeActiveOffer(offer);
+          if (needChangeActiveOffer) {
+            evt.preventDefault();
+            changeActiveOffer(offer.id);
           }
         }}
       >

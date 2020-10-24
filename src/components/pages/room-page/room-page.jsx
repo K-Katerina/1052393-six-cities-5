@@ -6,53 +6,62 @@ import Header from "../../header/header";
 import NearPlaces from "../../near-places/near-places";
 import Map from "../../map/map";
 import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/actions";
 
-const RoomPage = (props) => {
-  const {offers} = props;
-  const offerId = +props.match.params.id;
-  const offer = offers.find((it) => it.id === offerId);
-  return (
-    <React.Fragment>
-      <div className="page">
-        <Header/>
-        <main className="page__main page__main--property">
-          <section className="property">
-            <div className="property__gallery-container container">
-              <div className="property__gallery">
-                {offer.photos.map((photo) =>
-                  <div key={offer.id + photo} className="property__image-wrapper">
-                    <img className="property__image" src={photo} alt="Photo studio"/>
-                  </div>
-                )}
+class RoomPage extends React.Component {
+
+  componentDidMount() {
+    this.props.changeSelectedCity(this.props.offer.city);
+    this.props.changeActiveOffer(this.props.offer.id);
+  }
+
+  render() {
+    const {offer} = this.props;
+    return (
+      <React.Fragment>
+        <div className="page">
+          <Header/>
+          <main className="page__main page__main--property">
+            <section className="property">
+              <div className="property__gallery-container container">
+                <div className="property__gallery">
+                  {offer.photos.map((photo) =>
+                    <div key={offer.id + photo} className="property__image-wrapper">
+                      <img className="property__image" src={photo} alt="Photo studio"/>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-            <InfoProperty offer={offer}/>
-            <section className="property__map map">
-              <Map/>
+              <InfoProperty offer={offer}/>
+              <section className="property__map map">
+                <Map/>
+              </section>
             </section>
-          </section>
-          <div className="container">
-            <NearPlaces/>
-          </div>
-        </main>
-      </div>
-    </React.Fragment>
-  );
-};
+            <div className="container">
+              <NearPlaces selectedOffer={offer}/>
+            </div>
+          </main>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired
-    })
-  }),
+  offer: OfferPropType,
+  changeSelectedCity: PropTypes.func,
+  changeActiveOffer: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers
+const mapStateToProps = (state, ownProps) => ({
+  offer: state.offers.find((it) => it.id === Number(ownProps.match.params.id))
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeSelectedCity: (city) => dispatch(ActionCreator.changeSelectedCity(city)),
+  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer)),
 });
 
 export {RoomPage};
-export default connect(mapStateToProps)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
 

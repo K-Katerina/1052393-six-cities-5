@@ -3,21 +3,28 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link} from "react-router-dom";
 import {TypeCards} from "../../const";
+import {ActionCreator} from "../../store/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../store/actions";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES} = props;
+  const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
   return (
     <React.Fragment>
       <article className={`${className}__card place-card`}
-        onMouseOver={(evt) => {
-          evt.preventDefault();
-          if (changeActiveOffer) {
-            changeActiveOffer(offer);
+        onMouseLeave={(evt) => {
+          if (needChangeActiveOffer) {
+            evt.preventDefault();
+            changeActiveOffer(-1);
+          }
+        }}
+        onMouseEnter={(evt) => {
+          if (needChangeActiveOffer) {
+            evt.preventDefault();
+            changeActiveOffer(offer.id);
           }
         }}
       >
@@ -63,13 +70,11 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   changeActiveOffer: PropTypes.func,
   offer: OfferPropType.isRequired,
-  typeCard: PropTypes.oneOf(Object.values(TypeCards))
+  typeCard: PropTypes.oneOf(Object.values(TypeCards)),
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer(activeOffer) {
-    dispatch(ActionCreator.changeActiveOffer(activeOffer));
-  },
+  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer)),
 });
 
 export {OfferCard};

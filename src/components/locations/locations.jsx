@@ -1,8 +1,8 @@
 import React from "react";
-import {Cities} from "../../const";
 import {ActionCreator} from "../../store/actions";
 import PropTypes from "prop-types";
 import {CityPropType} from "../../types";
+import {Cities} from "../../const";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
 
@@ -24,7 +24,7 @@ const Locations = (props) => {
 
 Locations.propTypes = {
   selectedCity: CityPropType,
-  changeSelectedCity: PropTypes.func
+  changeSelectedCity: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -33,8 +33,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeSelectedCity(selectedCity) {
-    dispatch(ActionCreator.changeSelectedCity(selectedCity));
-  },
+    dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity]));
+  }
 });
 
 export {Locations};

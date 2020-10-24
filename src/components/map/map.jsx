@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {CityPropType, OfferPropType} from "../../types";
+import {OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
@@ -12,25 +12,22 @@ class Map extends React.Component {
   }
 
   initMap() {
-    const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
-      iconSize: [30, 30]
-    });
     const zoom = 12;
+    const coordinates = this.props.offers[0].coordinatesCity;
     this.map = leaflet.map(`map`, {
-      center: this.props.selectedCity.coordinates,
+      center: coordinates,
       zoom,
       zoomControl: false,
       marker: true
     });
-    this.map.setView(this.props.selectedCity.coordinates, zoom);
+    this.map.setView(coordinates, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
-    this.addMarkers(this.map, icon);
+    this.addMarkers(this.map);
   }
 
   componentDidMount() {
@@ -42,9 +39,22 @@ class Map extends React.Component {
     this.initMap();
   }
 
-  addMarkers(map, icon) {
-    const offersForCity = getOffersForCity(this.props.selectedCity, this.props.offers);
-    offersForCity.forEach((offer) => leaflet.marker(offer.coordinates, {icon}).addTo(map));
+  addMarkers(map) {
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+    const activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 30]
+    });
+    this.props.offers.forEach((offer) => {
+      if (offer.id === this.props.activeOffer) {
+        leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(map);
+      } else {
+        leaflet.marker(offer.coordinates, {icon}).addTo(map);
+      }
+    });
   }
 
   render() {
@@ -56,12 +66,13 @@ class Map extends React.Component {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(OfferPropType),
-  selectedCity: CityPropType
+  activeOffer: PropTypes.number
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  selectedCity: state.selectedCity
+  offers: getOffersForCity(state.selectedCity, state.offers),
+  selectedCity: state.selectedCity,
+  activeOffer: state.activeOffer
 });
 
 export {Map};

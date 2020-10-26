@@ -4,7 +4,7 @@ import {OFFERS} from "../mocks/offers";
 import {Cities, DEFAULT_SORT_TYPE} from "../const";
 
 const initialState = {
-  selectedCity: Cities.PARIS,
+  selectedCity: Object.keys(Cities)[0],
   offers: OFFERS,
   activeOffer: -1,
   isLoggedIn: true,
@@ -33,6 +33,5 @@ const reducer = (state = initialState, action) => {
     default: return state;
   }
 };
-
 
 export {reducer};

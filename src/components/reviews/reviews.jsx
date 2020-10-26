@@ -2,8 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {ReviewPropType} from "../../types";
 import ReviewsList from "../reviews-list/reviews-list";
+import withComment from "../../hocs/with-comment/with-comment";
 import ReviewsForm from "../reviews-form/reviews-form";
 import {connect} from "react-redux";
+
+const ReviewsFormWrapped = withComment(ReviewsForm);
 
 const Reviews = (props) => {
   const {reviews, isLoggedIn} = props;
@@ -14,7 +17,7 @@ const Reviews = (props) => {
         className="reviews__amount">{reviews.length}</span></h2>
       <ReviewsList reviews={reviews}/>
       {isLoggedIn ?
-        <ReviewsForm/> : ``}
+        <ReviewsFormWrapped/> : ``}
     </section>
   );
 };

@@ -4,7 +4,7 @@ import {OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
-import {getOffersForCity} from "../../utils";
+import {getActiveOffer, getSelectedCity} from "../../store/reducers/selectors";
 
 class Map extends React.Component {
   constructor(props) {
@@ -12,8 +12,8 @@ class Map extends React.Component {
   }
 
   initMap() {
-    const zoom = 12;
-    const coordinates = this.props.offers[0].coordinatesCity;
+    const zoom = this.props.nearPlaces[0].coordinatesCity.zoom;
+    const coordinates = this.props.nearPlaces[0].coordinatesCity;
     this.map = leaflet.map(`map`, {
       center: coordinates,
       zoom,
@@ -48,7 +48,7 @@ class Map extends React.Component {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    this.props.offers.forEach((offer) => {
+    this.props.nearPlaces.forEach((offer) => {
       if (offer.id === this.props.activeOffer) {
         leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(map);
       } else {
@@ -65,14 +65,13 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  activeOffer: PropTypes.number
+  nearPlaces: PropTypes.arrayOf(OfferPropType),
+  activeOffer: PropTypes.number,
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffersForCity(state.selectedCity, state.offers),
-  selectedCity: state.selectedCity,
-  activeOffer: state.activeOffer
+  selectedCity: getSelectedCity(state),
+  activeOffer: getActiveOffer(state)
 });
 
 export {Map};

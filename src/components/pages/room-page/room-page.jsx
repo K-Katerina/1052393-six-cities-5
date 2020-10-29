@@ -3,20 +3,21 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
 import InfoProperty from "../../info-property/info-property";
 import Header from "../../header/header";
-import NearPlaces from "../../near-places/near-places";
 import Map from "../../map/map";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../../store/actions";
+import {getOffersById, getNearPlacesFactory, getActiveOffer} from "../../../store/reducers/selectors";
+import {NearPlaces} from "../../near-places/near-places";
 
 class RoomPage extends React.Component {
 
   componentDidMount() {
-    this.props.changeSelectedCity(this.props.offer.city);
+    this.props.changeSelectedCity(this.props.offer.cityName);
     this.props.changeActiveOffer(this.props.offer.id);
   }
 
   render() {
-    const {offer} = this.props;
+    const {offer, offers} = this.props;
     return (
       <React.Fragment>
         <div className="page">
@@ -34,11 +35,11 @@ class RoomPage extends React.Component {
               </div>
               <InfoProperty offer={offer}/>
               <section className="property__map map">
-                <Map/>
+                <Map nearPlaces={offers}/>
               </section>
             </section>
             <div className="container">
-              <NearPlaces selectedOffer={offer}/>
+              <NearPlaces nearPlaces={offers.filter((it) => it.id !== offer.id)}/>
             </div>
           </main>
         </div>
@@ -50,16 +51,20 @@ class RoomPage extends React.Component {
 RoomPage.propTypes = {
   offer: OfferPropType,
   changeSelectedCity: PropTypes.func,
-  changeActiveOffer: PropTypes.func
+  changeActiveOffer: PropTypes.func,
+  offers: PropTypes.arrayOf(OfferPropType),
+  activeOffer: PropTypes.number
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  offer: state.offers.find((it) => it.id === Number(ownProps.match.params.id))
+  offer: getOffersById(Number(ownProps.match.params.id), state),
+  offers: getNearPlacesFactory(Number(ownProps.match.params.id), state)(state),
+  activeOffer: getActiveOffer(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity: (city) => dispatch(ActionCreator.changeSelectedCity(city)),
-  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer)),
+  changeSelectedCity: (city) => dispatch(ActionCreator.changeSelectedCity(city.toUpperCase())),
+  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
 });
 
 export {RoomPage};

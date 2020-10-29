@@ -5,10 +5,6 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const getOffersForCity = (city, offers) => {
-  return offers.filter((offer) => offer.city === city);
-};
-
 export const sortOffers = (offers, sortType) => {
   switch (sortType) {
     case `PRICE_TO_HIGH`: return offers.sort((a, b) => a.costPerNight - b.costPerNight).slice();
@@ -21,17 +17,6 @@ export const sortOffers = (offers, sortType) => {
 export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 
 export const getDate = (date) => moment(date).format(`MMMM YYYY`);
-
-export const groupOffersByCity = (offers) => {
-  const map = new Map();
-  offers.filter((offer) => offer.isFavorite).forEach((offer) => {
-    const city = offer.city;
-    map.set(city, map.get(city) || []);
-    map.get(city).push(offer);
-  });
-  return map;
-};
-
 
 export const getStyleForCard = (cardType) => {
   switch (cardType) {
@@ -61,3 +46,54 @@ export const getStyleForCard = (cardType) => {
 export const capitalizeWord = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 };
+
+export const adaptToClient = (offer) => {
+  const adaptedOffer = extend(
+      offer,
+      {
+        cityName: offer.city.name,
+        coordinatesCity: {
+          lat: offer.city.location.latitude,
+          lng: offer.city.location.longitude,
+          zoom: offer.city.location.zoom
+        },
+        coordinates: {
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
+          zoom: offer.location.zoom
+        },
+        preview: offer.preview_image,
+        photos: offer.images,
+        desc: offer.description,
+        isPremium: offer.is_premium,
+        bedroomsCount: offer.bedrooms,
+        maxGuests: offer.max_adults,
+        costPerNight: offer.price,
+        features: offer.goods,
+        isFavorite: offer.is_favorite,
+        owner:
+          {
+            id: offer.host.id,
+            avatar: offer.host.avatar_url,
+            name: offer.host.name,
+            isSuper: offer.host.is_pro
+          },
+        reviews: []
+      });
+
+  delete adaptedOffer.bedrooms;
+  delete adaptedOffer.city;
+  delete adaptedOffer.description;
+  delete adaptedOffer.goods;
+  delete adaptedOffer.host;
+  delete adaptedOffer.images;
+  delete adaptedOffer.is_favorite;
+  delete adaptedOffer.is_premium;
+  delete adaptedOffer.location;
+  delete adaptedOffer.max_adults;
+  delete adaptedOffer.preview_image;
+  delete adaptedOffer.price;
+
+  return adaptedOffer;
+};
+

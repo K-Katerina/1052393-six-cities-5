@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link} from "react-router-dom";
-import {TypeCards} from "../../const";
+import {HousingType, TypeCards} from "../../const";
 import {ActionCreator} from "../../store/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
@@ -60,7 +60,7 @@ const OfferCard = (props) => {
           <h2 className="place-card__name">
             <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
           </h2>
-          <p className="place-card__type">{offer.type}</p>
+          <p className="place-card__type">{HousingType[offer.type.toUpperCase()]}</p>
         </div>
       </article>
     </React.Fragment>

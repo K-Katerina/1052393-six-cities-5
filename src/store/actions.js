@@ -2,7 +2,8 @@ export const ActionType = {
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
   CHANGE_SELECTED_CITY: `CHANGE_SELECTED_CITY`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
-  OPEN_SORT_MENU: `OPEN_SORT_MENU`
+  OPEN_SORT_MENU: `OPEN_SORT_MENU`,
+  LOAD_OFFERS: `LOAD_OFFERS`
 };
 
 export const ActionCreator = {
@@ -21,5 +22,9 @@ export const ActionCreator = {
   openSortMenu: (isOpen) => ({
     type: ActionType.OPEN_SORT_MENU,
     payload: isOpen
+  }),
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
   })
 };

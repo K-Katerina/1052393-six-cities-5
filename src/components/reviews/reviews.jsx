@@ -5,18 +5,19 @@ import ReviewsList from "../reviews-list/reviews-list";
 import withComment from "../../hocs/with-comment/with-comment";
 import ReviewsForm from "../reviews-form/reviews-form";
 import {connect} from "react-redux";
+import {isLoggedIn} from "../../store/reducers/selectors";
 
 const ReviewsFormWrapped = withComment(ReviewsForm);
 
 const Reviews = (props) => {
-  const {reviews, isLoggedIn} = props;
+  const {reviews, loggedIn} = props;
 
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span
         className="reviews__amount">{reviews.length}</span></h2>
       <ReviewsList reviews={reviews}/>
-      {isLoggedIn ?
+      {loggedIn ?
         <ReviewsFormWrapped/> : ``}
     </section>
   );
@@ -24,11 +25,11 @@ const Reviews = (props) => {
 
 Reviews.propTypes = {
   reviews: PropTypes.arrayOf(ReviewPropType),
-  isLoggedIn: PropTypes.bool
+  loggedIn: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  isLoggedIn: state.isLoggedIn,
+  loggedIn: isLoggedIn(state),
 });
 
 export {Reviews};

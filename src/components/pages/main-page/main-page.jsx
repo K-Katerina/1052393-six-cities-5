@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getOffersForCity} from "../../../utils";
 import MainEmpty from "../../main-empty/main-empty";
 import Header from "../../header/header";
 import Locations from "../../locations/locations";
 import Map from "../../map/map";
 import OffersContainer from "../../offers-container/offers-container";
 import {connect} from "react-redux";
+import {getOffers, getOffersForCity} from "../../../store/reducers/selectors";
+import {OfferPropType} from "../../../types";
 
 const MainPage = (props) => {
-  const {isEmptyOffers} = props;
+  const {isEmptyOffers, offers} = props;
   return (
     <React.Fragment>
       <div className="page page--gray page--main">
@@ -25,7 +26,7 @@ const MainPage = (props) => {
                 <OffersContainer/>
                 <div className="cities__right-section">
                   <section className="cities__map map">
-                    <Map/>
+                    <Map nearPlaces={offers}/>
                   </section>
                 </div>
               </div> }
@@ -37,11 +38,13 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  isEmptyOffers: PropTypes.bool
+  isEmptyOffers: PropTypes.bool,
+  offers: PropTypes.arrayOf(OfferPropType)
 };
 
 const mapStateToProps = (state) => ({
-  isEmptyOffers: !getOffersForCity(state.selectedCity, state.offers).length
+  isEmptyOffers: !getOffersForCity(state).length,
+  offers: getOffers(state)
 });
 
 export {MainPage};

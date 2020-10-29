@@ -31,7 +31,7 @@ export const CityPropType = PropTypes.string;
 
 export const OfferPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  city: CityPropType,
+  cityName: CityPropType,
   coordinatesCity: CoordinatesPropType,
   title: PropTypes.string.isRequired,
   coordinates: CoordinatesPropType.isRequired,
@@ -40,7 +40,7 @@ export const OfferPropType = PropTypes.shape({
   desc: PropTypes.string,
   isPremium: PropTypes.bool.isRequired,
   rating: PropTypes.number,
-  type: PropTypes.oneOf(Object.values(HousingType)).isRequired,
+  type: PropTypes.oneOf(Object.keys(HousingType).map((typeOffer) => typeOffer.toLowerCase())).isRequired,
   bedroomsCount: PropTypes.number.isRequired,
   maxGuests: PropTypes.number.isRequired,
   costPerNight: PropTypes.number.isRequired,

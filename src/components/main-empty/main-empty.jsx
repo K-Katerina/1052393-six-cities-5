@@ -2,6 +2,7 @@ import React from "react";
 import {CityPropType} from "../../types";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
+import {getSelectedCity} from "../../store/reducers/selectors";
 
 const MainEmpty = (props) => {
   return (
@@ -24,7 +25,7 @@ MainEmpty.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity
+  selectedCity: getSelectedCity(state)
 });
 
 export default connect(mapStateToProps)(MainEmpty);

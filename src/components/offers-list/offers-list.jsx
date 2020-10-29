@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import PlaceCard from "../place-card/place-card";
-import {getOffersForCity, sortOffers} from "../../utils";
+import {sortOffers} from "../../utils";
 import {connect} from "react-redux";
+import {getOffersForCity, getSortType} from "../../store/reducers/selectors";
 
 const OffersList = (props) => {
   const {offers, sortType} = props;
@@ -24,8 +25,8 @@ OffersList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffersForCity(state.selectedCity, state.offers),
-  sortType: state.sortType
+  offers: getOffersForCity(state),
+  sortType: getSortType(state)
 });
 
 export {OffersList};

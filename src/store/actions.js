@@ -3,7 +3,8 @@ export const ActionType = {
   CHANGE_SELECTED_CITY: `CHANGE_SELECTED_CITY`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   OPEN_SORT_MENU: `OPEN_SORT_MENU`,
-  LOAD_OFFERS: `LOAD_OFFERS`
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`
 };
 
 export const ActionCreator = {
@@ -26,5 +27,9 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
-  })
+  }),
+  isLoadedOffers: (isLoading) => ({
+    type: ActionType.IS_LOADED_OFFERS,
+    payload: isLoading,
+  }),
 };

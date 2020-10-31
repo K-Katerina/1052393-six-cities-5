@@ -26,6 +26,11 @@ export const isLoggedIn = (state) => {
   return state.PROCESS.isLoggedIn;
 };
 
+export const isLoaded = (state) => {
+  return state.DATA.isLoadingOffers;
+};
+
+
 export const isOpenSortMenu = (state) => {
   return state.PROCESS.isOpenSortMenu;
 };

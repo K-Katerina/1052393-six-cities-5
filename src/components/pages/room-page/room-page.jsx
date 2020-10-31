@@ -6,8 +6,9 @@ import Header from "../../header/header";
 import Map from "../../map/map";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../../store/actions";
-import {getOffersById, getNearPlacesFactory, getActiveOffer} from "../../../store/reducers/selectors";
+import {getOffersById, getNearPlacesFactory, isLoaded, getActiveOffer} from "../../../store/reducers/selectors";
 import {NearPlaces} from "../../near-places/near-places";
+import withLoader from "../../../hocs/with-loader/with-loader";
 
 class RoomPage extends React.Component {
 
@@ -16,8 +17,17 @@ class RoomPage extends React.Component {
     this.props.changeActiveOffer(this.props.offer.id);
   }
 
+  componentDidUpdate(prevProps) {
+    if (Number(prevProps.match.params.id) !== this.props.activeOffer) {
+      this.props.changeSelectedCity(this.props.offer.cityName);
+      this.props.changeActiveOffer(this.props.offer.id);
+    }
+  }
+
   render() {
     const {offer, offers} = this.props;
+
+    const nearPlaces = offers.filter((it) => it.id !== offer.id);
     return (
       <React.Fragment>
         <div className="page">
@@ -39,7 +49,7 @@ class RoomPage extends React.Component {
               </section>
             </section>
             <div className="container">
-              <NearPlaces nearPlaces={offers.filter((it) => it.id !== offer.id)}/>
+              <NearPlaces nearPlaces={nearPlaces}/>
             </div>
           </main>
         </div>
@@ -53,10 +63,13 @@ RoomPage.propTypes = {
   changeSelectedCity: PropTypes.func,
   changeActiveOffer: PropTypes.func,
   offers: PropTypes.arrayOf(OfferPropType),
-  activeOffer: PropTypes.number
+  isLoading: PropTypes.bool,
+  activeOffer: PropTypes.number,
+  match: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  isLoading: isLoaded(state),
   offer: getOffersById(Number(ownProps.match.params.id), state),
   offers: getNearPlacesFactory(Number(ownProps.match.params.id), state)(state),
   activeOffer: getActiveOffer(state)
@@ -67,6 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
 });
 
-export {RoomPage};
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
-
+export default connect(mapStateToProps, mapDispatchToProps)(withLoader(RoomPage));

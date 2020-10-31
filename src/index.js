@@ -17,14 +17,11 @@ const store = createStore(
     )
 );
 
-Promise.all([
-  store.dispatch(getOffers()),
-])
-  .then(() => {
-    ReactDOM.render(
-        <Provider store={store}>
-          <App/>,
-        </Provider>,
-        document.querySelector(`#root`)
-    );
-  });
+store.dispatch(getOffers());
+ReactDOM.render(
+    <Provider store={store}>
+      <App/>
+    </Provider>,
+    document.querySelector(`#root`)
+);
+

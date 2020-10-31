@@ -6,7 +6,7 @@ import Locations from "../../locations/locations";
 import Map from "../../map/map";
 import OffersContainer from "../../offers-container/offers-container";
 import {connect} from "react-redux";
-import {getOffers, getOffersForCity} from "../../../store/reducers/selectors";
+import {getOffersForCity} from "../../../store/reducers/selectors";
 import {OfferPropType} from "../../../types";
 
 const MainPage = (props) => {
@@ -44,7 +44,7 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   isEmptyOffers: !getOffersForCity(state).length,
-  offers: getOffers(state)
+  offers: getOffersForCity(state)
 });
 
 export {MainPage};

@@ -24,6 +24,10 @@ class RoomPage extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.changeActiveOffer(-1);
+  }
+
   render() {
     const {offer, offers} = this.props;
 

@@ -18,7 +18,7 @@ class RoomPage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (Number(prevProps.match.params.id) !== this.props.activeOffer) {
+    if (Number(prevProps.match.params.id) !== this.props.offer.id) {
       this.props.changeSelectedCity(this.props.offer.cityName);
       this.props.changeActiveOffer(this.props.offer.id);
     }

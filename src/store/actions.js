@@ -6,7 +6,8 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
   IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
   LOGIN: `LOGIN`,
-  CHANGE_LOGIN: `CHANGE_LOGIN`
+  CHANGE_LOGIN: `CHANGE_LOGIN`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
 
 export const ActionCreator = {
@@ -42,4 +43,8 @@ export const ActionCreator = {
     type: ActionType.CHANGE_LOGIN,
     payload: login,
   }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  })
 };

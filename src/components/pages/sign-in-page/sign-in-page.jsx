@@ -1,6 +1,6 @@
 import React, {createRef} from "react";
 import {Link} from "react-router-dom";
-import {Cities} from "../../../const";
+import {AppRoute, Cities} from "../../../const";
 import PropTypes from "prop-types";
 import Header from "../../header/header";
 import {connect} from "react-redux";
@@ -50,7 +50,7 @@ class SignInPage extends React.PureComponent {
               </section>
               <section className="locations locations--login locations--current">
                 <div className="locations__item">
-                  <Link to="/" className="locations__item-link">
+                  <Link to={AppRoute.ROOT} className="locations__item-link">
                     <span>{Object.keys(Cities)[0]}</span>
                   </Link>
                 </div>

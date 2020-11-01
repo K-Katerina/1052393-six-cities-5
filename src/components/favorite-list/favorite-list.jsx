@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritePlaces from "../favorite-places/favorite-places";
 import {groupFavoriteOffersByCity} from "../../store/reducers/selectors";
+import {AppRoute} from "../../const";
 
 const FavoriteList = (props) => {
   const {offers} = props;
@@ -16,7 +17,7 @@ const FavoriteList = (props) => {
           <li key={location} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <Link to="/" className="locations__item-link">
+                <Link to={AppRoute.ROOT} className="locations__item-link">
                   <span>{location}</span>
                 </Link>
               </div>

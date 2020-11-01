@@ -5,9 +5,8 @@ import {Cities, DEFAULT_SORT_TYPE} from "../../../const";
 const initialState = {
   selectedCity: Object.keys(Cities)[0],
   activeOfferId: -1,
-  isLoggedIn: true,
   sortType: DEFAULT_SORT_TYPE,
-  isOpenSortMenu: false
+  isOpenSortMenu: false,
 };
 
 const appProcess = (state = initialState, action) => {

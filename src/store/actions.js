@@ -4,7 +4,9 @@ export const ActionType = {
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   OPEN_SORT_MENU: `OPEN_SORT_MENU`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`
+  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
+  LOGIN: `LOGIN`,
+  CHANGE_LOGIN: `CHANGE_LOGIN`
 };
 
 export const ActionCreator = {
@@ -31,5 +33,13 @@ export const ActionCreator = {
   isLoadedOffers: (isLoading) => ({
     type: ActionType.IS_LOADED_OFFERS,
     payload: isLoading,
+  }),
+  loggedIn: (loggedIn) => ({
+    type: ActionType.LOGIN,
+    payload: loggedIn,
+  }),
+  changeLogin: (login) => ({
+    type: ActionType.CHANGE_LOGIN,
+    payload: login,
   }),
 };

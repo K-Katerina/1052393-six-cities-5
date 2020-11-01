@@ -18,14 +18,17 @@ export const getSortType = (state) => {
   return state.PROCESS.sortType;
 };
 
-export const isLoggedIn = (state) => {
-  return state.PROCESS.isLoggedIn;
-};
-
 export const isLoaded = (state) => {
   return state.DATA.isLoadingOffers;
 };
 
+export const getUserLogin = (state) => {
+  return state.USER.login;
+};
+
+export const isLoggedIn = (state) => {
+  return state.USER.loggedIn;
+};
 
 export const isOpenSortMenu = (state) => {
   return state.PROCESS.isOpenSortMenu;

@@ -2,10 +2,10 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {isLoggedIn} from "../../store/reducers/selectors";
+import {getUserLogin, isLoggedIn} from "../../store/reducers/selectors";
 
 const Header = (props) => {
-  const {loggedIn} = props;
+  const {loggedIn, login} = props;
   return (
     <header className="header">
       <div className="container">
@@ -23,7 +23,7 @@ const Header = (props) => {
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {loggedIn ?
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span> :
+                    <span className="header__user-name user__name">{login}</span> :
                     <span className="header__login">Sign in</span>
                   }
                 </Link>
@@ -38,10 +38,12 @@ const Header = (props) => {
 
 Header.propTypes = {
   loggedIn: PropTypes.bool,
+  login: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
   loggedIn: isLoggedIn(state),
+  login: getUserLogin(state)
 });
 
 export {Header};

@@ -8,9 +8,9 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  changeActiveOffer: (activeOffer) => ({
+  changeActiveOffer: (activeOfferId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
-    payload: activeOffer
+    payload: activeOfferId
   }),
   changeSelectedCity: (selectedCity) => ({
     type: ActionType.CHANGE_SELECTED_CITY,

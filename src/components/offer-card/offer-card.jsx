@@ -74,7 +74,7 @@ OfferCard.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer)),
+  changeActiveOffer: (activeOfferId) => dispatch(ActionCreator.changeActiveOffer(activeOfferId)),
 });
 
 export {OfferCard};

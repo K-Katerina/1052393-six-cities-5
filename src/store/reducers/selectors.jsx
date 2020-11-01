@@ -10,12 +10,8 @@ export const getSelectedCity = (state) => {
   return state.PROCESS.selectedCity;
 };
 
-export const getActiveOffer = (state) => {
-  return state.PROCESS.activeOffer;
-};
-
-export const getOffersById = (id, state) => {
-  return getOffers(state).find((it) => it.id === id);
+export const getActiveOfferId = (state) => {
+  return state.PROCESS.activeOfferId;
 };
 
 export const getSortType = (state) => {
@@ -35,28 +31,44 @@ export const isOpenSortMenu = (state) => {
   return state.PROCESS.isOpenSortMenu;
 };
 
-export const groupOffersByCity = (state) => {
-  const map = new Map();
-  getOffers(state).filter((offer) => offer.isFavorite).forEach((offer) => {
-    const city = offer.city;
-    map.set(city, map.get(city) || []);
-    map.get(city).push(offer);
-  });
-  return map;
-};
+export const getOffersByIdFactory = (id) => createSelector(
+    [getOffers],
+    (offers) => {
+      return offers.find((it) => it.id === id);
+    });
+
+export const groupFavoriteOffersByCity = createSelector(
+    [getOffers],
+    (offers) => {
+      const map = new Map();
+      offers.filter((offer) => offer.isFavorite).forEach((offer) => {
+        const city = offer.city;
+        map.set(city, map.get(city) || []);
+        map.get(city).push(offer);
+      });
+      return map;
+    });
 
 export const getOffersForCity = createSelector(
     [getOffers, getSelectedCity],
     (offers, city) => {
-      return offers.filter((offer) => capitalizeWord(offer.cityName) === capitalizeWord(city));
+      return [...offers.filter((offer) => capitalizeWord(offer.cityName) === capitalizeWord(city))];
     });
 
+export const getSortOffers = createSelector(
+    [getOffersForCity, getSortType],
+    (offersForSelectedCity, sortType) => {
+      switch (sortType) {
+        case `PRICE_TO_HIGH`: return [...offersForSelectedCity].sort((a, b) => a.costPerNight - b.costPerNight);
+        case `PRICE_TO_LOW`: return [...offersForSelectedCity].sort((a, b) => b.costPerNight - a.costPerNight);
+        case `BY_RATING`: return [...offersForSelectedCity].sort((a, b) => b.rating - a.rating);
+        default: return [...offersForSelectedCity];
+      }
+    });
 
-export const getNearPlacesFactory = (id, state) => createSelector(
+export const getNearPlacesFactory = (id) => createSelector(
     [getOffersForCity],
     (offers) => {
-      const places = offers.filter((it) => it.id !== id).slice(0, MAX_NEAR_PLACES);
-      places.push(getOffersById(id, state));
-      return places;
+      return offers.filter((it) => it.id !== id).slice(0, MAX_NEAR_PLACES);
     });
 

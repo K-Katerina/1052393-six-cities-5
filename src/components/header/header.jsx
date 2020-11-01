@@ -19,7 +19,7 @@ const Header = (props) => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link to={loggedIn ? `/favorites` : `/login`}
+                <Link to={loggedIn ? AppRoute.FAVORITES : AppRoute.LOGIN}
                   className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>

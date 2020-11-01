@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
-import {Link} from "react-router-dom";
-import {HousingType, TypeCards} from "../../const";
+import {Link, withRouter} from "react-router-dom";
+import {AppRoute, HousingType, TypeCards} from "../../const";
 import {ActionCreator} from "../../store/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
+import {isLoggedIn} from "../../store/reducers/selectors";
 
 const OfferCard = (props) => {
-  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES} = props;
+  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history} = props;
   const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
@@ -44,7 +45,11 @@ const OfferCard = (props) => {
               <b className="place-card__price-value">&euro;{offer.costPerNight}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+            <button onClick={() => {
+              if (loggedIn) {
+                history.push(AppRoute.LOGIN);
+              }
+            }} className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
@@ -71,12 +76,18 @@ OfferCard.propTypes = {
   changeActiveOffer: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards)),
+  loggedIn: PropTypes.bool,
+  history: PropTypes.object
 };
+
+const mapStateToProps = (state) => ({
+  loggedIn: isLoggedIn(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   changeActiveOffer: (activeOfferId) => dispatch(ActionCreator.changeActiveOffer(activeOfferId)),
 });
 
 export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferCard));
 

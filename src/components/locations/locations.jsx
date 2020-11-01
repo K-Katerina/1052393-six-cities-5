@@ -5,6 +5,7 @@ import {CityPropType} from "../../types";
 import {Cities} from "../../const";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
+import {getSelectedCity} from "../../store/reducers/selectors";
 
 const Locations = (props) => {
   const {selectedCity, changeSelectedCity} = props;
@@ -28,12 +29,12 @@ Locations.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity,
+  selectedCity: getSelectedCity(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeSelectedCity(selectedCity) {
-    dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity]));
+    dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity].toUpperCase()));
   }
 });
 

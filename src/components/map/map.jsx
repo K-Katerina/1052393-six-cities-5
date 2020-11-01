@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {OfferPropType} from "../../types";
+import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
-import {getOffersForCity} from "../../utils";
+import {getActiveOffer, getSelectedCity} from "../../store/reducers/selectors";
 
 class Map extends React.Component {
   constructor(props) {
@@ -12,8 +12,8 @@ class Map extends React.Component {
   }
 
   initMap() {
-    const zoom = 12;
-    const coordinates = this.props.offers[0].coordinatesCity;
+    const zoom = this.props.nearPlaces[0].coordinatesCity.zoom;
+    const coordinates = this.props.nearPlaces[0].coordinatesCity;
     this.map = leaflet.map(`map`, {
       center: coordinates,
       zoom,
@@ -27,19 +27,26 @@ class Map extends React.Component {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
-    this.addMarkers(this.map);
+
+    this.group = leaflet.layerGroup().addTo(this.map);
+    this.addMarkers();
   }
 
   componentDidMount() {
     this.initMap();
   }
 
-  componentDidUpdate() {
-    this.map.remove();
-    this.initMap();
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedCity !== this.props.selectedCity) {
+      this.map.remove();
+      this.initMap();
+    } else {
+      this.group.clearLayers();
+      this.addMarkers();
+    }
   }
 
-  addMarkers(map) {
+  addMarkers() {
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -48,11 +55,11 @@ class Map extends React.Component {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    this.props.offers.forEach((offer) => {
+    this.props.nearPlaces.forEach((offer) => {
       if (offer.id === this.props.activeOffer) {
-        leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(map);
+        leaflet.marker(offer.coordinates, {icon: activeIcon}).addTo(this.group);
       } else {
-        leaflet.marker(offer.coordinates, {icon}).addTo(map);
+        leaflet.marker(offer.coordinates, {icon}).addTo(this.group);
       }
     });
   }
@@ -65,14 +72,14 @@ class Map extends React.Component {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(OfferPropType),
-  activeOffer: PropTypes.number
+  nearPlaces: PropTypes.arrayOf(OfferPropType),
+  activeOffer: PropTypes.number,
+  selectedCity: CityPropType
 };
 
 const mapStateToProps = (state) => ({
-  offers: getOffersForCity(state.selectedCity, state.offers),
-  selectedCity: state.selectedCity,
-  activeOffer: state.activeOffer
+  selectedCity: getSelectedCity(state),
+  activeOffer: getActiveOffer(state)
 });
 
 export {Map};

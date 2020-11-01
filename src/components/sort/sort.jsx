@@ -3,12 +3,13 @@ import {SortTypes} from "../../const";
 import PropTypes from "prop-types";
 import {ActionCreator} from "../../store/actions";
 import {connect} from "react-redux";
+import {getSortType, isOpenSortMenu} from "../../store/reducers/selectors";
 
 const Sort = (props) => {
-  const {sortType, isOpenSortMenu, changeSortType, openSortMenu} = props;
+  const {sortType, isOpenedSortMenu, changeSortType, openSortMenu} = props;
 
   return (
-    <form onClick={() => openSortMenu(!isOpenSortMenu)} className="places__sorting" action="#" method="get">
+    <form onClick={() => openSortMenu(!isOpenedSortMenu)} className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0">
         &nbsp;{SortTypes[sortType]}
@@ -16,7 +17,7 @@ const Sort = (props) => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpenSortMenu ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${isOpenedSortMenu ? `places__options--opened` : ``}`}>
         {Object.keys(SortTypes).map((type) =>
           <li onClick={() => changeSortType(type)}
             key={type}
@@ -33,12 +34,12 @@ Sort.propTypes = {
   onSortTypeChanged: PropTypes.func,
   changeSortType: PropTypes.func,
   openSortMenu: PropTypes.func,
-  isOpenSortMenu: PropTypes.bool
+  isOpenedSortMenu: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  sortType: state.sortType,
-  isOpenSortMenu: state.isOpenSortMenu
+  sortType: getSortType(state),
+  isOpenedSortMenu: isOpenSortMenu(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

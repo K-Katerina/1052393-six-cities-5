@@ -1,18 +1,16 @@
-import {extend} from "../utils";
-import {ActionType} from "./actions";
-import {OFFERS} from "../mocks/offers";
-import {Cities, DEFAULT_SORT_TYPE} from "../const";
+import {extend} from "../../../utils";
+import {ActionType} from "../../actions";
+import {Cities, DEFAULT_SORT_TYPE} from "../../../const";
 
 const initialState = {
   selectedCity: Object.keys(Cities)[0],
-  offers: OFFERS,
   activeOffer: -1,
   isLoggedIn: true,
   sortType: DEFAULT_SORT_TYPE,
   isOpenSortMenu: false
 };
 
-const reducer = (state = initialState, action) => {
+const appProcess = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_SELECTED_CITY:
       return extend(state, {
@@ -34,4 +32,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export {reducer};
+export {appProcess};

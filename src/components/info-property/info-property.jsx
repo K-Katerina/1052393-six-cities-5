@@ -67,7 +67,7 @@ const InfoProperty = (props) => {
             </p>
           </div>
         </div>
-        <Reviews reviews={offer.reviews}/>
+        <Reviews id={offer.id}/>
       </div>
     </div>
   );

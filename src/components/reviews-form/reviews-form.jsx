@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ReviewsForm = (props) => {
 
-  const {rating, review, handleFormSubmit, handleFieldChange} = props;
+  const {rating, comment, handleFormSubmit, handleFieldChange} = props;
   const RATING_VALUES = [5, 4, 3, 2, 1];
   return (
     <form onSubmit={(evt) => handleFormSubmit(evt)} className="reviews__form form" action="#" method="post">
@@ -21,7 +21,7 @@ const ReviewsForm = (props) => {
         )}
       </div>
       <textarea onChange={(evt) => handleFieldChange(evt)}
-        className="reviews__textarea form__textarea" id="review" name="review" value={review}
+        className="reviews__textarea form__textarea" id="review" name="comment" value={comment}
         placeholder="Tell how was your stay, what you like and what can be improved"/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -39,9 +39,9 @@ const ReviewsForm = (props) => {
 
 ReviewsForm.propTypes = {
   rating: PropTypes.number.isRequired,
-  review: PropTypes.string.isRequired,
+  comment: PropTypes.string.isRequired,
   handleFormSubmit: PropTypes.func.isRequired,
-  handleFieldChange: PropTypes.func.isRequired
+  handleFieldChange: PropTypes.func.isRequired,
 };
 
 export default ReviewsForm;

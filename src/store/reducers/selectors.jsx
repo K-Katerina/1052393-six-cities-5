@@ -18,8 +18,24 @@ export const getSortType = (state) => {
   return state.PROCESS.sortType;
 };
 
-export const isLoaded = (state) => {
+export const isLoadedOffers = (state) => {
   return state.DATA.isLoadingOffers;
+};
+
+export const isLoadedOfferById = (state) => {
+  return state.DATA.isLoadingOfferById;
+};
+
+export const getCurrentOffer = (state) => {
+  return state.DATA.currentOffer;
+};
+
+export const getCurrentReviews = (state) => {
+  return state.DATA.currentReviewsForOffer;
+};
+
+export const getCurrentNearPlaces = (state) => {
+  return state.DATA.currentNearPlaces;
 };
 
 export const getUserLogin = (state) => {

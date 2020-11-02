@@ -3,11 +3,18 @@ export const ActionType = {
   CHANGE_SELECTED_CITY: `CHANGE_SELECTED_CITY`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   OPEN_SORT_MENU: `OPEN_SORT_MENU`,
-  LOAD_OFFERS: `LOAD_OFFERS`,
-  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
+
   LOGIN: `LOGIN`,
   CHANGE_LOGIN: `CHANGE_LOGIN`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
+  GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
+  IS_LOADED_OFFER_BY_ID: `IS_LOADED_OFFER_BY_ID`,
+
+  GET_REVIEWS_BY_OFFER_ID: `GET_REVIEWS_BY_OFFER_ID`,
+  GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`
 };
 
 export const ActionCreator = {
@@ -27,14 +34,7 @@ export const ActionCreator = {
     type: ActionType.OPEN_SORT_MENU,
     payload: isOpen
   }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  isLoadedOffers: (isLoading) => ({
-    type: ActionType.IS_LOADED_OFFERS,
-    payload: isLoading,
-  }),
+
   loggedIn: (loggedIn) => ({
     type: ActionType.LOGIN,
     payload: loggedIn,
@@ -46,5 +46,31 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
+  }),
+
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+  isLoadedOffers: (isLoading) => ({
+    type: ActionType.IS_LOADED_OFFERS,
+    payload: isLoading,
+  }),
+  loadOfferById: (offer) => ({
+    type: ActionType.GET_OFFER_BY_ID,
+    payload: offer,
+  }),
+  isLoadedOfferById: (isLoading) => ({
+    type: ActionType.IS_LOADED_OFFER_BY_ID,
+    payload: isLoading,
+  }),
+
+  loadReviewsByOfferId: (reviews) => ({
+    type: ActionType.GET_REVIEWS_BY_OFFER_ID,
+    payload: reviews,
+  }),
+  loadNearPlacesByOfferId: (offers) => ({
+    type: ActionType.GET_NEAR_PLACES_BY_OFFER_ID,
+    payload: offers,
   })
 };

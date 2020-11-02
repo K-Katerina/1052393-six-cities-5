@@ -2,28 +2,29 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {isLoggedIn} from "../../store/reducers/selectors";
+import {getUserLogin, isLoggedIn} from "../../store/reducers/selectors";
+import {AppRoute} from "../../const";
 
 const Header = (props) => {
-  const {loggedIn} = props;
+  const {loggedIn, login} = props;
   return (
     <header className="header">
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Link to="/" className="header__logo-link header__logo-link--active">
+            <Link to={AppRoute.ROOT} className="header__logo-link header__logo-link--active">
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
             </Link>
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link to={loggedIn ? `/favorites` : `/login`}
+                <Link to={loggedIn ? AppRoute.FAVORITES : AppRoute.LOGIN}
                   className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
                   {loggedIn ?
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span> :
+                    <span className="header__user-name user__name">{login}</span> :
                     <span className="header__login">Sign in</span>
                   }
                 </Link>
@@ -38,10 +39,12 @@ const Header = (props) => {
 
 Header.propTypes = {
   loggedIn: PropTypes.bool,
+  login: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
   loggedIn: isLoggedIn(state),
+  login: getUserLogin(state)
 });
 
 export {Header};

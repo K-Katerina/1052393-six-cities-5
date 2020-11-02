@@ -4,13 +4,16 @@ export const ActionType = {
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   OPEN_SORT_MENU: `OPEN_SORT_MENU`,
   LOAD_OFFERS: `LOAD_OFFERS`,
-  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`
+  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
+  LOGIN: `LOGIN`,
+  CHANGE_LOGIN: `CHANGE_LOGIN`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
 
 export const ActionCreator = {
-  changeActiveOffer: (activeOffer) => ({
+  changeActiveOffer: (activeOfferId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
-    payload: activeOffer
+    payload: activeOfferId
   }),
   changeSelectedCity: (selectedCity) => ({
     type: ActionType.CHANGE_SELECTED_CITY,
@@ -32,4 +35,16 @@ export const ActionCreator = {
     type: ActionType.IS_LOADED_OFFERS,
     payload: isLoading,
   }),
+  loggedIn: (loggedIn) => ({
+    type: ActionType.LOGIN,
+    payload: loggedIn,
+  }),
+  changeLogin: (login) => ({
+    type: ActionType.CHANGE_LOGIN,
+    payload: login,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  })
 };

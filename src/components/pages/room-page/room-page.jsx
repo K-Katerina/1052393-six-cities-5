@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
+import {ActionCreator} from "../../../store/actions";
 import InfoProperty from "../../info-property/info-property";
+import {
+  getOffersByIdFactory,
+  getNearPlacesFactory,
+  isLoaded,
+} from "../../../store/reducers/selectors";
+import {NearPlaces} from "../../near-places/near-places";
+import withLoader from "../../../hocs/with-loader/with-loader";
+import {compose} from "redux";
 import Header from "../../header/header";
 import Map from "../../map/map";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../../store/actions";
-import {getOffersById, getNearPlacesFactory, isLoaded, getActiveOffer} from "../../../store/reducers/selectors";
-import {NearPlaces} from "../../near-places/near-places";
-import withLoader from "../../../hocs/with-loader/with-loader";
 
 class RoomPage extends React.Component {
 
@@ -29,9 +34,8 @@ class RoomPage extends React.Component {
   }
 
   render() {
-    const {offer, offers} = this.props;
+    const {offer, nearPlaces} = this.props;
 
-    const nearPlaces = offers.filter((it) => it.id !== offer.id);
     return (
       <React.Fragment>
         <div className="page">
@@ -49,7 +53,7 @@ class RoomPage extends React.Component {
               </div>
               <InfoProperty offer={offer}/>
               <section className="property__map map">
-                <Map nearPlaces={offers}/>
+                <Map nearPlaces={nearPlaces}/>
               </section>
             </section>
             <div className="container">
@@ -66,17 +70,15 @@ RoomPage.propTypes = {
   offer: OfferPropType,
   changeSelectedCity: PropTypes.func,
   changeActiveOffer: PropTypes.func,
-  offers: PropTypes.arrayOf(OfferPropType),
+  nearPlaces: PropTypes.arrayOf(OfferPropType),
   isLoading: PropTypes.bool,
-  activeOffer: PropTypes.number,
-  match: PropTypes.object
+  match: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => ({
   isLoading: isLoaded(state),
-  offer: getOffersById(Number(ownProps.match.params.id), state),
-  offers: getNearPlacesFactory(Number(ownProps.match.params.id), state)(state),
-  activeOffer: getActiveOffer(state)
+  offer: getOffersByIdFactory(Number(ownProps.match.params.id))(state),
+  nearPlaces: getNearPlacesFactory(Number(ownProps.match.params.id))(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -84,4 +86,6 @@ const mapDispatchToProps = (dispatch) => ({
   changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withLoader(RoomPage));
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withLoader)(RoomPage);

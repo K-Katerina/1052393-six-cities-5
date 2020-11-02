@@ -11,6 +11,14 @@ export const TypeCards = {
   CITIES: `CITIES`
 };
 
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer/:id`,
+  ROOT: `/`,
+};
+
+
 export const MAX_NEAR_PLACES = 3;
 export const DEFAULT_SORT_TYPE = `POPULAR`;
 

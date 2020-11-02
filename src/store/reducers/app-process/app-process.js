@@ -4,10 +4,9 @@ import {Cities, DEFAULT_SORT_TYPE} from "../../../const";
 
 const initialState = {
   selectedCity: Object.keys(Cities)[0],
-  activeOffer: -1,
-  isLoggedIn: true,
+  activeOfferId: -1,
   sortType: DEFAULT_SORT_TYPE,
-  isOpenSortMenu: false
+  isOpenSortMenu: false,
 };
 
 const appProcess = (state = initialState, action) => {
@@ -18,7 +17,7 @@ const appProcess = (state = initialState, action) => {
       });
     case ActionType.CHANGE_ACTIVE_OFFER:
       return extend(state, {
-        activeOffer: action.payload
+        activeOfferId: action.payload
       });
     case ActionType.CHANGE_SORT_TYPE:
       return extend(state, {

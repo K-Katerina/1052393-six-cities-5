@@ -20,10 +20,17 @@ export const getOfferById = (id) => (dispatch, _getState, api) =>{
 export const getReviewsByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/comments/${id}`)
     .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
-    .then((reviews) => {
-      dispatch(ActionCreator.loadReviewsByOfferId(reviews));
-    });
+    .then((reviews) => dispatch(ActionCreator.loadReviewsByOfferId(reviews)));
 };
+
+export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, {comment, rating})
+    .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
+    .then((reviews) => dispatch(ActionCreator.loadReviewsByOfferId(reviews)))
+    .catch((err) => {
+      throw err;
+    })
+);
 
 export const getNearPlacesByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/hotels/${id}/nearby`)
@@ -39,13 +46,6 @@ export const checkAuth = () => (dispatch, _getState, api) => (
       dispatch(ActionCreator.loggedIn(true));
       dispatch(ActionCreator.changeLogin(response.data.email));
     })
-    .catch((err) => {
-      throw err;
-    })
-);
-
-export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getState, api) => (
-  api.post(`/comments/${id}`, {comment, rating})
     .catch((err) => {
       throw err;
     })

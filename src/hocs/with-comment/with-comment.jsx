@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {postReviewByOfferId} from "../../store/api-actions";
 
+export const MIN_LENGTH_COMMENT = 50;
+
 const withComment = (Component) => {
   class WithComment extends PureComponent {
     constructor(props) {
@@ -41,7 +43,7 @@ const withComment = (Component) => {
           {...this.props}
           rating={Number(rating)}
           comment={comment}
-          isDisabled={true} // TODO Я бы ещё завёл поле isDisabled для кнопки, пока условия валидации не проходят, кнопка должна быть disabled
+          isDisabled={comment.length < MIN_LENGTH_COMMENT || !rating}
           handleFormSubmit={this.handleFormSubmit}
           handleFieldChange={this.handleFieldChange}
         />

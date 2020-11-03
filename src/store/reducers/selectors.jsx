@@ -1,6 +1,5 @@
 import {createSelector} from "reselect";
 import {capitalizeWord} from "../../utils";
-import {MAX_NEAR_PLACES} from "../../const";
 
 export const getOffers = (state) => {
   return state.DATA.offers;

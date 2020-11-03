@@ -80,10 +80,3 @@ export const getSortOffers = createSelector(
         default: return [...offersForSelectedCity];
       }
     });
-
-export const getNearPlacesFactory = (id) => createSelector(
-    [getOffersForCity],
-    (offers) => {
-      return offers.filter((it) => it.id !== id).slice(0, MAX_NEAR_PLACES);
-    });
-

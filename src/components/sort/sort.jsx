@@ -1,7 +1,7 @@
 import React from "react";
 import {SortTypes} from "../../const";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../store/actions";
+import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {connect} from "react-redux";
 import {getSortType, isOpenSortMenu} from "../../store/reducers/selectors";
 
@@ -43,8 +43,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSortType: (sortType) => dispatch(ActionCreator.changeSortType(sortType)),
-  openSortMenu: (isOpen) => dispatch(ActionCreator.openSortMenu(isOpen))
+  changeSortType: (sortType) => dispatch(ActionCreatorForProcess.changeSortType(sortType)),
+  openSortMenu: (isOpen) => dispatch(ActionCreatorForProcess.openSortMenu(isOpen))
 });
 
 export {Sort};

@@ -8,7 +8,6 @@ import {AppRoute} from "../../const";
 
 const PrivateRoute = (props) => {
   const {render, path, exact, loggedIn} = props;
-
   return (
     <Route
       path={path}

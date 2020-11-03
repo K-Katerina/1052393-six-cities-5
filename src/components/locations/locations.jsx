@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionCreator} from "../../store/actions";
+import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import PropTypes from "prop-types";
 import {CityPropType} from "../../types";
 import {Cities} from "../../const";
@@ -33,7 +33,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity: (selectedCity) => dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity].toUpperCase()))
+  changeSelectedCity: (selectedCity) => dispatch(ActionCreatorForProcess.changeSelectedCity(Cities[selectedCity].toUpperCase()))
 });
 
 export {Locations};

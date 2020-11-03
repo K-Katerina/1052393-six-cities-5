@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link, withRouter} from "react-router-dom";
 import {AppRoute, HousingType, TypeCards} from "../../const";
-import {ActionCreator} from "../../store/actions";
+import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
 import {isLoggedIn} from "../../store/reducers/selectors";
@@ -46,7 +46,7 @@ const OfferCard = (props) => {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button onClick={() => {
-              if (loggedIn) {
+              if (!loggedIn) {
                 history.push(AppRoute.LOGIN);
               }
             }} className={`place-card__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`} type="button">
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOfferId) => dispatch(ActionCreator.changeActiveOffer(activeOfferId))
+  changeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId))
 });
 
 export {OfferCard};

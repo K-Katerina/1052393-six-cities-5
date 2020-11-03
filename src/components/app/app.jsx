@@ -6,11 +6,11 @@ import FavoritesPage from "../pages/favorites-page/favorites-page";
 import SignInPage from "../pages/sign-in-page/sign-in-page";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
-
+import browserHistory from "../../browser-history";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.ROOT} render={() => <MainPage/>}/>
         <Route exact path={AppRoute.LOGIN} render={() => <SignInPage/>}/>

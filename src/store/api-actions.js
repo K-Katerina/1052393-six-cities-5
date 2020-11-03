@@ -1,32 +1,33 @@
-import {ActionCreator} from "./actions";
+import {ActionCreatorForData} from "./reducers/app-data/actions";
 import {offerAdaptToClient, reviewAdaptToClient} from "../utils";
 import {AppRoute} from "../const";
+import {ActionCreatorForUser} from "./reducers/user/actions";
 
 export const getOffers = () => (dispatch, _getState, api) =>
   api.get(`/hotels`)
   .then(({data}) => data.map((it) => offerAdaptToClient(it)))
-  .then((offers) => dispatch(ActionCreator.loadOffers(offers)));
+  .then((offers) => dispatch(ActionCreatorForData.loadOffers(offers)));
 
 export const getOfferById = (id) => (dispatch, _getState, api) =>{
-  dispatch(ActionCreator.isLoadedOfferById(true));
+  dispatch(ActionCreatorForData.isLoadedOfferById(true));
   api.get(`/hotels/${id}`)
     .then(({data}) => offerAdaptToClient(data))
     .then((offer) => {
-      dispatch(ActionCreator.loadOfferById(offer));
-      dispatch(ActionCreator.isLoadedOfferById(false));
+      dispatch(ActionCreatorForData.loadOfferById(offer));
+      dispatch(ActionCreatorForData.isLoadedOfferById(false));
     });
 };
 
 export const getReviewsByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/comments/${id}`)
     .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
-    .then((reviews) => dispatch(ActionCreator.loadReviewsByOfferId(reviews)));
+    .then((reviews) => dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews)));
 };
 
 export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getState, api) => (
   api.post(`/comments/${id}`, {comment, rating})
     .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
-    .then((reviews) => dispatch(ActionCreator.loadReviewsByOfferId(reviews)))
+    .then((reviews) => dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews)))
     .catch((err) => {
       throw err;
     })
@@ -36,15 +37,15 @@ export const getNearPlacesByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/hotels/${id}/nearby`)
     .then(({data}) => data.map((it) => offerAdaptToClient(it)))
     .then((offers) => {
-      dispatch(ActionCreator.loadNearPlacesByOfferId(offers));
+      dispatch(ActionCreatorForData.loadNearPlacesByOfferId(offers));
     });
 };
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(`/login`)
     .then((response) => {
-      dispatch(ActionCreator.loggedIn(true));
-      dispatch(ActionCreator.changeLogin(response.data.email));
+      dispatch(ActionCreatorForUser.loggedIn(true));
+      dispatch(ActionCreatorForUser.changeLogin(response.data.email));
     })
     .catch((err) => {
       throw err;
@@ -53,7 +54,12 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
-    .then(() => dispatch(ActionCreator.loggedIn(true)))
-    .then(() => dispatch(ActionCreator.changeLogin(email)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.FAVORITES)))
+    .then(() => {
+      dispatch(ActionCreatorForUser.loggedIn(true));
+      dispatch(ActionCreatorForUser.changeLogin(email));
+      dispatch(ActionCreatorForUser.redirectToRoute(AppRoute.FAVORITES));
+    })
+    .catch((err) => {
+      throw err;
+    })
 );

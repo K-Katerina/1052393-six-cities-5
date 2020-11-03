@@ -5,7 +5,7 @@ import InfoProperty from "../../info-property/info-property";
 import {
   getCurrentNearPlaces,
   getCurrentOffer,
-  isLoadedOfferById, isLoadedOffers,
+  isLoadedOfferById,
 } from "../../../store/reducers/selectors";
 import {NearPlaces} from "../../near-places/near-places";
 import Header from "../../header/header";
@@ -29,7 +29,7 @@ class RoomPage extends React.Component {
   }
 
   render() {
-    const {currentOffer, nearPlaces, isLoading} = this.props;
+    const {activeOffer, nearPlaces, isLoading} = this.props;
     if (isLoading) {
       return <Loader/>;
     }
@@ -40,11 +40,11 @@ class RoomPage extends React.Component {
           <main className="page__main page__main--property">
             <section className="property">
               <div className="property__gallery-container container">
-                <PhotosList photos={currentOffer.photos}/>
+                <PhotosList photos={activeOffer.photos}/>
               </div>
-              <InfoProperty offer={currentOffer}/>
+              <InfoProperty offer={activeOffer}/>
               <section className="property__map map">
-                {nearPlaces.length && <Map nearPlaces={nearPlaces} activeOffer={currentOffer}/>}
+                {nearPlaces.length && <Map nearPlaces={nearPlaces} activeOffer={activeOffer}/>}
               </section>
             </section>
             <div className="container">
@@ -58,7 +58,7 @@ class RoomPage extends React.Component {
 }
 
 RoomPage.propTypes = {
-  currentOffer: OfferPropType,
+  activeOffer: OfferPropType,
   nearPlaces: PropTypes.arrayOf(OfferPropType),
   isLoading: PropTypes.bool,
   match: PropTypes.object,
@@ -68,8 +68,8 @@ RoomPage.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isLoading: isLoadedOfferById(state) || isLoadedOffers(state),
-  currentOffer: getCurrentOffer(state),
+  isLoading: isLoadedOfferById(state),
+  activeOffer: getCurrentOffer(state),
   nearPlaces: getCurrentNearPlaces(state),
   id: Number(ownProps.match.params.id)
 });

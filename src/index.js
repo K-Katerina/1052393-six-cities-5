@@ -6,7 +6,7 @@ import {createAPI} from "./services/api";
 import {Provider} from "react-redux";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
-import {checkAuth, getOffers} from "./store/api-actions";
+import {checkAuth} from "./store/api-actions";
 
 const api = createAPI(() => false);
 const store = createStore(
@@ -17,7 +17,6 @@ const store = createStore(
     )
 );
 
-store.dispatch(getOffers());
 store.dispatch(checkAuth());
 
 ReactDOM.render(

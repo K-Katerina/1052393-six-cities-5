@@ -9,14 +9,13 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 
   LOAD_OFFERS: `LOAD_OFFERS`,
-  IS_LOADED_OFFERS: `IS_LOADED_OFFERS`,
   GET_OFFER_BY_ID: `GET_OFFER_BY_ID`,
   IS_LOADED_OFFER_BY_ID: `IS_LOADED_OFFER_BY_ID`,
 
   GET_REVIEWS_BY_OFFER_ID: `GET_REVIEWS_BY_OFFER_ID`,
   GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`
 };
-
+// TODO Как видидшь количество actions неустанно растёт, потому лучше разделять их между файлами в reduceрах
 export const ActionCreator = {
   changeActiveOffer: (activeOfferId) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
@@ -51,10 +50,6 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
-  }),
-  isLoadedOffers: (isLoading) => ({
-    type: ActionType.IS_LOADED_OFFERS,
-    payload: isLoading,
   }),
   loadOfferById: (offer) => ({
     type: ActionType.GET_OFFER_BY_ID,

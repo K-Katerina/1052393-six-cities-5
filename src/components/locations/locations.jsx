@@ -33,9 +33,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity(selectedCity) {
-    dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity].toUpperCase()));
-  }
+  changeSelectedCity: (selectedCity) => dispatch(ActionCreator.changeSelectedCity(Cities[selectedCity].toUpperCase()))
 });
 
 export {Locations};

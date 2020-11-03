@@ -5,10 +5,7 @@ import {AppRoute} from "../const";
 export const getOffers = () => (dispatch, _getState, api) =>
   api.get(`/hotels`)
   .then(({data}) => data.map((it) => offerAdaptToClient(it)))
-  .then((offers) => {
-    dispatch(ActionCreator.loadOffers(offers));
-    dispatch(ActionCreator.isLoadedOffers(false));
-  });
+  .then((offers) => dispatch(ActionCreator.loadOffers(offers)));
 
 export const getOfferById = (id) => (dispatch, _getState, api) =>{
   dispatch(ActionCreator.isLoadedOfferById(true));

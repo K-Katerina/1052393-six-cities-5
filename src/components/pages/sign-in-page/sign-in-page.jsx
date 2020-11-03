@@ -68,9 +68,7 @@ SignInPage.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  }
+  onSubmit: (authData) => dispatch(login(authData))
 });
 
 export default connect(null, mapDispatchToProps)(SignInPage);

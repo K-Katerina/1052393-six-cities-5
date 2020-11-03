@@ -41,7 +41,7 @@ const withComment = (Component) => {
           {...this.props}
           rating={Number(rating)}
           comment={comment}
-          isDisabled={true} // TODO
+          isDisabled={true} // TODO Я бы ещё завёл поле isDisabled для кнопки, пока условия валидации не проходят, кнопка должна быть disabled
           handleFormSubmit={this.handleFormSubmit}
           handleFieldChange={this.handleFieldChange}
         />

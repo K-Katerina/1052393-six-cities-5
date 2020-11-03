@@ -18,10 +18,6 @@ export const getSortType = (state) => {
   return state.PROCESS.sortType;
 };
 
-export const isLoadedOffers = (state) => {
-  return state.DATA.isLoadingOffers;
-};
-
 export const isLoadedOfferById = (state) => {
   return state.DATA.isLoadingOfferById;
 };
@@ -50,7 +46,7 @@ export const isOpenSortMenu = (state) => {
   return state.PROCESS.isOpenSortMenu;
 };
 
-export const getOffersByIdFactory = (id) => createSelector(
+export const getOfferByIdFactory = (id) => createSelector(
     [getOffers],
     (offers) => {
       return offers.find((it) => it.id === id);

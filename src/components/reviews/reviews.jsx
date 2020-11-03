@@ -15,7 +15,9 @@ class Reviews extends React.Component {
   componentDidMount() {
     this.props.getReviews(this.props.id);
   }
-
+  // TODO Сейчас проблема в том, что при отправке нового комментария, ничего не происходит.
+  //  Другими словами чтобы увидеть новый коммент - мне нужно обновить страницу, чего делать не хотелось бы.
+  //  Продумай ситуацию, когда при успешной загрузке, комментарий добавляется сразу в store, чтобы компонент перерендерился.
   render() {
     const {reviews, loggedIn, id} = this.props;
 
@@ -38,8 +40,8 @@ Reviews.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  loggedIn: isLoggedIn(state),
-  reviews: getCurrentReviews(state)
+  reviews: getCurrentReviews(state),
+  loggedIn: isLoggedIn(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

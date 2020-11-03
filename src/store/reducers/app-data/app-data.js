@@ -3,7 +3,6 @@ import {ActionType} from "../../actions";
 
 const initialState = {
   offers: [],
-  isLoadingOffers: true,
   currentOffer: null,
   isLoadingOfferById: true,
   currentReviewsForOffer: [],
@@ -15,10 +14,6 @@ const appData = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: action.payload,
-      });
-    case ActionType.IS_LOADED_OFFERS:
-      return extend(state, {
-        isLoadingOffers: action.payload,
       });
     case ActionType.GET_OFFER_BY_ID:
       return extend(state, {

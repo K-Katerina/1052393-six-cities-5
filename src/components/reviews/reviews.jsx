@@ -24,8 +24,7 @@ class Reviews extends React.Component {
         <h2 className="reviews__title">Reviews &middot; <span
           className="reviews__amount">{reviews.length}</span></h2>
         <ReviewsList reviews={reviews}/>
-        {loggedIn ?
-          <ReviewsFormWrapped id={id}/> : ``}
+        {loggedIn && <ReviewsFormWrapped id={id}/>}
       </section>
     );
   }

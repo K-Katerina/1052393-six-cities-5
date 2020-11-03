@@ -14,7 +14,7 @@ const Locations = (props) => {
       <ul className="locations__list tabs__list">
         {Object.keys(Cities).map((city) =>
           <li key={city} className="locations__item">
-            <a onClick={() => changeSelectedCity(Cities[city])} className={`locations__item-link tabs__item ${selectedCity === Cities[city] ? `tabs__item--active` : ``}`} href="#" data-city="${city}">
+            <a onClick={() => changeSelectedCity(Cities[city])} className={`locations__item-link tabs__item ${selectedCity === Cities[city] && `tabs__item--active`}`} href="#" data-city="${city}">
               <span>{capitalizeWord(city)}</span>
             </a>
           </li>)}

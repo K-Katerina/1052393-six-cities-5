@@ -29,10 +29,10 @@ const OfferCard = (props) => {
           }
         }}
       >
-        {offer.isPremium && needPremiumMark ?
+        {offer.isPremium && needPremiumMark &&
           <div className="place-card__mark">
             <span>Premium</span>
-          </div> : ``}
+          </div>}
         <div className={`${className}__image-wrapper place-card__image-wrapper`}>
           <Link to={`/offer/${offer.id}`}>
             <img className="place-card__image" src={offer.preview} width={`${width}`} height={`${height}`}
@@ -49,7 +49,7 @@ const OfferCard = (props) => {
               if (loggedIn) {
                 history.push(AppRoute.LOGIN);
               }
-            }} className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+            }} className={`place-card__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>

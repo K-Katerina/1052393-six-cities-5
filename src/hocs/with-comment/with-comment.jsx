@@ -41,6 +41,7 @@ const withComment = (Component) => {
           {...this.props}
           rating={Number(rating)}
           comment={comment}
+          isDisabled={true} // TODO
           handleFormSubmit={this.handleFormSubmit}
           handleFieldChange={this.handleFieldChange}
         />

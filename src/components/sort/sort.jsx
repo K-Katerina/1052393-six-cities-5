@@ -17,11 +17,11 @@ const Sort = (props) => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpenedSortMenu ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${isOpenedSortMenu && `places__options--opened`}`}>
         {Object.keys(SortTypes).map((type) =>
           <li onClick={() => changeSortType(type)}
             key={type}
-            className={`places__option ${sortType === type ? `places__option--active` : ``}`}
+            className={`places__option ${sortType === type && `places__option--active`}`}
             data-sort-type={`${type}`} tabIndex="0">{SortTypes[type]}</li>
         )}
       </ul>

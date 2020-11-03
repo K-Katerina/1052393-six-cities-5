@@ -9,16 +9,16 @@ const InfoProperty = (props) => {
   return (
     <div className="property__container container">
       <div className="property__wrapper">
-        {offer.isPremium ?
+        {offer.isPremium &&
           <div className="property__mark">
             <span>Premium</span>
-          </div> : ``}
+          </div>}
         <div className="property__name-wrapper">
           <h1 className="property__name">
             {offer.title}
           </h1>
           <button
-            className={`property__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`}
+            className={`property__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`}
             type="button">
             <svg className="property__bookmark-icon" width="31" height="33">
               <use xlinkHref="#icon-bookmark"></use>
@@ -38,10 +38,10 @@ const InfoProperty = (props) => {
             {offer.type}
           </li>
           <li className="property__feature property__feature--bedrooms">
-            {offer.bedroomsCount} Bedroom{offer.bedroomsCount > 1 ? `s` : ``}
+            {offer.bedroomsCount} Bedroom{offer.bedroomsCount > 1 && `s`}
           </li>
           <li className="property__feature property__feature--adults">
-            Max {offer.maxGuests} adult{offer.maxGuests > 1 ? `s` : ``}
+            Max {offer.maxGuests} adult{offer.maxGuests > 1 && `s`}
           </li>
         </ul>
         <div className="property__price">

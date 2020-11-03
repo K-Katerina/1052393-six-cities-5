@@ -11,6 +11,7 @@ export const getOffers = () => (dispatch, _getState, api) =>
   });
 
 export const getOfferById = (id) => (dispatch, _getState, api) =>{
+  dispatch(ActionCreator.isLoadedOfferById(true));
   api.get(`/hotels/${id}`)
     .then(({data}) => offerAdaptToClient(data))
     .then((offer) => {

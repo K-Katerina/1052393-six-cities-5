@@ -1,20 +1,9 @@
 import {createSelector} from "reselect";
-import {capitalizeWord} from "../../utils";
+import {capitalizeWord} from "../../../utils";
+import {getSelectedCity, getSortType} from "../app-process/selectors";
 
 export const getOffers = (state) => {
   return state.DATA.offers;
-};
-
-export const getSelectedCity = (state) => {
-  return state.PROCESS.selectedCity;
-};
-
-export const getActiveOfferId = (state) => {
-  return state.PROCESS.activeOfferId;
-};
-
-export const getSortType = (state) => {
-  return state.PROCESS.sortType;
 };
 
 export const isLoadedOfferById = (state) => {
@@ -31,18 +20,6 @@ export const getCurrentReviews = (state) => {
 
 export const getCurrentNearPlaces = (state) => {
   return state.DATA.currentNearPlaces;
-};
-
-export const getUserLogin = (state) => {
-  return state.USER.login;
-};
-
-export const isLoggedIn = (state) => {
-  return state.USER.loggedIn;
-};
-
-export const isOpenSortMenu = (state) => {
-  return state.PROCESS.isOpenSortMenu;
 };
 
 export const getOfferByIdFactory = (id) => createSelector(

@@ -5,7 +5,8 @@ import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
 import Sort from "../sort/sort";
 import OffersList from "../offers-list/offers-list";
-import {getOffersForCity, getSelectedCity} from "../../store/reducers/selectors";
+import {getOffersForCity} from "../../store/reducers/app-data/selectors";
+import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 
 const OffersContainer = (props) => {
   const {offersCount, selectedCity} = props;

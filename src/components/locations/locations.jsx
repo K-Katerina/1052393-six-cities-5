@@ -5,7 +5,7 @@ import {CityPropType} from "../../types";
 import {Cities} from "../../const";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
-import {getSelectedCity} from "../../store/reducers/selectors";
+import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 
 const Locations = (props) => {
   const {selectedCity, changeSelectedCity} = props;

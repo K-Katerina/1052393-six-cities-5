@@ -6,7 +6,7 @@ import {
   getCurrentNearPlaces,
   getCurrentOffer,
   isLoadedOfferById,
-} from "../../../store/reducers/selectors";
+} from "../../../store/reducers/app-data/selectors";
 import {NearPlaces} from "../../near-places/near-places";
 import Header from "../../header/header";
 import Map from "../../map/map";

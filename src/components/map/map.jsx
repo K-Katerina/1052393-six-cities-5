@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
-import {getSelectedCity} from "../../store/reducers/selectors";
 import {connect} from "react-redux";
+import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 
 class Map extends React.Component {
   constructor(props) {

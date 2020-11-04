@@ -2,7 +2,7 @@ import React from "react";
 import {CityPropType} from "../../types";
 import {capitalizeWord} from "../../utils";
 import {connect} from "react-redux";
-import {getSelectedCity} from "../../store/reducers/selectors";
+import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 
 const MainEmpty = (props) => {
   return (

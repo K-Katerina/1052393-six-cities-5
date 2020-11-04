@@ -6,9 +6,10 @@ import Locations from "../../locations/locations";
 import Map from "../../map/map";
 import OffersContainer from "../../offers-container/offers-container";
 import {connect} from "react-redux";
-import {getActiveOfferId, getOfferByIdFactory, getOffersForCity} from "../../../store/reducers/selectors";
+import {getOfferByIdFactory, getOffersForCity} from "../../../store/reducers/app-data/selectors";
 import {OfferPropType} from "../../../types";
 import {getOffers} from "../../../store/api-actions";
+import {getActiveOfferId} from "../../../store/reducers/app-process/selectors";
 
 class MainPage extends React.Component {
   componentDidMount() {

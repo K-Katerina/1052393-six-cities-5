@@ -6,7 +6,7 @@ import {AppRoute, HousingType, TypeCards} from "../../const";
 import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
-import {isLoggedIn} from "../../store/reducers/selectors";
+import {isLoggedIn} from "../../store/reducers/user/selectors";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history} = props;

@@ -3,7 +3,7 @@ import {SortTypes} from "../../const";
 import PropTypes from "prop-types";
 import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {connect} from "react-redux";
-import {getSortType, isOpenSortMenu} from "../../store/reducers/selectors";
+import {getSortType, isOpenSortMenu} from "../../store/reducers/app-process/selectors";
 
 const Sort = (props) => {
   const {sortType, isOpenedSortMenu, changeSortType, openSortMenu} = props;

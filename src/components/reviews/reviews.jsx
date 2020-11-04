@@ -5,8 +5,9 @@ import ReviewsList from "../reviews-list/reviews-list";
 import withComment from "../../hocs/with-comment/with-comment";
 import ReviewsForm from "../reviews-form/reviews-form";
 import {connect} from "react-redux";
-import {getCurrentReviews, isLoggedIn} from "../../store/reducers/selectors";
+import {getCurrentReviews} from "../../store/reducers/app-data/selectors";
 import {getReviewsByOfferId} from "../../store/api-actions";
+import {isLoggedIn} from "../../store/reducers/user/selectors";
 
 const ReviewsFormWrapped = withComment(ReviewsForm);
 

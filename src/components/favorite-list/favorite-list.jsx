@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import FavoritePlaces from "../favorite-places/favorite-places";
-import {groupFavoriteOffersByCity} from "../../store/reducers/selectors";
+import {groupFavoriteOffersByCity} from "../../store/reducers/app-data/selectors";
 import {AppRoute} from "../../const";
 
 const FavoriteList = (props) => {

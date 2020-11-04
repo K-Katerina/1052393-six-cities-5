@@ -1,7 +1,6 @@
 export const ActionTypeForUser = {
   LOGIN: `LOGIN`,
-  CHANGE_LOGIN: `CHANGE_LOGIN`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
+  CHANGE_LOGIN: `CHANGE_LOGIN`
 };
 
 export const ActionCreatorForUser = {
@@ -12,9 +11,5 @@ export const ActionCreatorForUser = {
   changeLogin: (login) => ({
     type: ActionTypeForUser.CHANGE_LOGIN,
     payload: login,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionTypeForUser.REDIRECT_TO_ROUTE,
-    payload: url,
   })
 };

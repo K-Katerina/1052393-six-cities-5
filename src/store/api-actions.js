@@ -1,6 +1,5 @@
 import {ActionCreatorForData} from "./reducers/app-data/actions";
 import {offerAdaptToClient, reviewAdaptToClient} from "../utils";
-import {AppRoute} from "../const";
 import {ActionCreatorForUser} from "./reducers/user/actions";
 
 export const getOffers = () => (dispatch, _getState, api) =>
@@ -57,7 +56,6 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => {
       dispatch(ActionCreatorForUser.loggedIn(true));
       dispatch(ActionCreatorForUser.changeLogin(email));
-      dispatch(ActionCreatorForUser.redirectToRoute(AppRoute.FAVORITES));
     })
     .catch((err) => {
       throw err;

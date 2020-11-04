@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Header from "../../header/header";
 import {connect} from "react-redux";
 import {login} from "../../../store/api-actions";
+import {isLoggedIn} from "../../../store/reducers/user/selectors";
 
 class SignInPage extends React.PureComponent {
   constructor(props) {
@@ -67,8 +68,12 @@ SignInPage.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
 
+const mapStateToProps = (state) => ({
+  loggedIn: isLoggedIn(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (authData) => dispatch(login(authData))
 });
 
-export default connect(null, mapDispatchToProps)(SignInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

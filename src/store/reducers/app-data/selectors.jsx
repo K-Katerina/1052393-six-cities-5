@@ -22,6 +22,10 @@ export const getCurrentNearPlaces = (state) => {
   return state.DATA.currentNearPlaces;
 };
 
+export const getFavorites = (state) => {
+  return state.DATA.favorites;
+};
+
 export const getOfferByIdFactory = (id) => createSelector(
     [getOffers],
     (offers) => {
@@ -29,11 +33,11 @@ export const getOfferByIdFactory = (id) => createSelector(
     });
 
 export const groupFavoriteOffersByCity = createSelector(
-    [getOffers],
+    [getFavorites],
     (offers) => {
       const map = new Map();
-      offers.filter((offer) => offer.isFavorite).forEach((offer) => {
-        const city = offer.city;
+      offers.forEach((offer) => {
+        const city = offer.cityName;
         map.set(city, map.get(city) || []);
         map.get(city).push(offer);
       });

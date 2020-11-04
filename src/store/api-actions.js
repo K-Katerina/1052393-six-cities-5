@@ -5,7 +5,7 @@ import {ActionCreatorForUser} from "./reducers/user/actions";
 export const getOffers = () => (dispatch, _getState, api) =>
   api.get(`/hotels`)
   .then(({data}) => data.map((it) => offerAdaptToClient(it)))
-  .then((offers) => dispatch(ActionCreatorForData.loadOffers(offers)));
+  .then((offers = []) => dispatch(ActionCreatorForData.loadOffers(offers)));
 
 export const getOfferById = (id) => (dispatch, _getState, api) =>{
   dispatch(ActionCreatorForData.isLoadedOfferById(true));
@@ -20,7 +20,7 @@ export const getOfferById = (id) => (dispatch, _getState, api) =>{
 export const getReviewsByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/comments/${id}`)
     .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
-    .then((reviews) => dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews)));
+    .then((reviews = []) => dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews)));
 };
 
 export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getState, api) => (
@@ -35,9 +35,13 @@ export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getSta
 export const getNearPlacesByOfferId = (id) => (dispatch, _getState, api) => {
   api.get(`/hotels/${id}/nearby`)
     .then(({data}) => data.map((it) => offerAdaptToClient(it)))
-    .then((offers) => {
-      dispatch(ActionCreatorForData.loadNearPlacesByOfferId(offers));
-    });
+    .then((offers = []) => dispatch(ActionCreatorForData.loadNearPlacesByOfferId(offers)));
+};
+
+export const getFavorites = () => (dispatch, _getState, api) => {
+  api.get(`/favorite`)
+    .then(({data}) => data.map((it) => offerAdaptToClient(it)))
+    .then((offers = []) => dispatch(ActionCreatorForData.loadFavorites(offers)));
 };
 
 export const checkAuth = () => (dispatch, _getState, api) => (

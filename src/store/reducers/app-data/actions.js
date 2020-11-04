@@ -4,7 +4,8 @@ export const ActionTypeForData = {
   IS_LOADED_OFFER_BY_ID: `IS_LOADED_OFFER_BY_ID`,
 
   GET_REVIEWS_BY_OFFER_ID: `GET_REVIEWS_BY_OFFER_ID`,
-  GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`
+  GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`,
+  GET_FAVORITES: `GET_FAVORITES`
 };
 
 export const ActionCreatorForData = {
@@ -26,6 +27,10 @@ export const ActionCreatorForData = {
   }),
   loadNearPlacesByOfferId: (offers) => ({
     type: ActionTypeForData.GET_NEAR_PLACES_BY_OFFER_ID,
+    payload: offers,
+  }),
+  loadFavorites: (offers) => ({
+    type: ActionTypeForData.GET_FAVORITES,
     payload: offers,
   })
 };

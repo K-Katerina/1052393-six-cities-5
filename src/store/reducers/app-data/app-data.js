@@ -6,7 +6,8 @@ const initialState = {
   currentOffer: null,
   isLoadingOfferById: true,
   currentReviewsForOffer: [],
-  currentNearPlaces: []
+  currentNearPlaces: [],
+  favorites: []
 };
 
 const appData = (state = initialState, action) => {
@@ -30,6 +31,10 @@ const appData = (state = initialState, action) => {
     case ActionTypeForData.GET_NEAR_PLACES_BY_OFFER_ID:
       return extend(state, {
         currentNearPlaces: action.payload,
+      });
+    case ActionTypeForData.GET_FAVORITES:
+      return extend(state, {
+        favorites: action.payload,
       });
     default: return state;
   }

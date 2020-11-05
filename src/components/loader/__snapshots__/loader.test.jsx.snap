@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Loader render correctly 1`] = `
+<div
+  className="container"
+>
+  <h1
+    className="visually-hidden"
+  >
+    Loading...
+  </h1>
+  <b>
+    Loading...
+  </b>
+</div>
+`;

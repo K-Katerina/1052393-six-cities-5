@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should InfoReview render correctly 1`] = `
+<div
+  className="reviews__info"
+>
+  <div
+    className="reviews__rating rating"
+  >
+    <div
+      className="reviews__stars rating__stars"
+    >
+      <span
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      />
+      <span
+        className="visually-hidden"
+      >
+        Rating
+      </span>
+    </div>
+  </div>
+  <p
+    className="reviews__text"
+  >
+    Dicta sit pariatur porro quaerat autem ipsam odit quam beatae tempora...
+  </p>
+  <time
+    className="reviews__time"
+    dateTime={2020-11-04T21:00:00.000Z}
+  >
+    November 2020
+  </time>
+</div>
+`;

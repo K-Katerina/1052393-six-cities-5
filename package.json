@@ -5,8 +5,9 @@
   "description": "Личный проект «Шесть городов» от HTML Academy",
   "scripts": {
     "eslint": "eslint --ext .jsx --ext .js src/",
-    "test": "npm run eslint",
     "fix": "npm run eslint -- --fix",
+    "test": "npm run fix && npm run test.jest",
+    "test.jest": "jest",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open"
   },
@@ -26,6 +27,8 @@
     "react-router-dom": "5.1.2",
     "style-loader": "2.0.0",
     "url-loader": "4.1.1",
+    "jest": "25.1.0",
+    "react-test-renderer": "16.12.0",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.1"
@@ -45,6 +48,13 @@
     "reselect": "4.0.0",
     "redux": "4.0.5",
     "redux-devtools-extension": "2.13.8",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "identity-obj-proxy": "3.0.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }

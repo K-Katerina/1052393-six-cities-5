@@ -63,6 +63,7 @@ exports[`Should OfferCard render correctly 1`] = `
           To bookmarks
         </span>
       </button>
+                
     </div>
     <div
       className="place-card__rating rating"

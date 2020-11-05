@@ -65,3 +65,12 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       throw err;
     })
 );
+
+export const updateFavorite = (offerId, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${offerId}/${status}`)
+    .then(({data}) => offerAdaptToClient(data))
+    .then((offer) => dispatch(ActionCreatorForData.updateFavorite(offer)))
+    .catch((err) => {
+      throw err;
+    })
+);

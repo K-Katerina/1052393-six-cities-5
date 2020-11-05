@@ -9,6 +9,15 @@ export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 
 export const getDate = (date) => moment(date).format(`MMMM YYYY`);
 
+export const addElementInArray = (el, array) => {
+  const index = array.findIndex((it) => it.id === el.id);
+  return [
+    ...array.slice(0, index),
+    el,
+    ...array.slice(index + 1)
+  ];
+};
+
 export const getStyleForCard = (cardType) => {
   switch (cardType) {
     case TypeCards.CITIES:
@@ -105,5 +114,3 @@ export const reviewAdaptToClient = (review) => {
 
   return adaptedReview;
 };
-
-

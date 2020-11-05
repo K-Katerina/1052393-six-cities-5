@@ -7,9 +7,11 @@ import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions"
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
 import {isLoggedIn} from "../../store/reducers/user/selectors";
+import {updateFavorite} from "../../store/api-actions";
+import {getOfferByIdFactory} from "../../store/reducers/app-data/selectors";
 
 const OfferCard = (props) => {
-  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history} = props;
+  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history, onButtonClick, isFavorite} = props;
   const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
@@ -48,14 +50,15 @@ const OfferCard = (props) => {
             <button onClick={() => {
               if (!loggedIn) {
                 history.push(AppRoute.LOGIN);
+              } else {
+                onButtonClick(offer.id, Number(!isFavorite));
               }
-            }} className={`place-card__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`} type="button">
+            }} className={`place-card__bookmark-button button ${isFavorite && `place-card__bookmark-button--active`}`} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
               <span className="visually-hidden">To bookmarks</span>
-            </button>
-          </div>
+            </button>          </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
               <span style={{width: getRating(offer.rating)}}></span>
@@ -74,20 +77,23 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   changeActiveOffer: PropTypes.func,
+  onButtonClick: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards)),
   loggedIn: PropTypes.bool,
-  history: PropTypes.object
+  history: PropTypes.object,
+  isFavorite: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   loggedIn: isLoggedIn(state),
+  isFavorite: getOfferByIdFactory(ownProps.offer.id)(state).isFavorite
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId))
+  changeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId)),
+  onButtonClick: (id, status) => dispatch(updateFavorite(id, status))
 });
 
 export {OfferCard};
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferCard));
-

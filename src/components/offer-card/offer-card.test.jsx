@@ -17,6 +17,7 @@ it(`Should OfferCard render correctly`, () => {
               offer={mockOffer}
               typeCard={TypeCards.FAVORITES}
               loggedIn={true}
+              isFavorite={true}
             />
           </BrowserRouter>
         </Provider>

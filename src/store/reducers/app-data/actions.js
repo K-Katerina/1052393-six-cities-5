@@ -5,7 +5,8 @@ export const ActionTypeForData = {
 
   GET_REVIEWS_BY_OFFER_ID: `GET_REVIEWS_BY_OFFER_ID`,
   GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`,
-  GET_FAVORITES: `GET_FAVORITES`
+  GET_FAVORITES: `GET_FAVORITES`,
+  UPDATE_FAVORITE: `UPDATE_FAVORITE`
 };
 
 export const ActionCreatorForData = {
@@ -32,5 +33,9 @@ export const ActionCreatorForData = {
   loadFavorites: (offers) => ({
     type: ActionTypeForData.GET_FAVORITES,
     payload: offers,
+  }),
+  updateFavorite: (offer) => ({
+    type: ActionTypeForData.UPDATE_FAVORITE,
+    payload: offer
   })
 };

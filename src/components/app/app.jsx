@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 
 const App = ({loggedIn}) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <Switch>
         <Route exact path={AppRoute.ROOT} component={MainPage}/>
         <Route exact path={AppRoute.LOGIN} component={withPrivateRoute(SignInPage, !loggedIn, AppRoute.ROOT)}/>

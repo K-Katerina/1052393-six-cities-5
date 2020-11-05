@@ -4,7 +4,7 @@ import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
 import * as leaflet from "leaflet";
 import {connect} from "react-redux";
-import {getActiveOfferId, getOffersByIdFactory, getSelectedCity} from "../../store/reducers/selectors";
+import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 
 class Map extends React.Component {
   constructor(props) {
@@ -55,11 +55,11 @@ class Map extends React.Component {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    this.props.nearPlaces.filter((offer) => offer.id !== this.props.activeOfferId).forEach((offer) => {
+    this.props.nearPlaces.filter((offer) => offer !== this.props.activeOffer).forEach((offer) => {
       leaflet.marker(offer.coordinates, {icon}).addTo(this.group);
     });
-    if (this.props.activeOfferId > 0) {
-      leaflet.marker(this.props.currentOffer.coordinates, {icon: activeIcon}).addTo(this.group);
+    if (this.props.activeOffer) {
+      leaflet.marker(this.props.activeOffer.coordinates, {icon: activeIcon}).addTo(this.group);
     }
   }
 
@@ -72,15 +72,12 @@ class Map extends React.Component {
 
 Map.propTypes = {
   nearPlaces: PropTypes.arrayOf(OfferPropType),
-  activeOfferId: PropTypes.number,
   selectedCity: CityPropType,
-  currentOffer: OfferPropType
+  activeOffer: OfferPropType
 };
 
 const mapStateToProps = (state) => ({
   selectedCity: getSelectedCity(state),
-  activeOfferId: getActiveOfferId(state),
-  currentOffer: getOffersByIdFactory(getActiveOfferId(state))(state)
 });
 
 export {Map};

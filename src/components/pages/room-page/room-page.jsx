@@ -1,41 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
-import {ActionCreator} from "../../../store/actions";
 import InfoProperty from "../../info-property/info-property";
 import {
-  getOffersByIdFactory,
-  getNearPlacesFactory,
-  isLoaded,
-} from "../../../store/reducers/selectors";
+  getCurrentNearPlaces,
+  getCurrentOffer,
+  isLoadedOfferById,
+} from "../../../store/reducers/app-data/selectors";
 import {NearPlaces} from "../../near-places/near-places";
-import withLoader from "../../../hocs/with-loader/with-loader";
-import {compose} from "redux";
 import Header from "../../header/header";
 import Map from "../../map/map";
 import {connect} from "react-redux";
+import {getNearPlacesByOfferId, getOfferById} from "../../../store/api-actions";
+import Loader from "../../loader/loader";
+import PhotosList from "../../photos-list/photos-list";
 
 class RoomPage extends React.Component {
-
   componentDidMount() {
-    this.props.changeSelectedCity(this.props.offer.cityName);
-    this.props.changeActiveOffer(this.props.offer.id);
+    this.props.getOffer(this.props.id);
+    this.props.getNearPlacesByOfferId(this.props.id);
   }
 
   componentDidUpdate(prevProps) {
-    if (Number(prevProps.match.params.id) !== this.props.offer.id) {
-      this.props.changeSelectedCity(this.props.offer.cityName);
-      this.props.changeActiveOffer(this.props.offer.id);
+    if (Number(prevProps.match.params.id) !== this.props.id) {
+      this.props.getOffer(this.props.id);
+      this.props.getNearPlacesByOfferId(this.props.id);
     }
   }
 
-  componentWillUnmount() {
-    this.props.changeActiveOffer(-1);
-  }
-
   render() {
-    const {offer, nearPlaces} = this.props;
-
+    const {activeOffer, nearPlaces, isLoading} = this.props;
+    if (isLoading) {
+      return <Loader/>;
+    }
     return (
       <React.Fragment>
         <div className="page">
@@ -43,17 +40,11 @@ class RoomPage extends React.Component {
           <main className="page__main page__main--property">
             <section className="property">
               <div className="property__gallery-container container">
-                <div className="property__gallery">
-                  {offer.photos.map((photo) =>
-                    <div key={offer.id + photo} className="property__image-wrapper">
-                      <img className="property__image" src={photo} alt="Photo studio"/>
-                    </div>
-                  )}
-                </div>
+                <PhotosList photos={activeOffer.photos}/>
               </div>
-              <InfoProperty offer={offer}/>
+              <InfoProperty offer={activeOffer}/>
               <section className="property__map map">
-                <Map nearPlaces={nearPlaces}/>
+                {nearPlaces.length && <Map nearPlaces={nearPlaces} activeOffer={activeOffer}/>}
               </section>
             </section>
             <div className="container">
@@ -67,25 +58,25 @@ class RoomPage extends React.Component {
 }
 
 RoomPage.propTypes = {
-  offer: OfferPropType,
-  changeSelectedCity: PropTypes.func,
-  changeActiveOffer: PropTypes.func,
+  activeOffer: OfferPropType,
   nearPlaces: PropTypes.arrayOf(OfferPropType),
   isLoading: PropTypes.bool,
   match: PropTypes.object,
+  id: PropTypes.number,
+  getOffer: PropTypes.func,
+  getNearPlacesByOfferId: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  isLoading: isLoaded(state),
-  offer: getOffersByIdFactory(Number(ownProps.match.params.id))(state),
-  nearPlaces: getNearPlacesFactory(Number(ownProps.match.params.id))(state),
+  isLoading: isLoadedOfferById(state),
+  activeOffer: getCurrentOffer(state),
+  nearPlaces: getCurrentNearPlaces(state),
+  id: Number(ownProps.match.params.id)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSelectedCity: (city) => dispatch(ActionCreator.changeSelectedCity(city.toUpperCase())),
-  changeActiveOffer: (activeOffer) => dispatch(ActionCreator.changeActiveOffer(activeOffer))
+  getOffer: (id) => dispatch(getOfferById(id)),
+  getNearPlacesByOfferId: (id) => dispatch(getNearPlacesByOfferId(id)),
 });
 
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withLoader)(RoomPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

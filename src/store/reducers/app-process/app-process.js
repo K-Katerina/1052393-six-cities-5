@@ -1,5 +1,5 @@
 import {extend} from "../../../utils";
-import {ActionType} from "../../actions";
+import {ActionTypeForProcess} from "./actions";
 import {Cities, DEFAULT_SORT_TYPE} from "../../../const";
 
 const initialState = {
@@ -11,19 +11,19 @@ const initialState = {
 
 const appProcess = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_SELECTED_CITY:
+    case ActionTypeForProcess.CHANGE_SELECTED_CITY:
       return extend(state, {
         selectedCity: action.payload
       });
-    case ActionType.CHANGE_ACTIVE_OFFER:
+    case ActionTypeForProcess.CHANGE_ACTIVE_OFFER:
       return extend(state, {
         activeOfferId: action.payload
       });
-    case ActionType.CHANGE_SORT_TYPE:
+    case ActionTypeForProcess.CHANGE_SORT_TYPE:
       return extend(state, {
         sortType: action.payload
       });
-    case ActionType.OPEN_SORT_MENU:
+    case ActionTypeForProcess.OPEN_SORT_MENU:
       return extend(state, {
         isOpenSortMenu: action.payload
       });

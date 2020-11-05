@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import PlaceCard from "../place-card/place-card";
 import {connect} from "react-redux";
-import {getSortOffers} from "../../store/reducers/selectors";
+import {getSortOffers} from "../../store/reducers/app-data/selectors";
 
 const OffersList = (props) => {
   const {sortOffers} = props;

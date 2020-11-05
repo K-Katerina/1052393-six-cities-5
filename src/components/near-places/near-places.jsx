@@ -7,7 +7,7 @@ const NearPlaces = (props) => {
   const {nearPlaces} = props;
   return (
     <React.Fragment>
-      {nearPlaces.length > 1 ?
+      {nearPlaces.length > 1 &&
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
@@ -17,7 +17,7 @@ const NearPlaces = (props) => {
                 key={offer.id}
               />)}
           </div>
-        </section> : ``}
+        </section>}
     </React.Fragment>
   );
 };

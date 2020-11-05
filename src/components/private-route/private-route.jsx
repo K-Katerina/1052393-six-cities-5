@@ -2,13 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {isLoggedIn} from "../../store/reducers/selectors";
 import {AppRoute} from "../../const";
+import {isLoggedIn} from "../../store/reducers/user/selectors";
 
 
 const PrivateRoute = (props) => {
   const {render, path, exact, loggedIn} = props;
-
   return (
     <Route
       path={path}

@@ -2,8 +2,8 @@ import React from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {getUserLogin, isLoggedIn} from "../../store/reducers/selectors";
 import {AppRoute} from "../../const";
+import {getUserLogin, isLoggedIn} from "../../store/reducers/user/selectors";
 
 const Header = (props) => {
   const {loggedIn, login} = props;

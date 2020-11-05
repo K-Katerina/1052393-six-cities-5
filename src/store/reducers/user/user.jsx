@@ -1,5 +1,5 @@
 import {extend} from "../../../utils";
-import {ActionType} from "../../actions";
+import {ActionTypeForUser} from "./actions";
 
 const initialState = {
   login: null,
@@ -8,11 +8,11 @@ const initialState = {
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOGIN:
+    case ActionTypeForUser.LOGIN:
       return extend(state, {
         loggedIn: action.payload
       });
-    case ActionType.CHANGE_LOGIN:
+    case ActionTypeForUser.CHANGE_LOGIN:
       return extend(state, {
         login: action.payload
       });

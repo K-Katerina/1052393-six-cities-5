@@ -1,51 +1,43 @@
 import {createSelector} from "reselect";
-import {capitalizeWord} from "../../utils";
-import {MAX_NEAR_PLACES} from "../../const";
+import {capitalizeWord} from "../../../utils";
+import {getSelectedCity, getSortType} from "../app-process/selectors";
 
 export const getOffers = (state) => {
   return state.DATA.offers;
 };
 
-export const getSelectedCity = (state) => {
-  return state.PROCESS.selectedCity;
+export const isLoadedOfferById = (state) => {
+  return state.DATA.isLoadingOfferById;
 };
 
-export const getActiveOfferId = (state) => {
-  return state.PROCESS.activeOfferId;
+export const getCurrentOffer = (state) => {
+  return state.DATA.currentOffer;
 };
 
-export const getSortType = (state) => {
-  return state.PROCESS.sortType;
+export const getCurrentReviews = (state) => {
+  return state.DATA.currentReviewsForOffer;
 };
 
-export const isLoaded = (state) => {
-  return state.DATA.isLoadingOffers;
+export const getCurrentNearPlaces = (state) => {
+  return state.DATA.currentNearPlaces;
 };
 
-export const getUserLogin = (state) => {
-  return state.USER.login;
+export const getFavorites = (state) => {
+  return state.DATA.favorites;
 };
 
-export const isLoggedIn = (state) => {
-  return state.USER.loggedIn;
-};
-
-export const isOpenSortMenu = (state) => {
-  return state.PROCESS.isOpenSortMenu;
-};
-
-export const getOffersByIdFactory = (id) => createSelector(
+export const getOfferByIdFactory = (id) => createSelector(
     [getOffers],
     (offers) => {
       return offers.find((it) => it.id === id);
     });
 
 export const groupFavoriteOffersByCity = createSelector(
-    [getOffers],
+    [getFavorites],
     (offers) => {
       const map = new Map();
-      offers.filter((offer) => offer.isFavorite).forEach((offer) => {
-        const city = offer.city;
+      offers.forEach((offer) => {
+        const city = offer.cityName;
         map.set(city, map.get(city) || []);
         map.get(city).push(offer);
       });
@@ -68,10 +60,3 @@ export const getSortOffers = createSelector(
         default: return [...offersForSelectedCity];
       }
     });
-
-export const getNearPlacesFactory = (id) => createSelector(
-    [getOffersForCity],
-    (offers) => {
-      return offers.filter((it) => it.id !== id).slice(0, MAX_NEAR_PLACES);
-    });
-

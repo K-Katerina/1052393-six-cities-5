@@ -38,7 +38,7 @@ export const capitalizeWord = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 };
 
-export const adaptToClient = (offer) => {
+export const offerAdaptToClient = (offer) => {
   const adaptedOffer = extend(
       offer,
       {
@@ -87,4 +87,23 @@ export const adaptToClient = (offer) => {
 
   return adaptedOffer;
 };
+
+export const reviewAdaptToClient = (review) => {
+  const adaptedReview = extend(
+      review,
+      {
+        date: new Date(review.date),
+        author: {
+          id: review.user.id,
+          name: review.user.name,
+          avatar: review.user.avatar_url,
+          isPro: review.user.is_pro
+        }
+      });
+
+  delete adaptedReview.user;
+
+  return adaptedReview;
+};
+
 

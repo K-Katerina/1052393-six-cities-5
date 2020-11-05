@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
 import {Link, withRouter} from "react-router-dom";
 import {AppRoute, HousingType, TypeCards} from "../../const";
-import {ActionCreator} from "../../store/actions";
+import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
-import {isLoggedIn} from "../../store/reducers/selectors";
+import {isLoggedIn} from "../../store/reducers/user/selectors";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history} = props;
@@ -29,10 +29,10 @@ const OfferCard = (props) => {
           }
         }}
       >
-        {offer.isPremium && needPremiumMark ?
+        {offer.isPremium && needPremiumMark &&
           <div className="place-card__mark">
             <span>Premium</span>
-          </div> : ``}
+          </div>}
         <div className={`${className}__image-wrapper place-card__image-wrapper`}>
           <Link to={`/offer/${offer.id}`}>
             <img className="place-card__image" src={offer.preview} width={`${width}`} height={`${height}`}
@@ -46,10 +46,10 @@ const OfferCard = (props) => {
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button onClick={() => {
-              if (loggedIn) {
+              if (!loggedIn) {
                 history.push(AppRoute.LOGIN);
               }
-            }} className={`place-card__bookmark-button button ${offer.isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
+            }} className={`place-card__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOfferId) => dispatch(ActionCreator.changeActiveOffer(activeOfferId)),
+  changeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId))
 });
 
 export {OfferCard};

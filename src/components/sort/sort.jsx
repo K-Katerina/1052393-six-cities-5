@@ -1,9 +1,9 @@
 import React from "react";
 import {SortTypes} from "../../const";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../store/actions";
+import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {connect} from "react-redux";
-import {getSortType, isOpenSortMenu} from "../../store/reducers/selectors";
+import {getSortType, isOpenSortMenu} from "../../store/reducers/app-process/selectors";
 
 const Sort = (props) => {
   const {sortType, isOpenedSortMenu, changeSortType, openSortMenu} = props;
@@ -17,11 +17,11 @@ const Sort = (props) => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isOpenedSortMenu ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${isOpenedSortMenu && `places__options--opened`}`}>
         {Object.keys(SortTypes).map((type) =>
           <li onClick={() => changeSortType(type)}
             key={type}
-            className={`places__option ${sortType === type ? `places__option--active` : ``}`}
+            className={`places__option ${sortType === type && `places__option--active`}`}
             data-sort-type={`${type}`} tabIndex="0">{SortTypes[type]}</li>
         )}
       </ul>
@@ -43,8 +43,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSortType: (sortType) => dispatch(ActionCreator.changeSortType(sortType)),
-  openSortMenu: (isOpen) => dispatch(ActionCreator.openSortMenu(isOpen))
+  changeSortType: (sortType) => dispatch(ActionCreatorForProcess.changeSortType(sortType)),
+  openSortMenu: (isOpen) => dispatch(ActionCreatorForProcess.openSortMenu(isOpen))
 });
 
 export {Sort};

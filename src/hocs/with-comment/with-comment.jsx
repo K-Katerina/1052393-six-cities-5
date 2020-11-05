@@ -1,28 +1,33 @@
 import React, {PureComponent} from "react";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {postReviewByOfferId} from "../../store/api-actions";
+
+export const MIN_LENGTH_COMMENT = 50;
 
 const withComment = (Component) => {
   class WithComment extends PureComponent {
     constructor(props) {
       super(props);
-
       this.state = {
         rating: 0,
-        review: ``,
+        comment: ``,
       };
 
       this.handleFieldChange = this.handleFieldChange.bind(this);
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
 
-
     handleFormSubmit(evt) {
       evt.preventDefault();
-      const {rating, review} = this.state;
-      if (rating && review) {
-        // submit
-        // console.log(rating, review);
+      const {rating, comment} = this.state;
+      if (rating && comment) {
+        this.props.postReview({
+          comment,
+          rating
+        }, this.props.id);
         this.setState({rating: 0});
-        this.setState({review: ``});
+        this.setState({comment: ``});
       }
     }
 
@@ -32,12 +37,13 @@ const withComment = (Component) => {
     }
 
     render() {
-      const {rating, review} = this.state;
+      const {rating, comment} = this.state;
       return (
         <Component
           {...this.props}
           rating={Number(rating)}
-          review={review}
+          comment={comment}
+          isDisabled={comment.length < MIN_LENGTH_COMMENT || !rating}
           handleFormSubmit={this.handleFormSubmit}
           handleFieldChange={this.handleFieldChange}
         />
@@ -45,7 +51,16 @@ const withComment = (Component) => {
     }
   }
 
-  return WithComment;
+  WithComment.propTypes = {
+    postReview: PropTypes.func,
+    id: PropTypes.number
+  };
+
+  const mapDispatchToProps = (dispatch) => ({
+    postReview: (review, id) => dispatch(postReviewByOfferId(review, id)),
+  });
+
+  return connect(null, mapDispatchToProps)(WithComment);
 };
 
 export default withComment;

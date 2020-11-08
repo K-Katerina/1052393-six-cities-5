@@ -78,6 +78,6 @@ export const mockReview = {
     name: `Sun-43`
   },
   rating: 5,
-  date: new Date(`2020/11/05`),
+  date: new Date(`2020-11-04T21:00:00.000Z`),
   comment: `Dicta sit pariatur porro quaerat autem ipsam odit quam beatae tempora...`
 };

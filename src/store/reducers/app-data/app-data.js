@@ -1,4 +1,4 @@
-import {addElementInArray, extend} from "../../../utils";
+import {extend, updateElementInArray} from "../../../utils";
 import {ActionTypeForData} from "./actions";
 
 const initialState = {
@@ -43,7 +43,9 @@ const appData = (state = initialState, action) => {
       });
     case ActionTypeForData.UPDATE_FAVORITE:
       return extend(state, {
-        offers: addElementInArray(action.payload, state.offers),
+        offers: updateElementInArray(action.payload, state.offers),
+        currentOffer: action.payload,
+        favorites: updateElementInArray(action.payload, state.favorites),
       });
     default: return state;
   }

@@ -10,7 +10,7 @@ export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 
 export const getDate = (date) => moment(date).format(`MMMM YYYY`);
 
-export const addElementInArray = (el, array) => {
+export const updateElementInArray = (el, array) => {
   const index = array.findIndex((it) => it.id === el.id);
   return [
     ...array.slice(0, index),
@@ -96,7 +96,7 @@ export const offerAdaptToClient = (offer) => {
         isFavorite: offer.is_favorite,
         owner:
           {
-            id: offer.host.id,
+            id: Number(offer.host.id),
             avatar: offer.host.avatar_url,
             name: offer.host.name,
             isSuper: offer.host.is_pro

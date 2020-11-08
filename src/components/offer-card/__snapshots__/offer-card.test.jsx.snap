@@ -2,12 +2,19 @@
 
 exports[`Should OfferCard render correctly 1`] = `
 <article
-  className="favorites__card place-card"
+  className="cities__card place-card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
   <div
-    className="favorites__image-wrapper place-card__image-wrapper"
+    className="place-card__mark"
+  >
+    <span>
+      Premium
+    </span>
+  </div>
+  <div
+    className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
       href="/offer/13"
@@ -16,14 +23,14 @@ exports[`Should OfferCard render correctly 1`] = `
       <img
         alt="Place image"
         className="place-card__image"
-        height="110"
+        height="200"
         src="http://picsum.photos/248/152?r=123"
-        width="150"
+        width="260"
       />
     </a>
   </div>
   <div
-    className="favorites__card-info place-card__info"
+    className="cities__card-info place-card__info"
   >
     <div
       className="place-card__price-wrapper"
@@ -63,7 +70,6 @@ exports[`Should OfferCard render correctly 1`] = `
           To bookmarks
         </span>
       </button>
-                
     </div>
     <div
       className="place-card__rating rating"

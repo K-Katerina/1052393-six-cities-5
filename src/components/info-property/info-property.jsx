@@ -1,11 +1,14 @@
 import React from "react";
 import {OfferPropType} from "../../types";
+import PropTypes from "prop-types";
 import {getRating} from "../../utils";
 import Owner from "../owner/owner";
 import Reviews from "../reviews/reviews";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
 
 const InfoProperty = (props) => {
-  const {offer} = props;
+  const {offer, isFavorite} = props;
   return (
     <div className="property__container container">
       <div className="property__wrapper">
@@ -18,9 +21,9 @@ const InfoProperty = (props) => {
             {offer.title}
           </h1>
           <button
-            className={`property__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`}
+            className={`property__bookmark-button button ${isFavorite && `property__bookmark-button--active`}`}
             type="button">
-            <svg className="property__bookmark-icon" width="31" height="33">
+            <svg className="place-card__bookmark-icon property__bookmark-icon" width="31" height="33">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">To bookmarks</span>
@@ -75,6 +78,13 @@ const InfoProperty = (props) => {
 
 InfoProperty.propTypes = {
   offer: OfferPropType.isRequired,
+  isFavorite: PropTypes.bool
 };
 
-export default InfoProperty;
+const mapStateToProps = (state, ownProps) => ({
+  isFavorite: ownProps.offer.isFavorite
+});
+
+export {InfoProperty};
+export default withRouter(connect(mapStateToProps)(InfoProperty));
+

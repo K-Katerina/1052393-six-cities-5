@@ -1,5 +1,6 @@
 import moment from "moment";
-import {TypeCards} from "./const";
+import {Cities, DEFAULT_SORT_TYPE, mockOffer, mockReview, TypeCards} from "./const";
+import {NameSpace} from "./store/reducers/root-reducer";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -46,6 +47,28 @@ export const getStyleForCard = (cardType) => {
 export const capitalizeWord = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 };
+
+export const makeInitialStateMock = () => ({
+  [NameSpace.DATA]: {
+    offers: [mockOffer],
+    currentOffer: mockOffer,
+    isLoadingOfferById: true,
+    isLoadingReviewsById: true,
+    currentReviewsForOffer: [mockReview],
+    currentNearPlaces: [mockOffer],
+    favorites: [mockOffer]
+  },
+  [NameSpace.PROCESS]: {
+    selectedCity: Cities.AMSTERDAM,
+    activeOfferId: mockOffer.id,
+    sortType: DEFAULT_SORT_TYPE,
+    isOpenSortMenu: false,
+  },
+  [NameSpace.USER]: {
+    login: `null@mail.ru`,
+    loggedIn: true
+  }
+});
 
 export const offerAdaptToClient = (offer) => {
   const adaptedOffer = extend(

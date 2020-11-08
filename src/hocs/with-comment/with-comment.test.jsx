@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import withComment from "./with-comment";
 import PropTypes from "prop-types";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
-import rootReducer from "../../store/reducers/root-reducer";
 import {BrowserRouter} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import {makeInitialStateMock} from "../../utils";
 
 const MockComponent = (props) => {
   const {children} = props;
@@ -27,8 +27,10 @@ MockComponent.propTypes = {
 const MockComponentWrapped = withComment(MockComponent);
 
 it(`withComment is render correctly`, () => {
+  const store = configureStore()(makeInitialStateMock());
+
   const tree = renderer.create((
-    <Provider store={createStore(rootReducer)}>
+    <Provider store={store}>
       <BrowserRouter>
         <MockComponentWrapped
           postReview={()=>{}}

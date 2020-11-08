@@ -2,16 +2,21 @@ import React from "react";
 import renderer from "react-test-renderer";
 import FavoritesPage from "./favorites-page";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
-import rootReducer from "../../../store/reducers/root-reducer";
 import {BrowserRouter} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import {makeInitialStateMock} from "../../../utils";
+import thunk from "redux-thunk";
+import {createAPI} from "../../../services/api";
 
 it(`Should FavoritesPage render correctly`, () => {
+  const store = configureStore([thunk.withExtraArgument(createAPI(() => false))])(makeInitialStateMock());
+
   const tree = renderer
     .create(
-        <Provider store={createStore(rootReducer)}>
+        <Provider store={store}>
           <BrowserRouter>
-            <FavoritesPage/>
+            <FavoritesPage
+            />
           </BrowserRouter>
         </Provider>
     )

@@ -10,6 +10,10 @@ export const isLoadedOfferById = (state) => {
   return state.DATA.isLoadingOfferById;
 };
 
+export const isLoadedReviewsById = (state) => {
+  return state.DATA.isLoadingReviewsById;
+};
+
 export const getCurrentOffer = (state) => {
   return state.DATA.currentOffer;
 };

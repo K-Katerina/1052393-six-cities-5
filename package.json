@@ -12,9 +12,9 @@
     "start": "webpack-dev-server --open"
   },
   "devDependencies": {
-    "@babel/core": "7.8.7",
-    "@babel/preset-env": "7.8.7",
-    "@babel/preset-react": "7.8.3",
+    "@babel/core": "7.12.3",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-react": "7.12.5",
     "axios": "0.19.2",
     "babel-loader": "8.1.0",
     "css-loader": "4.3.0",
@@ -30,6 +30,7 @@
     "react-test-renderer": "16.12.0",
     "redux-thunk": "2.3.0",
     "style-loader": "2.0.0",
+    "file-loader": "6.2.0",
     "url-loader": "4.1.1",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
@@ -49,5 +50,10 @@
     "react-router-dom": "5.1.2",
     "reselect": "4.0.0",
     "redux": "4.0.5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }

@@ -4,6 +4,8 @@ export const ActionTypeForData = {
   IS_LOADED_OFFER_BY_ID: `IS_LOADED_OFFER_BY_ID`,
 
   GET_REVIEWS_BY_OFFER_ID: `GET_REVIEWS_BY_OFFER_ID`,
+  IS_LOADED_REVIEWS_BY_ID: `IS_LOADED_REVIEWS_BY_ID`,
+
   GET_NEAR_PLACES_BY_OFFER_ID: `GET_NEAR_PLACES_BY_OFFER_ID`,
   GET_FAVORITES: `GET_FAVORITES`,
   UPDATE_FAVORITE: `UPDATE_FAVORITE`
@@ -20,6 +22,10 @@ export const ActionCreatorForData = {
   }),
   isLoadedOfferById: (isLoading) => ({
     type: ActionTypeForData.IS_LOADED_OFFER_BY_ID,
+    payload: isLoading,
+  }),
+  isLoadedReviewsById: (isLoading) => ({
+    type: ActionTypeForData.IS_LOADED_REVIEWS_BY_ID,
     payload: isLoading,
   }),
   loadReviewsByOfferId: (reviews) => ({

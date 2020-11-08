@@ -8,7 +8,6 @@ import {getRating, getStyleForCard} from "../../utils";
 import {connect} from "react-redux";
 import {isLoggedIn} from "../../store/reducers/user/selectors";
 import {updateFavorite} from "../../store/api-actions";
-import {getOfferByIdFactory} from "../../store/reducers/app-data/selectors";
 
 const OfferCard = (props) => {
   const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, loggedIn, history, onButtonClick, isFavorite} = props;
@@ -87,7 +86,7 @@ OfferCard.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   loggedIn: isLoggedIn(state),
-  isFavorite: getOfferByIdFactory(ownProps.offer.id)(state).isFavorite
+  isFavorite: ownProps.offer.isFavorite
 });
 
 const mapDispatchToProps = (dispatch) => ({

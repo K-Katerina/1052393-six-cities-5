@@ -9,7 +9,8 @@ const state = {
   isLoadingOfferById: true,
   currentReviewsForOffer: [mockReview],
   currentNearPlaces: [mockOffer],
-  favorites: [mockOffer]
+  favorites: [mockOffer],
+  isLoadingReviewsById: true
 };
 
 const newMockOffer = extend(mockOffer, {title: `This is probably not a problem with npm`});
@@ -38,6 +39,14 @@ describe(`AppData Reducer testing`, () => {
       payload: false
     };
     expect(appData(state, action).isLoadingOfferById).toEqual(false);
+  });
+
+  it(`Test reducer action IS_LOADED_OFFER_BY_ID`, () => {
+    const action = {
+      type: ActionTypeForData.IS_LOADED_REVIEWS_BY_ID,
+      payload: false
+    };
+    expect(appData(state, action).isLoadingReviewsById).toEqual(false);
   });
 
   it(`Test reducer action GET_REVIEWS_BY_OFFER_ID`, () => {

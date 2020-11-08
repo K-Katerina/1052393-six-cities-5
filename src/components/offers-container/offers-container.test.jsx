@@ -3,14 +3,16 @@ import renderer from "react-test-renderer";
 import {Cities} from "../../const";
 import {OffersContainer} from "./offers-container";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
-import rootReducer from "../../store/reducers/root-reducer";
 import {BrowserRouter} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import {makeInitialStateMock} from "../../utils";
 
 it(`Should OffersContainer render correctly`, () => {
+  const store = configureStore()(makeInitialStateMock());
+
   const tree = renderer
     .create(
-        <Provider store={createStore(rootReducer)}>
+        <Provider store={store}>
           <BrowserRouter>
             <OffersContainer
               offersCount={5}

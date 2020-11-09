@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should PhotosList render correctly 1`] = `
+<div
+  className="property__gallery"
+>
+  <div
+    className="property__image-wrapper"
+  >
+    <img
+      alt="Photo studio"
+      className="property__image"
+      src="http://picsum.photos/248/152?r=123}"
+    />
+  </div>
+</div>
+`;

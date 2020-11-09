@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should Owner render correctly 1`] = `
+<div
+  className="property__host-user user"
+>
+  <div
+    className="jsx-avatar__owner property__avatar-wrapper user__avatar-wrapper false"
+  >
+    <img
+      alt="Host avatar"
+      className="property__avatar user__avatar"
+      height="74"
+      src="http://picsum.photos/74/74?r=123}"
+      width="74"
+    />
+  </div>
+  <span
+    className="property__user-name"
+  >
+    Onik_373
+  </span>
+</div>
+`;

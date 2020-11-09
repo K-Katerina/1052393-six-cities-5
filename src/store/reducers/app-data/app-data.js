@@ -1,10 +1,11 @@
-import {extend} from "../../../utils";
+import {extend, updateElementInArray} from "../../../utils";
 import {ActionTypeForData} from "./actions";
 
 const initialState = {
   offers: [],
   currentOffer: null,
   isLoadingOfferById: true,
+  isLoadingReviewsById: true,
   currentReviewsForOffer: [],
   currentNearPlaces: [],
   favorites: []
@@ -24,6 +25,10 @@ const appData = (state = initialState, action) => {
       return extend(state, {
         isLoadingOfferById: action.payload,
       });
+    case ActionTypeForData.IS_LOADED_REVIEWS_BY_ID:
+      return extend(state, {
+        isLoadingReviewsById: action.payload,
+      });
     case ActionTypeForData.GET_REVIEWS_BY_OFFER_ID:
       return extend(state, {
         currentReviewsForOffer: action.payload,
@@ -35,6 +40,12 @@ const appData = (state = initialState, action) => {
     case ActionTypeForData.GET_FAVORITES:
       return extend(state, {
         favorites: action.payload,
+      });
+    case ActionTypeForData.UPDATE_FAVORITE:
+      return extend(state, {
+        offers: updateElementInArray(action.payload, state.offers),
+        currentOffer: action.payload,
+        favorites: updateElementInArray(action.payload, state.favorites),
       });
     default: return state;
   }

@@ -1,5 +1,6 @@
 import moment from "moment";
-import {TypeCards} from "./const";
+import {Cities, DEFAULT_SORT_TYPE, mockOffer, mockReview, TypeCards} from "./const";
+import {NameSpace} from "./store/reducers/root-reducer";
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -8,6 +9,15 @@ export const extend = (a, b) => {
 export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 
 export const getDate = (date) => moment(date).format(`MMMM YYYY`);
+
+export const updateElementInArray = (el, array) => {
+  const index = array.findIndex((it) => it.id === el.id);
+  return [
+    ...array.slice(0, index),
+    el,
+    ...array.slice(index + 1)
+  ];
+};
 
 export const getStyleForCard = (cardType) => {
   switch (cardType) {
@@ -38,6 +48,28 @@ export const capitalizeWord = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 };
 
+export const makeInitialStateMock = () => ({
+  [NameSpace.DATA]: {
+    offers: [mockOffer],
+    currentOffer: mockOffer,
+    isLoadingOfferById: true,
+    isLoadingReviewsById: true,
+    currentReviewsForOffer: [mockReview],
+    currentNearPlaces: [mockOffer],
+    favorites: [mockOffer]
+  },
+  [NameSpace.PROCESS]: {
+    selectedCity: Cities.AMSTERDAM,
+    activeOfferId: mockOffer.id,
+    sortType: DEFAULT_SORT_TYPE,
+    isOpenSortMenu: false,
+  },
+  [NameSpace.USER]: {
+    login: `null@mail.ru`,
+    loggedIn: true
+  }
+});
+
 export const offerAdaptToClient = (offer) => {
   const adaptedOffer = extend(
       offer,
@@ -64,7 +96,7 @@ export const offerAdaptToClient = (offer) => {
         isFavorite: offer.is_favorite,
         owner:
           {
-            id: offer.host.id,
+            id: Number(offer.host.id),
             avatar: offer.host.avatar_url,
             name: offer.host.name,
             isSuper: offer.host.is_pro
@@ -105,5 +137,3 @@ export const reviewAdaptToClient = (review) => {
 
   return adaptedReview;
 };
-
-

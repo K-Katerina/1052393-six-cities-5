@@ -1,0 +1,383 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should InfoProperty render correctly 1`] = `
+<div
+  className="property__container container"
+>
+  <div
+    className="property__wrapper"
+  >
+    <div
+      className="property__mark"
+    >
+      <span>
+        Premium
+      </span>
+    </div>
+    <div
+      className="property__name-wrapper"
+    >
+      <h1
+        className="property__name"
+      >
+        Beautiful & luxurious studio at great location
+      </h1>
+      <button
+        className="property__bookmark-button button place-card__bookmark-button--active"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          className="place-card__bookmark-icon"
+          height="19"
+          width="18"
+        >
+          <use
+            xlinkHref="#icon-bookmark"
+          />
+        </svg>
+        <span
+          className="visually-hidden"
+        >
+          To bookmarks
+        </span>
+      </button>
+    </div>
+    <div
+      className="property__rating rating"
+    >
+      <div
+        className="property__stars rating__stars"
+      >
+        <span
+          style={
+            Object {
+              "width": "86%",
+            }
+          }
+        />
+        <span
+          className="visually-hidden"
+        >
+          Rating
+        </span>
+      </div>
+      <span
+        className="property__rating-value rating__value"
+      >
+        4.3
+      </span>
+    </div>
+    <ul
+      className="property__features"
+    >
+      <li
+        className="property__feature property__feature--entire"
+      >
+        apartment
+      </li>
+      <li
+        className="property__feature property__feature--bedrooms"
+      >
+        2
+         Bedroom
+        s
+      </li>
+      <li
+        className="property__feature property__feature--adults"
+      >
+        Max 
+        1
+         adult
+      </li>
+    </ul>
+    <div
+      className="property__price"
+    >
+      <b
+        className="property__price-value"
+      >
+        €
+        100
+      </b>
+      <span
+        className="property__price-text"
+      >
+         night
+      </span>
+    </div>
+    <div
+      className="property__inside"
+    >
+      <h2
+        className="property__inside-title"
+      >
+        What's inside
+      </h2>
+      <ul
+        className="property__inside-list"
+      >
+        <li
+          className="property__inside-item"
+        >
+          Wifi
+        </li>
+        <li
+          className="property__inside-item"
+        >
+          Heating
+        </li>
+        <li
+          className="property__inside-item"
+        >
+          Kitchen
+        </li>
+        <li
+          className="property__inside-item"
+        >
+          Cable TV
+        </li>
+      </ul>
+    </div>
+    <div
+      className="property__host"
+    >
+      <h2
+        className="property__host-title"
+      >
+        Meet the host
+      </h2>
+      <div
+        className="property__host-user user"
+      >
+        <div
+          className="jsx-avatar__owner property__avatar-wrapper user__avatar-wrapper false"
+        >
+          <img
+            alt="Host avatar"
+            className="property__avatar user__avatar"
+            height="74"
+            src="http://picsum.photos/74/74?r=123}"
+            width="74"
+          />
+        </div>
+        <span
+          className="property__user-name"
+        >
+          Onik_373
+        </span>
+      </div>
+      <div
+        className="property__description"
+      >
+        <p
+          className="property__text"
+        >
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!
+        </p>
+      </div>
+    </div>
+    <section
+      className="property__reviews reviews"
+    >
+      <h2
+        className="reviews__title"
+      >
+        Reviews · 
+        <span
+          className="reviews__amount"
+        >
+          1
+        </span>
+      </h2>
+      <div
+        className="container"
+      >
+        <h1
+          className="visually-hidden"
+        >
+          Loading...
+        </h1>
+        <b>
+          Loading...
+        </b>
+      </div>
+      <form
+        action="#"
+        className="reviews__form form"
+        method="post"
+        onSubmit={[Function]}
+      >
+        <label
+          className="reviews__label form__label"
+          htmlFor="review"
+        >
+          Your review
+        </label>
+        <div
+          className="reviews__rating-form form__rating"
+          name="rating"
+        >
+          <input
+            checked={false}
+            className="form__rating-input visually-hidden"
+            id="5-stars"
+            name="rating"
+            onChange={[Function]}
+            type="radio"
+            value={5}
+          />
+          <label
+            className="reviews__rating-label form__rating-label"
+            htmlFor="5-stars"
+            title="5-stars"
+          >
+            <svg
+              className="form__star-image"
+              height="33"
+              width="37"
+            >
+              <use
+                xlinkHref="#icon-star"
+              />
+            </svg>
+          </label>
+          <input
+            checked={false}
+            className="form__rating-input visually-hidden"
+            id="4-stars"
+            name="rating"
+            onChange={[Function]}
+            type="radio"
+            value={4}
+          />
+          <label
+            className="reviews__rating-label form__rating-label"
+            htmlFor="4-stars"
+            title="4-stars"
+          >
+            <svg
+              className="form__star-image"
+              height="33"
+              width="37"
+            >
+              <use
+                xlinkHref="#icon-star"
+              />
+            </svg>
+          </label>
+          <input
+            checked={false}
+            className="form__rating-input visually-hidden"
+            id="3-stars"
+            name="rating"
+            onChange={[Function]}
+            type="radio"
+            value={3}
+          />
+          <label
+            className="reviews__rating-label form__rating-label"
+            htmlFor="3-stars"
+            title="3-stars"
+          >
+            <svg
+              className="form__star-image"
+              height="33"
+              width="37"
+            >
+              <use
+                xlinkHref="#icon-star"
+              />
+            </svg>
+          </label>
+          <input
+            checked={false}
+            className="form__rating-input visually-hidden"
+            id="2-stars"
+            name="rating"
+            onChange={[Function]}
+            type="radio"
+            value={2}
+          />
+          <label
+            className="reviews__rating-label form__rating-label"
+            htmlFor="2-stars"
+            title="2-stars"
+          >
+            <svg
+              className="form__star-image"
+              height="33"
+              width="37"
+            >
+              <use
+                xlinkHref="#icon-star"
+              />
+            </svg>
+          </label>
+          <input
+            checked={false}
+            className="form__rating-input visually-hidden"
+            id="1-stars"
+            name="rating"
+            onChange={[Function]}
+            type="radio"
+            value={1}
+          />
+          <label
+            className="reviews__rating-label form__rating-label"
+            htmlFor="1-stars"
+            title="1-stars"
+          >
+            <svg
+              className="form__star-image"
+              height="33"
+              width="37"
+            >
+              <use
+                xlinkHref="#icon-star"
+              />
+            </svg>
+          </label>
+        </div>
+        <textarea
+          className="reviews__textarea form__textarea"
+          id="review"
+          name="comment"
+          onChange={[Function]}
+          placeholder="Tell how was your stay, what you like and what can be improved"
+          value=""
+        />
+        <div
+          className="reviews__button-wrapper"
+        >
+          <p
+            className="reviews__help"
+          >
+            To submit review please make sure to set 
+            <span
+              className="reviews__star"
+            >
+              rating
+            </span>
+             and describe your stay with at least 
+            <b
+              className="reviews__text-amount"
+            >
+              50
+               characters
+            </b>
+            .
+          </p>
+          <button
+            className="reviews__submit form__submit button"
+            disabled={true}
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+`;

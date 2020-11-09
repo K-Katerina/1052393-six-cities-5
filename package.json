@@ -5,26 +5,32 @@
   "description": "Личный проект «Шесть городов» от HTML Academy",
   "scripts": {
     "eslint": "eslint --ext .jsx --ext .js src/",
-    "test": "npm run eslint",
     "fix": "npm run eslint -- --fix",
+    "test": "npm run fix && npm run test.jest",
+    "test.jest": "jest",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open"
   },
   "devDependencies": {
-    "@babel/core": "7.8.7",
-    "@babel/preset-env": "7.8.7",
-    "@babel/preset-react": "7.8.3",
+    "@babel/core": "7.12.3",
+    "@babel/preset-env": "7.12.1",
+    "@babel/preset-react": "7.12.5",
+    "axios": "0.19.2",
     "babel-loader": "8.1.0",
     "css-loader": "4.3.0",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.2",
     "eslint": "5.13.0",
     "eslint-config-htmlacademy": "0.5.2",
     "eslint-plugin-react": "7.18.3",
-    "history": "4.10.1",
-    "prop-types": "15.7.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-router-dom": "5.1.2",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "25.1.0",
+    "redux-devtools-extension": "2.13.8",
+    "redux-mock-store": "1.5.4",
+    "react-test-renderer": "16.12.0",
+    "redux-thunk": "2.3.0",
     "style-loader": "2.0.0",
+    "file-loader": "6.2.0",
     "url-loader": "4.1.1",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
@@ -34,7 +40,7 @@
     "node": "10"
   },
   "dependencies": {
-    "axios": "0.19.2",
+    "history": "4.10.1",
     "leaflet": "1.7.1",
     "moment": "2.29.1",
     "prop-types": "15.7.2",
@@ -43,8 +49,11 @@
     "react-redux": "7.2.0",
     "react-router-dom": "5.1.2",
     "reselect": "4.0.0",
-    "redux": "4.0.5",
-    "redux-devtools-extension": "2.13.8",
-    "redux-thunk": "2.3.0"
+    "redux": "4.0.5"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }

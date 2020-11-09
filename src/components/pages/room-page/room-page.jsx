@@ -79,4 +79,5 @@ const mapDispatchToProps = (dispatch) => ({
   getNearPlacesByOfferId: (id) => dispatch(getNearPlacesByOfferId(id)),
 });
 
+export {RoomPage};
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

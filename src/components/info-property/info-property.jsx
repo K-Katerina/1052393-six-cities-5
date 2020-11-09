@@ -1,11 +1,15 @@
 import React from "react";
 import {OfferPropType} from "../../types";
+import PropTypes from "prop-types";
 import {getRating} from "../../utils";
 import Owner from "../owner/owner";
 import Reviews from "../reviews/reviews";
+import {withRouter} from "react-router-dom";
+import {connect} from "react-redux";
+import FavoriteButton from "../favorite-button/favorite-button";
 
 const InfoProperty = (props) => {
-  const {offer} = props;
+  const {offer, history} = props;
   return (
     <div className="property__container container">
       <div className="property__wrapper">
@@ -17,14 +21,7 @@ const InfoProperty = (props) => {
           <h1 className="property__name">
             {offer.title}
           </h1>
-          <button
-            className={`property__bookmark-button button ${offer.isFavorite && `place-card__bookmark-button--active`}`}
-            type="button">
-            <svg className="property__bookmark-icon" width="31" height="33">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">To bookmarks</span>
-          </button>
+          <FavoriteButton className={`property__bookmark-button`} id={offer.id} history={history} isFavorite={offer.isFavorite}/>
         </div>
         <div className="property__rating rating">
           <div className="property__stars rating__stars">
@@ -75,6 +72,13 @@ const InfoProperty = (props) => {
 
 InfoProperty.propTypes = {
   offer: OfferPropType.isRequired,
+  history: PropTypes.object
 };
 
-export default InfoProperty;
+const mapStateToProps = (state, ownProps) => ({
+  offer: ownProps.offer
+});
+
+export {InfoProperty};
+export default withRouter(connect(mapStateToProps)(InfoProperty));
+

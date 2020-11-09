@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should AuthorReview render correctly 1`] = `
+<div
+  className="reviews__user user"
+>
+  <div
+    className="reviews__avatar-wrapper user__avatar-wrapper"
+  >
+    <img
+      alt="Reviews avatar"
+      className="reviews__avatar user__avatar"
+      height="54"
+      src="http://picsum.photos/74/74?r=123}"
+      width="54"
+    />
+  </div>
+  <span
+    className="reviews__user-name"
+  >
+    Sun-43
+  </span>
+</div>
+`;

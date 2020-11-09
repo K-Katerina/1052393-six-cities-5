@@ -28,4 +28,5 @@ const mapStateToProps = (state) => ({
   selectedCity: getSelectedCity(state)
 });
 
+export {MainEmpty};
 export default connect(mapStateToProps)(MainEmpty);

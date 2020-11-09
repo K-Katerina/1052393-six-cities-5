@@ -32,4 +32,5 @@ const mapStateToProps = (state) => ({
   loggedIn: isLoggedIn(state),
 });
 
+export {App};
 export default connect(mapStateToProps)(App);

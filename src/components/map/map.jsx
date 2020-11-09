@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {CityPropType, OfferPropType} from "../../types";
 import "leaflet/dist/leaflet.css";
@@ -9,12 +9,13 @@ import {getSelectedCity} from "../../store/reducers/app-process/selectors";
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.mapRef = createRef();
   }
 
   initMap() {
     const zoom = this.props.nearPlaces[0].coordinatesCity.zoom;
     const coordinates = this.props.nearPlaces[0].coordinatesCity;
-    this.map = leaflet.map(`map`, {
+    this.map = leaflet.map(this.mapRef.current, {
       center: coordinates,
       zoom,
       zoomControl: false,
@@ -65,7 +66,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div id="map" style={{height: `100%`}}></div>
+      <div ref={this.mapRef} id="map" style={{height: `100%`}}></div>
     );
   }
 }

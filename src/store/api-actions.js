@@ -18,9 +18,15 @@ export const getOfferById = (id) => (dispatch, _getState, api) =>{
 };
 
 export const getReviewsByOfferId = (id) => (dispatch, _getState, api) => {
-  api.get(`/comments/${id}`)
-    .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
-    .then((reviews = []) => dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews)));
+  dispatch(ActionCreatorForData.isLoadedReviewsById(true));
+  if (api) {
+    api.get(`/comments/${id}`)
+      .then(({data}) => data.map((it) => reviewAdaptToClient(it)))
+      .then((reviews) => {
+        dispatch(ActionCreatorForData.loadReviewsByOfferId(reviews));
+        dispatch(ActionCreatorForData.isLoadedReviewsById(false));
+      });
+  }
 };
 
 export const postReviewByOfferId = ({comment, rating}, id) => (dispatch, _getState, api) => (
@@ -61,6 +67,15 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       dispatch(ActionCreatorForUser.loggedIn(true));
       dispatch(ActionCreatorForUser.changeLogin(email));
     })
+    .catch((err) => {
+      throw err;
+    })
+);
+
+export const updateFavorite = (offerId, status) => (dispatch, _getState, api) => (
+  api.post(`/favorite/${offerId}/${status}`)
+    .then(({data}) => offerAdaptToClient(data))
+    .then((offer) => dispatch(ActionCreatorForData.updateFavorite(offer)))
     .catch((err) => {
       throw err;
     })

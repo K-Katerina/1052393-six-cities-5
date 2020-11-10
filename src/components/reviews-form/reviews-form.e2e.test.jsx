@@ -8,21 +8,21 @@ Enzyme.configure({
 });
 
 it(`Should submit review`, () => {
-  const handleFormSubmit = jest.fn();
+  const onSubmit = jest.fn();
 
   const wrapper = shallow(
       <ReviewsForm
         rating={3}
         comment={`Submit`}
-        handleFormSubmit={handleFormSubmit}
-        handleFieldChange={()=>{}}
+        onSubmit={onSubmit}
+        onFieldChange={()=>{}}
       />
   );
 
   const form = wrapper.find(`form`);
 
   form.simulate(`submit`, {
-    preventDefault: handleFormSubmit,
+    preventDefault: onSubmit,
   });
-  expect(handleFormSubmit).toHaveBeenCalledTimes(1);
+  expect(onSubmit).toHaveBeenCalledTimes(1);
 });

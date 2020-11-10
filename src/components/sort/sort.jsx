@@ -6,10 +6,10 @@ import {connect} from "react-redux";
 import {getSortType, isOpenSortMenu} from "../../store/reducers/app-process/selectors";
 
 const Sort = (props) => {
-  const {sortType, isOpenedSortMenu, changeSortType, openSortMenu} = props;
+  const {sortType, isOpenedSortMenu, onChangeSortType, onSortMenuOpen} = props;
 
   return (
-    <form onClick={() => openSortMenu(!isOpenedSortMenu)} className="places__sorting" action="#" method="get">
+    <form onClick={() => onSortMenuOpen(!isOpenedSortMenu)} className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex="0">
         &nbsp;{SortTypes[sortType]}
@@ -19,7 +19,7 @@ const Sort = (props) => {
       </span>
       <ul className={`places__options places__options--custom ${isOpenedSortMenu && `places__options--opened`}`}>
         {Object.keys(SortTypes).map((type) =>
-          <li onClick={() => changeSortType(type)}
+          <li onClick={() => onChangeSortType(type)}
             key={type}
             className={`places__option ${sortType === type && `places__option--active`}`}
             data-sort-type={`${type}`} tabIndex="0">{SortTypes[type]}</li>
@@ -32,8 +32,8 @@ const Sort = (props) => {
 Sort.propTypes = {
   sortType: PropTypes.string,
   onSortTypeChanged: PropTypes.func,
-  changeSortType: PropTypes.func,
-  openSortMenu: PropTypes.func,
+  onChangeSortType: PropTypes.func,
+  onSortMenuOpen: PropTypes.func,
   isOpenedSortMenu: PropTypes.bool
 };
 
@@ -43,8 +43,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeSortType: (sortType) => dispatch(ActionCreatorForProcess.changeSortType(sortType)),
-  openSortMenu: (isOpen) => dispatch(ActionCreatorForProcess.openSortMenu(isOpen))
+  onChangeSortType: (sortType) => dispatch(ActionCreatorForProcess.changeSortType(sortType)),
+  onSortMenuOpen: (isOpen) => dispatch(ActionCreatorForProcess.openSortMenu(isOpen))
 });
 
 export {Sort};

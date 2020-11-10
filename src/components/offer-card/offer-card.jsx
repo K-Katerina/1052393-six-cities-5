@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import FavoriteButton from "../favorite-button/favorite-button";
 
 const OfferCard = (props) => {
-  const {changeActiveOffer, offer, typeCard = TypeCards.CITIES, history, isFavorite} = props;
+  const {onChangeActiveOffer, offer, typeCard = TypeCards.CITIES, history, isFavorite} = props;
   const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
@@ -19,13 +19,13 @@ const OfferCard = (props) => {
         onMouseLeave={(evt) => {
           if (needChangeActiveOffer) {
             evt.preventDefault();
-            changeActiveOffer(-1);
+            onChangeActiveOffer(-1);
           }
         }}
         onMouseEnter={(evt) => {
           if (needChangeActiveOffer) {
             evt.preventDefault();
-            changeActiveOffer(offer.id);
+            onChangeActiveOffer(offer.id);
           }
         }}
       >
@@ -64,7 +64,7 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = {
-  changeActiveOffer: PropTypes.func,
+  onChangeActiveOffer: PropTypes.func,
   onButtonClick: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards)),
@@ -77,7 +77,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId)),
+  onChangeActiveOffer: (activeOfferId) => dispatch(ActionCreatorForProcess.changeActiveOffer(activeOfferId)),
 });
 
 export {OfferCard};

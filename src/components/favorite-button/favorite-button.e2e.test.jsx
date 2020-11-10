@@ -14,7 +14,6 @@ it(`Click on FavoriteButton`, () => {
       <FavoriteButton
         isFavorite={true}
         onButtonClick={onButtonClick}
-        loggedIn={true}
       />
   );
 

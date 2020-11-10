@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../types";
-import {Link, withRouter} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {HousingType, TypeCards} from "../../const";
 import {ActionCreatorForProcess} from "../../store/reducers/app-process/actions";
 import {getRating, getStyleForCard} from "../../utils";
@@ -9,7 +9,7 @@ import {connect} from "react-redux";
 import FavoriteButton from "../favorite-button/favorite-button";
 
 const OfferCard = (props) => {
-  const {onChangeActiveOffer, offer, typeCard = TypeCards.CITIES, history, isFavorite} = props;
+  const {onChangeActiveOffer, offer, typeCard = TypeCards.CITIES, isFavorite} = props;
   const needChangeActiveOffer = typeCard === TypeCards.CITIES;
   const needPremiumMark = TypeCards.CITIES === typeCard;
   const {className, width, height} = getStyleForCard(typeCard);
@@ -45,7 +45,7 @@ const OfferCard = (props) => {
               <b className="place-card__price-value">&euro;{offer.costPerNight}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <FavoriteButton className={`place-card__bookmark-button`} id={offer.id} history={history} isFavorite={isFavorite}/>
+            <FavoriteButton className={`place-card__bookmark-button`} id={offer.id} isFavorite={isFavorite}/>
           </div>
           <div className="place-card__rating rating">
             <div className="place-card__stars rating__stars">
@@ -68,7 +68,6 @@ OfferCard.propTypes = {
   onButtonClick: PropTypes.func,
   offer: OfferPropType.isRequired,
   typeCard: PropTypes.oneOf(Object.values(TypeCards)),
-  history: PropTypes.object,
   isFavorite: PropTypes.bool
 };
 
@@ -81,4 +80,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {OfferCard};
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OfferCard));
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

@@ -9,8 +9,8 @@ it(`Should ReviewsForm render correctly`, () => {
           rating={5}
           comment={``}
           isDisabled={false}
-          handleFormSubmit={()=>{}}
-          handleFieldChange={()=>{}}
+          onSubmit={()=>{}}
+          onFieldChange={()=>{}}
         />
     )
     .toJSON();

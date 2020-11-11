@@ -12,11 +12,9 @@ export const getDate = (date) => moment(date).format(`MMMM YYYY`);
 
 export const updateElementInArray = (el, array) => {
   const index = array.findIndex((it) => it.id === el.id);
-  return [
-    ...array.slice(0, index),
-    el,
-    ...array.slice(index + 1)
-  ];
+  return index !== -1
+    ? [...array.slice(0, index), el, ...array.slice(index + 1)]
+    : [...array, el];
 };
 
 export const getStyleForCard = (cardType) => {

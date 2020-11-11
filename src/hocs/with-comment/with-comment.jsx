@@ -44,8 +44,8 @@ const withComment = (Component) => {
           rating={Number(rating)}
           comment={comment}
           isDisabled={comment.length < MIN_LENGTH_COMMENT || !rating}
-          handleFormSubmit={this.handleFormSubmit}
-          handleFieldChange={this.handleFieldChange}
+          onSubmit={this.handleFormSubmit}
+          onFieldChange={this.handleFieldChange}
         />
       );
     }

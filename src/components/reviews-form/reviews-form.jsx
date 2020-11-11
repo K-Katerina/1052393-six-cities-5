@@ -4,15 +4,15 @@ import {MIN_LENGTH_COMMENT} from "../../hocs/with-comment/with-comment";
 
 const ReviewsForm = (props) => {
 
-  const {rating, comment, handleFormSubmit, handleFieldChange, isDisabled = true} = props;
+  const {rating, comment, onSubmit, onFieldChange, isDisabled = true} = props;
   const RATING_VALUES = [5, 4, 3, 2, 1];
   return (
-    <form onSubmit={(evt) => handleFormSubmit(evt)} className="reviews__form form" action="#" method="post">
+    <form onSubmit={(evt) => onSubmit(evt)} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div name="rating" className="reviews__rating-form form__rating">
         {RATING_VALUES.map((value) =>
           <React.Fragment key={value}>
-            <input onChange={(evt) => handleFieldChange(evt)} checked={value === rating} className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio"/>
+            <input onChange={(evt) => onFieldChange(evt)} checked={value === rating} className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio"/>
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={`${value}-stars`}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
@@ -21,7 +21,7 @@ const ReviewsForm = (props) => {
           </React.Fragment>
         )}
       </div>
-      <textarea onChange={(evt) => handleFieldChange(evt)}
+      <textarea onChange={(evt) => onFieldChange(evt)}
         className="reviews__textarea form__textarea" id="review" name="comment" value={comment}
         placeholder="Tell how was your stay, what you like and what can be improved"/>
       <div className="reviews__button-wrapper">
@@ -42,8 +42,8 @@ ReviewsForm.propTypes = {
   rating: PropTypes.number.isRequired,
   comment: PropTypes.string.isRequired,
   isDisabled: PropTypes.bool,
-  handleFormSubmit: PropTypes.func.isRequired,
-  handleFieldChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onFieldChange: PropTypes.func.isRequired,
 };
 
 export default ReviewsForm;

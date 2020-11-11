@@ -7,12 +7,13 @@ import FavoritesPage from "../pages/favorites-page/favorites-page";
 import MainPage from "../pages/main-page/main-page";
 import RoomPage from "../pages/room-page/room-page";
 import SignInPage from "../pages/sign-in-page/sign-in-page";
-import {Redirect, Switch, Route, BrowserRouter} from "react-router-dom";
+import {Redirect, Router, Switch, Route} from "react-router-dom";
 import {connect} from "react-redux";
+import history from "../../history";
 
 const App = ({loggedIn}) => {
   return (
-    <BrowserRouter history={history}>
+    <Router history={history}>
       <Switch>
         <Route exact path={AppRoute.ROOT} component={MainPage}/>
         <Route exact path={AppRoute.LOGIN} component={withPrivateRoute(SignInPage, !loggedIn, AppRoute.ROOT)}/>
@@ -20,7 +21,7 @@ const App = ({loggedIn}) => {
         <Route exact path={AppRoute.OFFER} component={RoomPage}/>
         <Redirect to={AppRoute.ROOT}/>
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 

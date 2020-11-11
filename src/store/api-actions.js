@@ -1,6 +1,8 @@
 import {ActionCreatorForData} from "./reducers/app-data/actions";
 import {offerAdaptToClient, reviewAdaptToClient} from "../utils";
 import {ActionCreatorForUser} from "./reducers/user/actions";
+import {AppRoute} from "../const";
+import history from "../history";
 
 export const getOffers = () => (dispatch, _getState, api) =>
   api.get(`/hotels`)
@@ -76,7 +78,5 @@ export const updateFavorite = (offerId, status) => (dispatch, _getState, api) =>
   api.post(`/favorite/${offerId}/${status}`)
     .then(({data}) => offerAdaptToClient(data))
     .then((offer) => dispatch(ActionCreatorForData.updateFavorite(offer)))
-    .catch((err) => {
-      throw err;
-    })
+    .catch(() => history.push(AppRoute.LOGIN))
 );

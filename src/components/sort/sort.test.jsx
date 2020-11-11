@@ -9,8 +9,8 @@ it(`Should Sort render correctly`, () => {
         <Sort
           sortType={DEFAULT_SORT_TYPE}
           onSortTypeChanged={()=>{}}
-          changeSortType={()=>{}}
-          openSortMenu={()=>{}}
+          onChangeSortType={()=>{}}
+          onSortMenuOpen={()=>{}}
           isOpenedSortMenu={false}
         />
     )

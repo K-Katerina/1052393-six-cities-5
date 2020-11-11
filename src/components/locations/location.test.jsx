@@ -8,7 +8,7 @@ it(`Should Locations render correctly`, () => {
     .create(
         <Locations
           selectedCity={Cities.PARIS}
-          changeSelectedCity={()=>{}}
+          onChangeSelectedCity={()=>{}}
         />
     )
     .toJSON();

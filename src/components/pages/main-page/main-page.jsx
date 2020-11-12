@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import MainEmpty from "../../main-empty/main-empty";
 import Header from "../../header/header";
@@ -11,45 +11,44 @@ import {OfferPropType} from "../../../types";
 import {getOffers} from "../../../store/api-actions";
 import {getActiveOfferId} from "../../../store/reducers/app-process/selectors";
 
-class MainPage extends React.Component {
-  componentDidMount() {
-    this.props.getOffers();
-  }
+const MainPage = (props) => {
+  const {isEmptyOffers, offers, activeOffer, loadOffers} = props;
 
-  render() {
-    const {isEmptyOffers, offers, activeOffer} = this.props;
-    return (
-      <React.Fragment>
-        <div className="page page--gray page--main">
-          <Header/>
-          <main className={`page__main page__main--index ${isEmptyOffers && `page__main--index-empty`}`}>
-            <h1 className="visually-hidden">Cities</h1>
-            <div className="tabs">
-              <Locations/>
-            </div>
-            <div className="cities">
-              {isEmptyOffers ? <MainEmpty/> :
-                <div className="cities__places-container container">
-                  <OffersContainer/>
-                  <div className="cities__right-section">
-                    <section className="cities__map map">
-                      <Map nearPlaces={offers} activeOffer={activeOffer}/>
-                    </section>
-                  </div>
-                </div>}
-            </div>
-          </main>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+  useEffect(() => {
+    loadOffers();
+  }, []);
+
+  return (
+    <React.Fragment>
+      <div className="page page--gray page--main">
+        <Header/>
+        <main className={`page__main page__main--index ${isEmptyOffers && `page__main--index-empty`}`}>
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <Locations/>
+          </div>
+          <div className="cities">
+            {isEmptyOffers ? <MainEmpty/> :
+              <div className="cities__places-container container">
+                <OffersContainer/>
+                <div className="cities__right-section">
+                  <section className="cities__map map">
+                    <Map nearPlaces={offers} activeOffer={activeOffer}/>
+                  </section>
+                </div>
+              </div>}
+          </div>
+        </main>
+      </div>
+    </React.Fragment>
+  );
+};
 
 MainPage.propTypes = {
   isEmptyOffers: PropTypes.bool,
   offers: PropTypes.arrayOf(OfferPropType),
   activeOffer: OfferPropType,
-  getOffers: PropTypes.func
+  loadOffers: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -59,7 +58,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getOffers: () => dispatch(getOffers())
+  loadOffers: () => dispatch(getOffers())
 });
 
 export {MainPage};

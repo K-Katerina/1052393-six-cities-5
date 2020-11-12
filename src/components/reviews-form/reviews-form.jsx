@@ -35,7 +35,6 @@ const ReviewsForm = (props) => {
       </div>
     </form>
   );
-
 };
 
 ReviewsForm.propTypes = {

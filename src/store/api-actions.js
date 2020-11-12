@@ -9,14 +9,12 @@ export const getOffers = () => (dispatch, _getState, api) =>
   .then(({data}) => data.map((it) => offerAdaptToClient(it)))
   .then((offers = []) => dispatch(ActionCreatorForData.loadOffers(offers)));
 
-export const getOfferById = (id) => (dispatch, _getState, api) =>{
+export const getOfferById = (id) => (dispatch, _getState, api) => {
   dispatch(ActionCreatorForData.isLoadedOfferById(true));
   api.get(`/hotels/${id}`)
     .then(({data}) => offerAdaptToClient(data))
-    .then((offer) => {
-      dispatch(ActionCreatorForData.loadOfferById(offer));
-      dispatch(ActionCreatorForData.isLoadedOfferById(false));
-    });
+    .then((offer) => dispatch(ActionCreatorForData.loadOfferById(offer)))
+    .then(() => dispatch(ActionCreatorForData.isLoadedOfferById(false)));
 };
 
 export const getReviewsByOfferId = (id) => (dispatch, _getState, api) => {

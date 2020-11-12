@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {ReviewPropType} from "../../types";
 import ReviewsList from "../reviews-list/reviews-list";
@@ -12,24 +12,22 @@ import Loader from "../loader/loader";
 
 const ReviewsFormWrapped = withComment(ReviewsForm);
 
-class Reviews extends React.Component {
+const Reviews = (props) => {
+  const {reviews, loggedIn, id, isLoading, getReviews} = props;
 
-  componentDidMount() {
-    this.props.getReviews(this.props.id);
-  }
+  useEffect(() => {
+    getReviews(id);
+  }, []);
 
-  render() {
-    const {reviews, loggedIn, id, isLoading} = this.props;
-    return (
-      <section className="property__reviews reviews">
-        <h2 className="reviews__title">Reviews &middot; <span
-          className="reviews__amount">{reviews ? reviews.length : 0}</span></h2>
-        {isLoading ? <Loader/> : <ReviewsList reviews={reviews}/>}
-        {loggedIn && <ReviewsFormWrapped id={id}/>}
-      </section>
-    );
-  }
-}
+  return (
+    <section className="property__reviews reviews">
+      <h2 className="reviews__title">Reviews &middot; <span
+        className="reviews__amount">{reviews ? reviews.length : 0}</span></h2>
+      {isLoading ? <Loader/> : <ReviewsList reviews={reviews}/>}
+      {loggedIn && <ReviewsFormWrapped id={id}/>}
+    </section>
+  );
+};
 
 Reviews.propTypes = {
   reviews: PropTypes.arrayOf(ReviewPropType),

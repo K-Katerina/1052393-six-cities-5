@@ -1,12 +1,17 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {updateFavorite} from "../../store/api-actions";
 import {connect} from "react-redux";
 
 const FavoriteButton = (props) => {
   const {className, id, isFavorite, onButtonClick} = props;
+
+  const favoriteButtonClickHandler = useCallback(() => {
+    onButtonClick(id, Number(!isFavorite));
+  }, []);
+
   return (
-    <button onClick={() => onButtonClick(id, Number(!isFavorite))}
+    <button onClick={favoriteButtonClickHandler}
       className={`${className} button ${isFavorite && `place-card__bookmark-button--active`}`} type="button">
       <svg className="place-card__bookmark-icon" width="18" height="19">
         <use xlinkHref="#icon-bookmark"></use>

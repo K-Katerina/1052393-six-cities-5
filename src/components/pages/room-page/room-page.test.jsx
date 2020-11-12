@@ -21,7 +21,7 @@ it(`Should RoomPage render correctly`, () => {
               isLoading={false}
               id={1}
               getOffer={()=>{}}
-              getNearPlacesByOfferId={()=>{}}
+              loadNearPlacesByOfferId={()=>{}}
             />
           </BrowserRouter>
         </Provider>, {

@@ -18,7 +18,7 @@ it(`Should MainPage render correctly`, () => {
               isEmptyOffers={false}
               offers={[mockOffer]}
               activeOffer={mockOffer}
-              getOffers={()=>{}}
+              loadOffers={()=>{}}
             />
           </BrowserRouter>
         </Provider>, {

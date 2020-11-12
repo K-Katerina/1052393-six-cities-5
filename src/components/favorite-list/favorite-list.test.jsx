@@ -10,7 +10,7 @@ it(`Should FavoriteList render correctly`, () => {
     .create(
         <FavoriteList
           favorites={map}
-          getFavorites={()=>{}}
+          loadFavorites={()=>{}}
         />
     )
     .toJSON();

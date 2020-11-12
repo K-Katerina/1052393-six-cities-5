@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {OfferPropType} from "../../../types";
 import InfoProperty from "../../info-property/info-property";
@@ -15,47 +15,39 @@ import {getNearPlacesByOfferId, getOfferById} from "../../../store/api-actions";
 import Loader from "../../loader/loader";
 import PhotosList from "../../photos-list/photos-list";
 
-class RoomPage extends React.Component {
-  componentDidMount() {
-    this.props.getOffer(this.props.id);
-    this.props.getNearPlacesByOfferId(this.props.id);
-  }
+const RoomPage = (props) => {
+  const {activeOffer, nearPlaces, isLoading, getOffer, loadNearPlacesByOfferId, id} = props;
 
-  componentDidUpdate(prevProps) {
-    if (Number(prevProps.match.params.id) !== this.props.id) {
-      this.props.getOffer(this.props.id);
-      this.props.getNearPlacesByOfferId(this.props.id);
-    }
-  }
+  useEffect(() => {
+    getOffer(id);
+    loadNearPlacesByOfferId(id);
+  }, [id]);
 
-  render() {
-    const {activeOffer, nearPlaces, isLoading} = this.props;
-    if (isLoading) {
-      return <Loader/>;
-    }
-    return (
-      <React.Fragment>
-        <div className="page">
-          <Header/>
-          <main className="page__main page__main--property">
-            <section className="property">
-              <div className="property__gallery-container container">
-                <PhotosList photos={activeOffer.photos}/>
-              </div>
-              <InfoProperty offer={activeOffer}/>
-              <section className="property__map map">
-                {nearPlaces.length && <Map nearPlaces={nearPlaces} activeOffer={activeOffer}/>}
-              </section>
-            </section>
-            <div className="container">
-              <NearPlaces nearPlaces={nearPlaces}/>
+  if (isLoading) {
+    return <Loader/>;
+  }
+  return (
+    <React.Fragment>
+      <div className="page">
+        <Header/>
+        <main className="page__main page__main--property">
+          <section className="property">
+            <div className="property__gallery-container container">
+              <PhotosList photos={activeOffer.photos}/>
             </div>
-          </main>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+            <InfoProperty offer={activeOffer}/>
+            <section className="property__map map">
+              {nearPlaces.length && <Map nearPlaces={nearPlaces} activeOffer={activeOffer}/>}
+            </section>
+          </section>
+          <div className="container">
+            <NearPlaces nearPlaces={nearPlaces}/>
+          </div>
+        </main>
+      </div>
+    </React.Fragment>
+  );
+};
 
 RoomPage.propTypes = {
   activeOffer: OfferPropType,
@@ -64,7 +56,7 @@ RoomPage.propTypes = {
   match: PropTypes.object,
   id: PropTypes.number,
   getOffer: PropTypes.func,
-  getNearPlacesByOfferId: PropTypes.func,
+  loadNearPlacesByOfferId: PropTypes.func,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -76,7 +68,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getOffer: (id) => dispatch(getOfferById(id)),
-  getNearPlacesByOfferId: (id) => dispatch(getNearPlacesByOfferId(id)),
+  loadNearPlacesByOfferId: (id) => dispatch(getNearPlacesByOfferId(id)),
 });
 
 export {RoomPage};

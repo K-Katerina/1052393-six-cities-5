@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {createRef} from "react";
 import {Link} from "react-router-dom";
 import {AppRoute, Cities} from "../../../const";
 import PropTypes from "prop-types";
@@ -11,8 +11,8 @@ class SignInPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.loginRef = useRef(``);
-    this.passwordRef = useRef(``);
+    this.loginRef = createRef();
+    this.passwordRef = createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }

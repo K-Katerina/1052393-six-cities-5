@@ -21,9 +21,6 @@ const Map = (props) => {
 
   useEffect(() => {
     addMarkers();
-    return () => {
-      group.clearLayers();
-    };
   }, [activeOffer, selectedCity]);
 
   const initMap = () => {
@@ -54,12 +51,12 @@ const Map = (props) => {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    if (activeOffer) {
-      leaflet.marker(activeOffer.coordinates, {icon: activeIcon}).addTo(group);
-    }
     nearPlaces.filter((offer) => offer !== activeOffer).forEach((offer) => {
       leaflet.marker(offer.coordinates, {icon}).addTo(group);
     });
+    if (activeOffer) {
+      leaflet.marker(activeOffer.coordinates, {icon: activeIcon}).addTo(group);
+    }
   };
 
   return <div ref={mapRef} id="map" style={{height: `100%`}}></div>;

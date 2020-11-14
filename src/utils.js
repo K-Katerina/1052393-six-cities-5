@@ -2,9 +2,7 @@ import moment from "moment";
 import {Cities, DEFAULT_SORT_TYPE, mockOffer, mockReview, TypeCards} from "./const";
 import {NameSpace} from "./store/reducers/root-reducer";
 
-export const extend = (a, b) => {
-  return Object.assign({}, a, b);
-};
+export const extend = (a, b) => Object.assign({}, a, b);
 
 export const getRating = (rating) => Math.round(rating / 5 * 100) + `%`;
 

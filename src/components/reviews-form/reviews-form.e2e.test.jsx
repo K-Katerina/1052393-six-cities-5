@@ -1,7 +1,7 @@
 import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import ReviewsForm from "./reviews-form";
+import {ReviewsForm} from "./reviews-form";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -12,10 +12,8 @@ it(`Should submit review`, () => {
 
   const wrapper = shallow(
       <ReviewsForm
-        rating={3}
-        comment={`Submit`}
-        onSubmit={onSubmit}
-        onFieldChange={()=>{}}
+        id={3}
+        postReview={onSubmit}
       />
   );
 

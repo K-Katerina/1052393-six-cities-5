@@ -44,8 +44,9 @@ const appData = (state = initialState, action) => {
     case ActionTypeForData.UPDATE_FAVORITE:
       return extend(state, {
         offers: updateElementInArray(action.payload, state.offers),
-        currentOffer: action.payload,
         favorites: updateElementInArray(action.payload, state.favorites),
+        currentOffer: state.currentOffer.id === action.payload.id ? action.payload : state.currentOffer,
+        currentNearPlaces: state.currentOffer.id !== action.payload.id ? updateElementInArray(action.payload, state.currentNearPlaces) : state.currentNearPlaces,
       });
     default: return state;
   }

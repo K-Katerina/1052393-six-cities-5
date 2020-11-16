@@ -19,7 +19,7 @@ export const getCurrentOffer = (state) => {
 };
 
 export const getCurrentReviews = (state) => {
-  return state.DATA.currentReviewsForOffer;
+  return state.DATA.currentReviewsForOffer.sort((a, b) => b.date - a.date);
 };
 
 export const getCurrentNearPlaces = (state) => {

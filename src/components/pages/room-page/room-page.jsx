@@ -14,16 +14,18 @@ import {connect} from "react-redux";
 import {getNearPlacesByOfferId, getOfferById} from "../../../store/api-actions";
 import Loader from "../../loader/loader";
 import PhotosList from "../../photos-list/photos-list";
+import {ActionCreatorForData} from "../../../store/reducers/app-data/actions";
 
 const RoomPage = (props) => {
-  const {activeOffer, nearPlaces, isLoading, getOffer, loadNearPlacesByOfferId, id} = props;
+  const {activeOffer, nearPlaces, isLoading, getOffer, loadNearPlacesByOfferId, id, resetCurrentOffer} = props;
 
   useEffect(() => {
     getOffer(id);
     loadNearPlacesByOfferId(id);
+    return () => resetCurrentOffer();
   }, [id]);
 
-  if (isLoading) {
+  if (isLoading || !activeOffer) {
     return <Loader/>;
   }
   return (
@@ -57,6 +59,7 @@ RoomPage.propTypes = {
   id: PropTypes.number,
   getOffer: PropTypes.func,
   loadNearPlacesByOfferId: PropTypes.func,
+  resetCurrentOffer: PropTypes.func
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -69,6 +72,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => ({
   getOffer: (id) => dispatch(getOfferById(id)),
   loadNearPlacesByOfferId: (id) => dispatch(getNearPlacesByOfferId(id)),
+  resetCurrentOffer: () => dispatch(ActionCreatorForData.updateOfferById(null)),
 });
 
 export {RoomPage};

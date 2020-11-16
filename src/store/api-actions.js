@@ -13,7 +13,7 @@ export const getOfferById = (id) => (dispatch, _getState, api) => {
   dispatch(ActionCreatorForData.isLoadedOfferById(true));
   api.get(`/hotels/${id}`)
     .then(({data}) => offerAdaptToClient(data))
-    .then((offer) => dispatch(ActionCreatorForData.loadOfferById(offer)))
+    .then((offer) => dispatch(ActionCreatorForData.updateOfferById(offer)))
     .then(() => dispatch(ActionCreatorForData.isLoadedOfferById(false)));
 };
 

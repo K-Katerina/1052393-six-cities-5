@@ -1,4 +1,4 @@
-import {extend, updateElementInArray} from "../../../utils";
+import {extend, removeElementInArray, updateElementInArray} from "../../../utils";
 import {ActionTypeForData} from "./actions";
 
 const initialState = {
@@ -44,9 +44,9 @@ const appData = (state = initialState, action) => {
     case ActionTypeForData.UPDATE_FAVORITE:
       return extend(state, {
         offers: updateElementInArray(action.payload, state.offers),
-        favorites: updateElementInArray(action.payload, state.favorites),
-        currentOffer: state.currentOffer.id === action.payload.id ? action.payload : state.currentOffer,
-        currentNearPlaces: state.currentOffer.id !== action.payload.id ? updateElementInArray(action.payload, state.currentNearPlaces) : state.currentNearPlaces,
+        favorites: action.payload.isFavorite ? updateElementInArray(action.payload, state.offers) : removeElementInArray(action.payload, state.favorites),
+        currentOffer: state.currentOffer && (state.currentOffer.id === action.payload.id) ? action.payload : state.currentOffer,
+        currentNearPlaces: state.currentOffer && (state.currentOffer.id !== action.payload.id) ? updateElementInArray(action.payload, state.currentNearPlaces) : state.currentNearPlaces,
       });
     default: return state;
   }

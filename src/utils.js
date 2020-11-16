@@ -15,6 +15,13 @@ export const updateElementInArray = (el, array) => {
     : [...array, el];
 };
 
+export const removeElementInArray = (el, array) => {
+  const index = array.findIndex((it) => it.id === el.id);
+  return index !== -1
+    ? [...array.slice(0, index), ...array.slice(index + 1)]
+    : [...array];
+};
+
 export const getStyleForCard = (cardType) => {
   switch (cardType) {
     case TypeCards.CITIES:
@@ -96,8 +103,7 @@ export const offerAdaptToClient = (offer) => {
             avatar: offer.host.avatar_url,
             name: offer.host.name,
             isSuper: offer.host.is_pro
-          },
-        reviews: []
+          }
       });
 
   delete adaptedOffer.bedrooms;

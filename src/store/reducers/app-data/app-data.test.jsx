@@ -3,17 +3,17 @@ import {extend} from "../../../utils";
 import {ActionTypeForData} from "./actions";
 import {appData} from "./app-data";
 
+const newMockOffer = extend(mockOffer, {id: 9876, title: `This is probably not a problem with npm`, isFavorite: !mockOffer.isFavorite});
+
 const state = {
   offers: [mockOffer],
   currentOffer: mockOffer,
   isLoadingOfferById: true,
   currentReviewsForOffer: [mockReview],
-  currentNearPlaces: [mockOffer],
+  currentNearPlaces: [newMockOffer],
   favorites: [mockOffer],
   isLoadingReviewsById: true
 };
-
-const newMockOffer = extend(mockOffer, {title: `This is probably not a problem with npm`});
 
 describe(`AppData Reducer testing`, () => {
 
@@ -71,5 +71,18 @@ describe(`AppData Reducer testing`, () => {
       payload: []
     };
     expect(appData(state, action).favorites).toEqual([]);
+  });
+
+  it(`Test reducer action UPDATE_FAVORITE`, () => {
+    const updateIsFavoriteForMockOffer = extend(mockOffer, {isFavorite: !mockOffer.isFavorite});
+    const action = {
+      type: ActionTypeForData.UPDATE_FAVORITE,
+      payload: updateIsFavoriteForMockOffer
+    };
+    const data = appData(state, action);
+    expect(data.offers).toEqual([updateIsFavoriteForMockOffer]);
+    expect(data.favorites).toEqual([]);
+    expect(data.currentOffer).toEqual(updateIsFavoriteForMockOffer);
+    expect(data.currentNearPlaces).toEqual([newMockOffer]);
   });
 });

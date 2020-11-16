@@ -16,7 +16,7 @@ export const ActionCreatorForData = {
     type: ActionTypeForData.LOAD_OFFERS,
     payload: offers,
   }),
-  loadOfferById: (offer) => ({
+  updateOfferById: (offer) => ({
     type: ActionTypeForData.GET_OFFER_BY_ID,
     payload: offer,
   }),

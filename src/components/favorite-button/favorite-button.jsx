@@ -8,7 +8,7 @@ const FavoriteButton = (props) => {
 
   const favoriteButtonClickHandler = useCallback(() => {
     onButtonClick(id, Number(!isFavorite));
-  }, []);
+  }, [isFavorite]);
 
   return (
     <button onClick={favoriteButtonClickHandler}

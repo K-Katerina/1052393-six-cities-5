@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore, applyMiddleware, compose} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 import {Provider} from "react-redux";
@@ -11,11 +11,7 @@ import {checkAuth} from "./store/api-actions";
 const api = createAPI(() => false);
 const store = createStore(
     rootReducer,
-    compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
-);
+    applyMiddleware(thunk.withExtraArgument(api)));
 
 store.dispatch(checkAuth());
 

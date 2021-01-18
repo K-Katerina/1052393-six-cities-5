@@ -9,4 +9,7 @@
 * Reselect
 * Jest, Enzyme
 
-[Сертификат профессии Frontend Developer React](https://assets.htmlacademy.ru/certificates/profession/13/1052393.pdf?1605687308)
+
+[Сертификат: React. Разработка сложных клиентских приложений](https://assets.htmlacademy.ru/certificates/intensive/171/1052393.pdf?1605687300)
+
+[Итоговый сертификат профессии Frontend React Developer](https://assets.htmlacademy.ru/certificates/profession/13/1052393.pdf?1605687308)

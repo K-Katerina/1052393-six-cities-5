@@ -11,7 +11,10 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open"
   },
-  "devDependencies": {
+  "engines": {
+    "node": "10"
+  },
+  "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/preset-env": "7.12.1",
     "@babel/preset-react": "7.12.5",
@@ -34,12 +37,7 @@
     "url-loader": "4.1.1",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.10.1"
-  },
-  "engines": {
-    "node": "10"
-  },
-  "dependencies": {
+    "webpack-dev-server": "3.10.1",
     "history": "4.10.1",
     "leaflet": "1.7.1",
     "moment": "2.29.1",

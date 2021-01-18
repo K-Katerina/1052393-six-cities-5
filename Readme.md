@@ -8,6 +8,7 @@
 * Axios
 * Reselect
 * Jest, Enzyme
+* leaflet
 
 
 [Сертификат: React. Разработка сложных клиентских приложений](https://assets.htmlacademy.ru/certificates/intensive/171/1052393.pdf?1605687300)

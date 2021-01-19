@@ -14,3 +14,6 @@
 [Сертификат: React. Разработка сложных клиентских приложений](https://assets.htmlacademy.ru/certificates/intensive/171/1052393.pdf?1605687300)
 
 [Итоговый сертификат профессии Frontend React Developer](https://assets.htmlacademy.ru/certificates/profession/13/1052393.pdf?1605687308)
+
+---
+P.S.: т.к. приложение развернуто на Heroku, то оно может "спать" из-за особенностей хостинга, поэтому первая загрузка длится пару минут.
